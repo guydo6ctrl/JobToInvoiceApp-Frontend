@@ -1,6 +1,6 @@
 import Form from "../components/Form"
 
-function Login() {
+function Login(): JSX.Element {
     return <Form route="/api/token/" method="login" />
 }
 
