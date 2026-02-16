@@ -1,4 +1,3 @@
-import React from "react";
 import ClientsList from "../components/ClientsList";
 
 const ClientsPage = () => {

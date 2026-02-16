@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClientsPage from "./pages/ClientsPage";
+import JobsPage from "./pages/JobsPage";
 
 function Logout(): JSX.Element {
   localStorage.clear();
@@ -33,6 +34,7 @@ function App(): JSX.Element {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/clients" element={<ClientsPage />} />
+        <Route path="/jobs" element={<JobsPage />} />
       </Routes>
     </BrowserRouter>
   );

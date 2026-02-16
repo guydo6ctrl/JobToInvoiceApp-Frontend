@@ -3,7 +3,12 @@ import "../styles/Home.css";
 
 function Home(): JSX.Element {
   const navigate = useNavigate();
-  return <button onClick={() => navigate("/clients")}>Clients</button>;
+  return (
+    <div>
+      <button onClick={() => navigate("/clients")}>Clients</button>
+      <button onClick={() => navigate("/jobs")}>Jobs</button>
+    </div>
+  );
 }
 
 export default Home;
