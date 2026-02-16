@@ -1,7 +1,9 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
 function Home(): JSX.Element {
-  return <div>HomePage</div>;
+  const navigate = useNavigate();
+  return <button onClick={() => navigate("/clients")}>Clients</button>;
 }
 
 export default Home;
