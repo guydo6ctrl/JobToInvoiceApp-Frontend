@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClientsPage from "./pages/ClientsPage";
 import JobsPage from "./pages/JobsPage";
+import InvoicePage from "./pages/InvoicePage";
 
 function Logout(): JSX.Element {
   localStorage.clear();
@@ -35,6 +36,7 @@ function App(): JSX.Element {
         <Route path="*" element={<NotFound />} />
         <Route path="/clients" element={<ClientsPage />} />
         <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/invoices" element={<InvoicePage />} />
       </Routes>
     </BrowserRouter>
   );
