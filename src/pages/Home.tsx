@@ -8,6 +8,7 @@ function Home(): JSX.Element {
       <button onClick={() => navigate("/clients")}>Clients</button>
       <button onClick={() => navigate("/jobs")}>Jobs</button>
       <button onClick={() => navigate("/invoices")}>Invoices</button>
+      <button onClick={() => navigate("/quotes")}>Quotes</button>
     </div>
   );
 }
