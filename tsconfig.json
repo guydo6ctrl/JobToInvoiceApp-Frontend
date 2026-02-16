@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    // Target modern JS
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    // JSX support
+    "jsx": "react-jsx",
+
+    // Strict Type Checking
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Module & Import Handling
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": false,
+    "skipLibCheck": true,
+
+    // Output
+    "noEmit": true,          
+
+    // Optional Safety
+    "useDefineForClassFields": true
+  },
+  "include": ["src"],
+
+  // Node config for vite.config.ts
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ]
+}
