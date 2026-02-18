@@ -13,12 +13,14 @@ import React, { useState } from "react";
 import SelectClient from "./SelectClient";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import SelectQuoteStatus from "./SelectQuoteStatus";
+import LineItemsInput from "./LineItemsInput";
+import { LineItem } from "./LineItemsInput";
 
 interface QuoteFormData {
   client: string;
   issue_date: string;
   expiry_date: string;
-  line_items: [];
+  line_items: LineItem[];
   status: string;
 }
 
@@ -95,12 +97,11 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
           </Field.Root>
 
           <Field.Root>
-            <Text>Line Items</Text>
-            <Input
-              name="line_items"
-              value={formData.line_items}
-              onChange={handleChange}
-              placeholder=""
+            <LineItemsInput
+              lineItems={formData.line_items}
+              onChange={(items) =>
+                setFormData({ ...formData, line_items: items })
+              }
             />
           </Field.Root>
 

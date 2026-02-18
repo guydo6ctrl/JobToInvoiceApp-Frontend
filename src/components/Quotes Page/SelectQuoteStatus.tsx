@@ -14,7 +14,7 @@ const SelectQuoteStatus = ({ status, onChange }: Props) => {
           <option value="">Select status</option>
           <option value="draft">Draft</option>
           <option value="sent">Sent</option>
-          <option value="paid">Accepted</option>
+          <option value="accepted">Accepted</option>
           <option value="rejected">Rejected</option>
         </NativeSelect.Field>
         <NativeSelect.Indicator />
