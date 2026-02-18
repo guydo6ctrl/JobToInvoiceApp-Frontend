@@ -1,3 +1,4 @@
+import { HStack } from "@chakra-ui/react";
 import AddClientForm from "../components/AddClientForm";
 import ClientsList from "../components/ClientsList";
 

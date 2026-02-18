@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
 
 const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const [data, setData] = useState<T[]>([]);
@@ -17,9 +13,9 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
     
     setLoading(true)
     api
-      .get<FetchResponse<T>>(endpoint, {signal: controller.signal, ...requestConfig})
+      .get<T[]>(endpoint, {signal: controller.signal, ...requestConfig}) 
       .then((res) => {
-        setData(res.data.results)
+        setData(res.data)  
         setLoading(false)})
       .catch((err) => {
         if (err instanceof CanceledError) return;
