@@ -1,17 +1,17 @@
 import React from "react";
 import QuotesList from "../components/Quotes Page/QuotesList";
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import AddQuoteForm from "../components/Quotes Page/AddQuoteForm";
 
 const QuotesPage = () => {
   return (
-    <SimpleGrid columns={{ base: 1, lg: 2 }} gap="40px">
-      <Box>
+    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
+      <GridItem colSpan={1}>
         <QuotesList />
-      </Box>
-      <Box>
+      </GridItem>
+      <GridItem colSpan={2}>
         <AddQuoteForm endpoint="quotes" />
-      </Box>
+      </GridItem>
     </SimpleGrid>
   );
 };
