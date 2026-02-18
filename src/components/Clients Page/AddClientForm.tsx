@@ -8,7 +8,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useFormSubmit } from "../hooks/useFormSubmit";
+import { useFormSubmit } from "../../hooks/useFormSubmit";
 
 interface ClientFormData {
   name: string;
@@ -17,7 +17,7 @@ interface ClientFormData {
   address: string;
 }
 
-const AddClientVForm = ({ endpoint }: { endpoint: string }) => {
+const AddClientForm = ({ endpoint }: { endpoint: string }) => {
   const [formData, setFormData] = useState<ClientFormData>({
     name: "",
     email: "",
@@ -100,4 +100,4 @@ const AddClientVForm = ({ endpoint }: { endpoint: string }) => {
   );
 };
 
-export default AddClientVForm;
+export default AddClientForm;

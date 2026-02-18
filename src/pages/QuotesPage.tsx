@@ -1,7 +1,7 @@
 import React from "react";
-import QuotesList from "../components/QuotesList";
+import QuotesList from "../components/Quotes Page/QuotesList";
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import AddQuoteForm from "../components/AddQuoteForm";
+import AddQuoteForm from "../components/Quotes Page/AddQuoteForm";
 
 const QuotesPage = () => {
   return (
@@ -10,7 +10,7 @@ const QuotesPage = () => {
         <QuotesList />
       </Box>
       <Box>
-        <AddQuoteForm />
+        <AddQuoteForm endpoint="quotes" />
       </Box>
     </SimpleGrid>
   );

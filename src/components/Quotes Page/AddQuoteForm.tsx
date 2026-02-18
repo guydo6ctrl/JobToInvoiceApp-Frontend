@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import SelectClient from "./SelectClient";
+import { useFormSubmit } from "../../hooks/useFormSubmit";
 
 interface QuoteFormData {
   client: string;
@@ -19,7 +20,7 @@ interface QuoteFormData {
   status: string;
 }
 
-const AddQuoteForm = (): JSX.Element => {
+const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
   const [formData, setFormData] = useState<QuoteFormData>({
     client: "",
     issue_date: "",
@@ -27,8 +28,20 @@ const AddQuoteForm = (): JSX.Element => {
     line_items: [],
     status: "",
   });
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+
+  const { submit, error, loading } = useFormSubmit({
+    endpoint,
+    onSuccess: () => {
+      setFormData({
+        client: "",
+        issue_date: "",
+        expiry_date: "",
+        line_items: [],
+        status: "",
+      });
+      alert("Quote added successfully!");
+    },
+  });
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -44,36 +57,7 @@ const AddQuoteForm = (): JSX.Element => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://localhost:8000/quotes/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add Quote");
-      }
-
-      setFormData({
-        client: "",
-        issue_date: "",
-        expiry_date: "",
-        line_items: [],
-        status: "",
-      });
-      alert("Quote added successfully!");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-    } finally {
-      setLoading(false);
-    }
+    await submit(formData);
   };
 
   return (

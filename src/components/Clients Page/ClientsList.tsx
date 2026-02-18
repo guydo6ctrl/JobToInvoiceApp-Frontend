@@ -1,5 +1,5 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import useClients from "../hooks/useClients";
+import useClients from "../../hooks/useClients";
 
 const ClientsList = () => {
   const { data, isLoading, error } = useClients();

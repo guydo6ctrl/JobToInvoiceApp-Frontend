@@ -1,5 +1,5 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import useQuotes from "../hooks/useQuotes";
+import useQuotes from "../../hooks/useQuotes";
 
 const QuotesList = () => {
   const { data, isLoading, error } = useQuotes();
