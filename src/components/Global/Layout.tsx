@@ -1,17 +1,15 @@
-
 import { Box } from "@chakra-ui/react";
 import NavBar from "./NavBar/NavBar";
+import { Outlet } from "react-router-dom";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
   return (
     <Box>
-      <NavBar />
+      <Box py={4}>
+        <NavBar />
+      </Box>
       <Box p={6}>
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Layout from "./components/Global/Layout";
 import ClientsPage from "./pages/ClientsPage";
 import JobsPage from "./pages/JobsPage";
 import InvoicePage from "./pages/InvoicePage";
@@ -23,22 +24,28 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        {/* Public routes (no navbar) */}
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Protected routes (with navbar) */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/invoices" element={<InvoicePage />} />
+          <Route path="/quotes" element={<QuotesPage />} />
+        </Route>
+
+        {/* Catch all */}
         <Route path="*" element={<NotFound />} />
-        <Route path="/clients" element={<ClientsPage />} />
-        <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/invoices" element={<InvoicePage />} />
-        <Route path="/quotes" element={<QuotesPage />} />
       </Routes>
     </BrowserRouter>
   );
