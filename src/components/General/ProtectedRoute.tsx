@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import api from "../services/api";
-import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
+import api from "../../services/api";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import { useState, useEffect, ReactNode } from "react";
 
 type Props = {

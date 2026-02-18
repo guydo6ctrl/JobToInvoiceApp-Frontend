@@ -17,7 +17,7 @@ interface ClientFormData {
   address: string;
 }
 
-const AddClientForm = ({ endpoint }: { endpoint: string }) => {
+const AddClientVForm = ({ endpoint }: { endpoint: string }) => {
   const [formData, setFormData] = useState<ClientFormData>({
     name: "",
     email: "",
@@ -100,4 +100,4 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
   );
 };
 
-export default AddClientForm;
+export default AddClientVForm;

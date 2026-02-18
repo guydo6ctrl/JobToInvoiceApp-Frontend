@@ -1,8 +1,7 @@
 import { useState } from "react";
-import api from "../services/api";
+import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import "../styles/Form.css";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import LoadingIndicator from "./LoadingIndicator";
 
 type Props = {

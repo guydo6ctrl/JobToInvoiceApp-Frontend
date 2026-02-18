@@ -1,5 +1,3 @@
-import "../styles/LoadingIndicator.css";
-
 const LoadingIndicator = (): JSX.Element => {
   return (
     <div className="loading-container">

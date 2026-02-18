@@ -11,8 +11,8 @@ const NavBar = () => {
       <Flex justify="flex-start" gap={4}>
         <AvatarItem />
         <NavButton route="">Home</NavButton>
-        <NavButton route="clients">Clients</NavButton>
         <NavButton route="jobs">Jobs</NavButton>
+        <NavButton route="clients">Clients</NavButton>
         <NavButton route="quotes">Quotes</NavButton>
         <NavButton route="invoices">Invoices</NavButton>
       </Flex>

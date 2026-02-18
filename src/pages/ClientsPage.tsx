@@ -9,7 +9,7 @@ const ClientsPage = () => {
         <ClientsList />
       </Box>
       <Box>
-        <AddClientForm />
+        <AddClientForm endpoint="clients" />
       </Box>
     </SimpleGrid>
   );

@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/General/ProtectedRoute";
 import Layout from "./components/Global/Layout";
 import ClientsPage from "./pages/ClientsPage";
 import JobsPage from "./pages/JobsPage";
