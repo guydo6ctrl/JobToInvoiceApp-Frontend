@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import SelectClient from "./SelectClient";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
+import SelectQuoteStatus from "./SelectQuoteStatus";
 
 interface QuoteFormData {
   client: string;
@@ -103,23 +104,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
             />
           </Field.Root>
 
-          <Field.Root>
-            <Text>Status</Text>
-            <NativeSelect.Root>
-              <NativeSelect.Field
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-              >
-                <option value="">Select status</option>
-                <option value="draft">Draft</option>
-                <option value="sent">Sent</option>
-                <option value="paid">Accepted</option>
-                <option value="rejected">Rejected</option>
-              </NativeSelect.Field>
-              <NativeSelect.Indicator />
-            </NativeSelect.Root>
-          </Field.Root>
+          <SelectQuoteStatus status={formData.status} onChange={handleChange} />
         </Fieldset.Content>
 
         {error && (
