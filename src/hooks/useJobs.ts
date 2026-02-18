@@ -1,12 +1,11 @@
 import useData from './useData';
 
 interface Job{
-    id: number;
     title: string;
     description: string;
-    date_created: string;
-    completed: boolean;
+    status: string;
     client_id: number;
+    source_quote: string;
 }
 
 const useJobs = () => {

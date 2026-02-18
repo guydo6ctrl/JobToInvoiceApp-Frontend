@@ -1,12 +1,11 @@
 import useData from "./useData"
 
-interface Client{
-    
+export interface Client{
+    id: number;
     name: string; 
     email: string;
     phone: string;
     address: string;
-    
 }
 
 const useClients = () => {

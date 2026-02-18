@@ -11,7 +11,7 @@ const ClientsList = () => {
   return (
     <Box>
       {data.map((client) => (
-        <Box key={client.name} bg="gray.100" p={4} borderRadius="md" mb={3}>
+        <Box key={client.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
           <Text fontWeight="bold">{client.name}</Text>
           <Text fontSize="sm">{client.email}</Text>
           {client.phone && <Text fontSize="sm">{client.phone}</Text>}

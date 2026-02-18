@@ -2,9 +2,10 @@ import useData from './useData'
 
 interface Quote{
     id: number;
+    client: number;
     issue_date: string;
     expiry_date: string;
-    job_id: number;
+    line_items: string;
     status: string;
 }
 
