@@ -1,10 +1,11 @@
 import { Input, InputGroup, Box, VStack, Text } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { Template } from "./AddQuoteForm";
 
 interface Props {
   onSearch: (searchText: string) => void;
-  onSelect: (result: any[]) => void;
+  onSelect: (result: Template) => void;
   results?: any[];
 }
 
