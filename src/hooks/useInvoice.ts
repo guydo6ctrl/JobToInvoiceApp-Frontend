@@ -1,4 +1,4 @@
-import useData from "./useData"
+import useData from "./Generic/useData";
 
 interface Invoice{
     id: number;
