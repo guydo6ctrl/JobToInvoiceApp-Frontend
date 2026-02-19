@@ -15,14 +15,20 @@ export interface LineItem {
   quantity: number;
   unit_price: number;
   type: string;
+  saveAsTemplate: boolean;
 }
 
 interface LineItemsInputProps {
   lineItems: LineItem[];
   onChange: (items: LineItem[]) => void;
+  clientId: string;
 }
 
-const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
+const LineItemsInput = ({
+  lineItems,
+  onChange,
+  clientId,
+}: LineItemsInputProps) => {
   const [showForm, setShowForm] = useState(false);
   const [newItem, setNewItem] = useState({
     name: "",
@@ -30,10 +36,29 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
     quantity: 1,
     unit_price: 0,
     type: "Materials",
+    saveAsTemplate: false,
   });
 
-  const addLineItem = () => {
+  // Save template if checked.
+  const addLineItem = async () => {
     if (newItem.description && newItem.unit_price > 0) {
+      if (newItem.saveAsTemplate) {
+        await fetch("http://localhost:8000/templates/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+          body: JSON.stringify({
+            name: newItem.name,
+            description: newItem.description,
+            unit_price: newItem.unit_price,
+            type: newItem.type,
+            client_id: parseInt(clientId),
+          }),
+        });
+      }
+
       onChange([...lineItems, newItem]);
       setNewItem({
         name: "",
@@ -41,6 +66,7 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
         quantity: 1,
         unit_price: 0,
         type: "Materials",
+        saveAsTemplate: false,
       });
       setShowForm(false);
     }
@@ -117,8 +143,19 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          
+
           <HStack>
+            <input
+              type="checkbox"
+              checked={newItem.saveAsTemplate}
+              onChange={(e) =>
+                setNewItem({ ...newItem, saveAsTemplate: e.target.checked })
+              }
+            />
+            <Text>Save as template</Text>
+          </HStack>
+
+          <HStack paddingY={3}>
             <Button colorScheme="green" onClick={addLineItem}>
               Add
             </Button>

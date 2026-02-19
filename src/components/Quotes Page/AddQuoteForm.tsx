@@ -21,17 +21,16 @@ interface QuoteFormData {
   expiry_date: string;
   line_items: LineItem[];
   status: string;
-  saveAsTemplate: boolean;
 }
 
 const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
+  const [searchResults, setSearchResults] = useState([]);
   const [formData, setFormData] = useState<QuoteFormData>({
     client: "",
     issue_date: "",
     expiry_date: "",
     line_items: [],
     status: "",
-    saveAsTemplate: false,
   });
 
   const { submit, error, loading } = useFormSubmit({
@@ -43,7 +42,6 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
         expiry_date: "",
         line_items: [],
         status: "",
-        saveAsTemplate: false,
       });
       alert("Quote added successfully!");
     },
@@ -63,29 +61,9 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (formData.saveAsTemplate) {
-      for (const item of formData.line_items) {
-        await fetch("http://localhost:8000/templates/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-          body: JSON.stringify({
-            name: item.name,
-            description: item.description,
-            unit_price: item.unit_price,
-            type: item.type,
-            client_id: formData.client,
-          }),
-        });
-      }
-    }
-
     await submit(formData);
   };
-  const [searchResults, setSearchResults] = useState([]);
+
   const handleSearch = async (searchText: string) => {
     const response = await fetch(
       `http://localhost:8000/templates/?search=${searchText}`,
@@ -144,23 +122,12 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 onChange={(items) =>
                   setFormData({ ...formData, line_items: items })
                 }
+                clientId={formData.client} 
               />
             </Box>
           </Field.Root>
 
           <SelectQuoteStatus status={formData.status} onChange={handleChange} />
-
-          <Field.Root>
-            <input
-              type="checkbox"
-              name="saveAsTemplate"
-              checked={formData.saveAsTemplate}
-              onChange={(e) =>
-                setFormData({ ...formData, saveAsTemplate: e.target.checked })
-              }
-            />
-            <Text ml={2}>Save line items as templates</Text>
-          </Field.Root>
         </Fieldset.Content>
 
         {error && (
