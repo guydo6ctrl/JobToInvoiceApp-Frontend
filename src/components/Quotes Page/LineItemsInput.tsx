@@ -7,7 +7,7 @@ import {
   HStack,
   NativeSelect,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface LineItem {
   name: string;
@@ -22,22 +22,41 @@ interface LineItemsInputProps {
   lineItems: LineItem[];
   onChange: (items: LineItem[]) => void;
   clientId: string;
+  selectedTemplate?: any;
 }
+
+const defaultNewItem = {
+  name: "",
+  description: "",
+  quantity: 1,
+  unit_price: 0,
+  type: "Type",
+  saveAsTemplate: false,
+};
 
 const LineItemsInput = ({
   lineItems,
   onChange,
   clientId,
+  selectedTemplate,
 }: LineItemsInputProps) => {
+  useEffect(() => {
+    if (selectedTemplate) {
+      onChange([
+        ...lineItems,
+        {
+          name: selectedTemplate.description,
+          description: selectedTemplate.description,
+          quantity: 1,
+          unit_price: parseFloat(selectedTemplate.unit_price),
+          type: selectedTemplate.type,
+          saveAsTemplate: false,
+        },
+      ]);
+    }
+  }, [selectedTemplate]);
   const [showForm, setShowForm] = useState(false);
-  const [newItem, setNewItem] = useState({
-    name: "",
-    description: "",
-    quantity: 1,
-    unit_price: 0,
-    type: "Materials",
-    saveAsTemplate: false,
-  });
+  const [newItem, setNewItem] = useState(defaultNewItem);
 
   // Save template if checked.
   const addLineItem = async () => {
@@ -60,14 +79,7 @@ const LineItemsInput = ({
       }
 
       onChange([...lineItems, newItem]);
-      setNewItem({
-        name: "",
-        description: "",
-        quantity: 1,
-        unit_price: 0,
-        type: "Materials",
-        saveAsTemplate: false,
-      });
+      setNewItem(defaultNewItem);
       setShowForm(false);
     }
   };

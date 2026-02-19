@@ -11,7 +11,7 @@ const SelectClient = ({ formData, handleChange }: SelectClientProps) => {
 
   return (
     <Field.Root>
-      <Text>Client *</Text>
+      <Text>Client</Text>
       <NativeSelect.Root>
         <NativeSelect.Field
           name="client"

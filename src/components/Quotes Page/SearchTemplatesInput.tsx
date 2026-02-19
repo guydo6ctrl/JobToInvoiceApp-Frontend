@@ -1,19 +1,14 @@
-import {
-  Input,
-  InputGroup,
-  Box,
-  VStack,
-  Text,
-} from "@chakra-ui/react";
+import { Input, InputGroup, Box, VStack, Text } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
 interface Props {
   onSearch: (searchText: string) => void;
+  onSelect: (result: any[]) => void;
   results?: any[];
 }
 
-const SearchTemplatesInput = ({ onSearch, results = [] }: Props) => {
+const SearchTemplatesInput = ({ onSearch, onSelect, results = [] }: Props) => {
   const ref = useRef<HTMLInputElement>(null);
   const [showResults, setShowResults] = useState(false);
 
@@ -29,7 +24,7 @@ const SearchTemplatesInput = ({ onSearch, results = [] }: Props) => {
         <InputGroup startElement={<BsSearch />} w="100%">
           <Input
             ref={ref}
-            placeholder="Search existing templates"
+            placeholder="Search existing line items"
             onChange={(e) => {
               onSearch(e.target.value);
               setShowResults(true);
@@ -62,6 +57,7 @@ const SearchTemplatesInput = ({ onSearch, results = [] }: Props) => {
                 _hover={{ bg: "gray.300" }}
                 onClick={() => {
                   if (ref.current) ref.current.value = result.name;
+                  onSelect({ ...result });
                   setShowResults(false);
                 }}
               >

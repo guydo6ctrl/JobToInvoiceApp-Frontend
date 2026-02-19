@@ -14,6 +14,7 @@ import SelectQuoteStatus from "./SelectQuoteStatus";
 import LineItemsInput from "./LineItemsInput";
 import { LineItem } from "./LineItemsInput";
 import SearchTemplatesInput from "./SearchTemplatesInput";
+import GenericDateInput from "./GenericDateInput";
 
 interface QuoteFormData {
   client: string;
@@ -23,26 +24,23 @@ interface QuoteFormData {
   status: string;
 }
 
+const defaultFormData = {
+  client: "",
+  issue_date: "",
+  expiry_date: "",
+  line_items: [],
+  status: "",
+};
+
 const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
   const [searchResults, setSearchResults] = useState([]);
-  const [formData, setFormData] = useState<QuoteFormData>({
-    client: "",
-    issue_date: "",
-    expiry_date: "",
-    line_items: [],
-    status: "",
-  });
+  const [formData, setFormData] = useState<QuoteFormData>(defaultFormData);
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
 
   const { submit, error, loading } = useFormSubmit({
     endpoint,
     onSuccess: () => {
-      setFormData({
-        client: "",
-        issue_date: "",
-        expiry_date: "",
-        line_items: [],
-        status: "",
-      });
+      setFormData(defaultFormData);
       alert("Quote added successfully!");
     },
   });
@@ -64,9 +62,13 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
     await submit(formData);
   };
 
-  const handleSearch = async (searchText: string) => {
+  const handleSearch = async (searchTextOrResult: string | any) => {
+    if (typeof searchTextOrResult === "object") {
+      setSelectedTemplate(searchTextOrResult); // Store the selected template
+      return;
+    }
     const response = await fetch(
-      `http://localhost:8000/templates/?search=${searchText}`,
+      `http://localhost:8000/templates/?search=${searchTextOrResult}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -87,32 +89,25 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
         <Fieldset.Content>
           <SelectClient formData={formData} handleChange={handleChange} />
 
-          <Field.Root>
-            <Text>Issue Date *</Text>
-            <Input
-              name="issue_date"
-              type="date"
-              value={formData.issue_date}
-              onChange={handleChange}
-              placeholder="01-01-2000"
-            />
-          </Field.Root>
+          <GenericDateInput
+            name="issue_date"
+            value={formData.issue_date}
+            children="Issue Date"
+            onChange={handleChange}
+          />
 
-          <Field.Root>
-            <Text>Expiry Date</Text>
-            <Input
-              name="expiry_date"
-              type="date"
-              value={formData.expiry_date}
-              onChange={handleChange}
-              placeholder="01-01-2000"
-            />
-          </Field.Root>
+          <GenericDateInput
+            name="expiry_date"
+            value={formData.expiry_date}
+            children="Expiry Date"
+            onChange={handleChange}
+          />
 
           <Field.Root>
             <Box flex="3" width="100%">
               <SearchTemplatesInput
                 onSearch={handleSearch}
+                onSelect={(result) => setSelectedTemplate(result)}
                 results={searchResults}
               />
             </Box>
@@ -122,7 +117,8 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 onChange={(items) =>
                   setFormData({ ...formData, line_items: items })
                 }
-                clientId={formData.client} 
+                clientId={formData.client}
+                selectedTemplate={selectedTemplate}
               />
             </Box>
           </Field.Root>
