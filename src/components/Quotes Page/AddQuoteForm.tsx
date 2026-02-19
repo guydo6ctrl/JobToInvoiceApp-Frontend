@@ -13,7 +13,7 @@ import { useFormSubmit } from "../../hooks/useFormSubmit";
 import SelectQuoteStatus from "./SelectQuoteStatus";
 import LineItemsInput from "./LineItemsInput";
 import { LineItem } from "./LineItemsInput";
-import SearchTemplatesInput from "../General/SearchTemplatesInput";
+import SearchTemplatesInput from "./SearchTemplatesInput";
 
 interface QuoteFormData {
   client: string;
@@ -100,7 +100,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
   };
 
   return (
-    <Box maxW="500px" mx="auto" py={8}>
+    <Box mx="auto" py={8} width="100%">
       <Heading size="lg" mb={6}>
         Add New Quote
       </Heading>
@@ -138,7 +138,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 results={searchResults}
               />
             </Box>
-            <Box flex="1">
+            <Box flex="1" width="100%">
               <LineItemsInput
                 lineItems={formData.line_items}
                 onChange={(items) =>

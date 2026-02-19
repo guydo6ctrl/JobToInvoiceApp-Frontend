@@ -1,6 +1,5 @@
 import {
   Input,
-  InputElement,
   InputGroup,
   Box,
   VStack,

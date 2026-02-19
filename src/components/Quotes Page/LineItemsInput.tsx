@@ -55,8 +55,8 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
             <Text flex={1}>{item.name}</Text>
             <Text flex={1}>{item.description}</Text>
             <Text>Qty: {item.quantity}</Text>
-            <Text>£{item.unit_price}</Text>
-            <Text>£{item.unit_price * item.quantity}</Text>
+            <Text>Unit Price: £{item.unit_price}</Text>
+            <Text>Total: £{item.unit_price * item.quantity}</Text>
             <Text>Type: {item.type}</Text>
             <Button
               size="sm"
@@ -111,12 +111,13 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
               onChange={(e) => setNewItem({ ...newItem, type: e.target.value })}
             >
               <option value="">Select type</option>
-              <option value="labour">Labour</option>
-              <option value="materials">Materials</option>
-              <option value="miscellaneous">Miscellaneous</option>
+              <option value="Labour">Labour</option>
+              <option value="Materials">Materials</option>
+              <option value="Miscellaneous">Miscellaneous</option>
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
+          
           <HStack>
             <Button colorScheme="green" onClick={addLineItem}>
               Add
