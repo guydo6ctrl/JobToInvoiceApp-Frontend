@@ -5,9 +5,7 @@ import {
   Fieldset,
   Heading,
   Input,
-  NativeSelect,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import SelectClient from "./SelectClient";
@@ -15,6 +13,7 @@ import { useFormSubmit } from "../../hooks/useFormSubmit";
 import SelectQuoteStatus from "./SelectQuoteStatus";
 import LineItemsInput from "./LineItemsInput";
 import { LineItem } from "./LineItemsInput";
+import SearchTemplatesInput from "../General/SearchTemplatesInput";
 
 interface QuoteFormData {
   client: string;
@@ -86,6 +85,19 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
     await submit(formData);
   };
+  const [searchResults, setSearchResults] = useState([]);
+  const handleSearch = async (searchText: string) => {
+    const response = await fetch(
+      `http://localhost:8000/templates/?search=${searchText}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      },
+    );
+    const data = await response.json();
+    setSearchResults(data);
+  };
 
   return (
     <Box maxW="500px" mx="auto" py={8}>
@@ -120,12 +132,20 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
           </Field.Root>
 
           <Field.Root>
-            <LineItemsInput
-              lineItems={formData.line_items}
-              onChange={(items) =>
-                setFormData({ ...formData, line_items: items })
-              }
-            />
+            <Box flex="3" width="100%">
+              <SearchTemplatesInput
+                onSearch={handleSearch}
+                results={searchResults}
+              />
+            </Box>
+            <Box flex="1">
+              <LineItemsInput
+                lineItems={formData.line_items}
+                onChange={(items) =>
+                  setFormData({ ...formData, line_items: items })
+                }
+              />
+            </Box>
           </Field.Root>
 
           <SelectQuoteStatus status={formData.status} onChange={handleChange} />

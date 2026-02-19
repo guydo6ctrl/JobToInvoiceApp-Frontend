@@ -6,10 +6,10 @@ import AddQuoteForm from "../components/Quotes Page/AddQuoteForm";
 const QuotesPage = () => {
   return (
     <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
-      <GridItem colSpan={1}>
+      <GridItem colSpan={{ base: 1, lg: 1 }}>
         <QuotesList />
       </GridItem>
-      <GridItem colSpan={2}>
+      <GridItem colSpan={{ base: 1, lg: 2 }}>
         <AddQuoteForm endpoint="quotes" />
       </GridItem>
     </SimpleGrid>

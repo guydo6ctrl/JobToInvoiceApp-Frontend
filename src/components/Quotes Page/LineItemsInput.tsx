@@ -48,10 +48,6 @@ const LineItemsInput = ({ lineItems, onChange }: LineItemsInputProps) => {
 
   return (
     <Box>
-      <Text fontWeight="bold" mb={2}>
-        Line Items
-      </Text>
-
       {/* Display existing items */}
       <VStack mb={4}>
         {lineItems.map((item, idx) => (
