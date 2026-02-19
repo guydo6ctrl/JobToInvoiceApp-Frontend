@@ -15,6 +15,7 @@ import LineItemsInput from "./LineItemsInput";
 import { LineItem } from "./LineItemsInput";
 import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
+import { searchTemplates } from "../../services/templateService";
 
 interface QuoteFormData {
   client: string;
@@ -67,15 +68,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
       setSelectedTemplate(searchTextOrResult); // Store the selected template
       return;
     }
-    const response = await fetch(
-      `http://localhost:8000/templates/?search=${searchTextOrResult}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      },
-    );
-    const data = await response.json();
+    const data = await searchTemplates(searchTextOrResult);
     setSearchResults(data);
   };
 
