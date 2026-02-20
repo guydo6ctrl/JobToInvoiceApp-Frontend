@@ -16,7 +16,7 @@ export const useFormSubmit = ({ endpoint, onSuccess }: UseFormSubmitOptions) => 
     setLoading(true);
 
     try {
-      const response = await api.post(`${endpoint}`, data)
+      const response = await api.post(`/${endpoint}/`, data)
 
       onSuccess?.();
       return response.data();
