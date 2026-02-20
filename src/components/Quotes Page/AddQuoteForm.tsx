@@ -8,11 +8,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import SelectClient from "./SelectClient";
+import SelectClient from "../General/SelectClient";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import SelectQuoteStatus from "./SelectQuoteStatus";
-import LineItemsInput from "./LineItemsInput";
-import { LineItem } from "./LineItemsInput";
+import LineItemsInput, { LineItem } from "./LineItemsInput";
 import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";

@@ -17,18 +17,22 @@ interface ClientFormData {
   address: string;
 }
 
+const defaultClientFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
+};
+
 const AddClientForm = ({ endpoint }: { endpoint: string }) => {
-  const [formData, setFormData] = useState<ClientFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
+  const [formData, setFormData] = useState<ClientFormData>(
+    defaultClientFormData,
+  );
 
   const { submit, error, loading } = useFormSubmit({
     endpoint,
     onSuccess: () => {
-      setFormData({ name: "", email: "", phone: "", address: "" });
+      setFormData(defaultClientFormData);
       alert("Client added successfully!");
     },
   });
@@ -46,11 +50,11 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
   };
 
   return (
-    <Box maxW="500px" mx="auto" py={8}>
-      <Heading size="lg" mb={6}>
-        Add New Client
-      </Heading>
+    <Box mx="auto" py={8}>
       <form onSubmit={handleSubmit}>
+        <Heading size="lg" mb={6}>
+          Add New Client
+        </Heading>
         <Field.Root>
           <Text>Name *</Text>
           <Input

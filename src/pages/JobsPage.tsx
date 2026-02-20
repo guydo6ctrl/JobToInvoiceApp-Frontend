@@ -1,9 +1,7 @@
-import JobsList from '../components/JobsList'
+import JobsList from "../components/Jobs page/JobsList";
 
 const JobsPage = () => {
-  return (
-    <JobsList/>
-  )
-}
+  return <JobsList />;
+};
 
-export default JobsPage
+export default JobsPage;

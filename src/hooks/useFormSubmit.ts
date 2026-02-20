@@ -1,4 +1,6 @@
 import { useState } from "react";
+import api from "../services/api";
+import axios from "axios";
 
 interface UseFormSubmitOptions {
   endpoint: string;
@@ -6,7 +8,7 @@ interface UseFormSubmitOptions {
 }
 
 export const useFormSubmit = ({ endpoint, onSuccess }: UseFormSubmitOptions) => {
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const submit = async (data: Record<string, any>) => {
@@ -14,23 +16,22 @@ export const useFormSubmit = ({ endpoint, onSuccess }: UseFormSubmitOptions) => 
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/${endpoint}/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) throw new Error("Failed to submit");
+      const response = await api.post(`${endpoint}`, data)
 
       onSuccess?.();
-      return response.json();
+      return response.data();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.detail ??
+            err.response?.statusText ??
+            "Failed to submit",
+        );
+      } else {
+        setError("An unexpected error occurred");
+      }
       throw err;
-    } finally {
+    }finally {
       setLoading(false);
     }
   };

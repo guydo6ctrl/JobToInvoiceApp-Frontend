@@ -1,5 +1,5 @@
 import React from "react";
-import useJobs from "../hooks/useJobs";
+import useJobs from "../../hooks/useJobs";
 
 const JobsList = () => {
   const { data, isLoading, error } = useJobs();

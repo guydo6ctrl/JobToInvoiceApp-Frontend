@@ -1,8 +1,8 @@
-const API_BASE = "http://localhost:8000";
+
 
 export const searchTemplates = async (searchText: string) => {
   const response = await fetch(
-    `${API_BASE}/templates/?search=${searchText}`,
+    `${import.meta.env.VITE_API_URL}/templates/?search=${searchText}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
