@@ -19,7 +19,7 @@ export const useFormSubmit = ({ endpoint, onSuccess }: UseFormSubmitOptions) => 
       const response = await api.post(`/${endpoint}/`, data)
 
       onSuccess?.();
-      return response.data();
+      return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
         setError(
