@@ -1,5 +1,5 @@
-import React from "react";
 import useJobs from "../../hooks/useJobs";
+import { Box, Text } from "@chakra-ui/react";
 
 const JobsList = () => {
   const { data, isLoading, error } = useJobs();
@@ -9,11 +9,17 @@ const JobsList = () => {
   if (!data || data.length === 0) return <p>No jobs found</p>;
 
   return (
-    <ul>
+    <Box>
       {data.map((job) => (
-        <li key={job.title}>{job.title}</li>
+        <Box key={job.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
+          <Text fontWeight="bold">{job.client}</Text>
+          <Text fontWeight="bold">{job.title}</Text>
+          <Text fontSize="sm">{job.description}</Text>
+          <Text fontSize="sm">Source Quote #{job.source_quote}</Text>
+          <Text fontSize="sm">{job.status}</Text>
+        </Box>
       ))}
-    </ul>
+    </Box>
   );
 };
 

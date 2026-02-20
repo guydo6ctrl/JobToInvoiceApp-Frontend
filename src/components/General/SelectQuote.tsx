@@ -1,30 +1,46 @@
-import { Field, NativeSelect, Text } from "@chakra-ui/react";
-import useQuotes from "../../hooks/useQuotes";
+import { Field, NativeSelect, NativeSelectRoot, Text } from "@chakra-ui/react";
+import useQuotes, { useQuotesByClient } from "../../hooks/useQuotes";
 
 interface SelectQuoteProps {
-  formData: { sourceQuote: string | number };
+  formData: { source_quote: string | number };
+  client: string;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectQuote = ({ formData, handleChange }: SelectQuoteProps) => {
-  const { data: quotes } = useQuotes();
+const SelectQuote = ({ formData, client, handleChange }: SelectQuoteProps) => {
+  const { data: quotes = [], isLoading, error } = useQuotesByClient(client);
+
+  if (client === "") {
+    return (
+      <Field.Root>
+        <Text>Quote</Text>
+        <NativeSelect.Root>
+          <NativeSelect.Field _disabled={{ opacity: 0.5 }}>
+            <option>Select a client first</option>
+          </NativeSelect.Field>
+        </NativeSelect.Root>
+      </Field.Root>
+    );
+  }
+
   return (
     <Field.Root>
       <Text>Quote</Text>
       <NativeSelect.Root>
         <NativeSelect.Field
-          name="quote"
-          value={formData.sourceQuote}
+          name="source_quote"
+          value={formData.source_quote.toString()}
           onChange={handleChange}
         >
           <option value="">Select a quote</option>
+          {isLoading && <option disabled>Loading quotes...</option>}
+          {error && <option disabled>Error loading quotes</option>}
           {quotes.map((quote) => (
             <option key={quote.id} value={quote.id.toString()}>
-              {quote.id}
+              Quote #{quote.id}
             </option>
           ))}
         </NativeSelect.Field>
-        <NativeSelect.Indicator />
       </NativeSelect.Root>
     </Field.Root>
   );

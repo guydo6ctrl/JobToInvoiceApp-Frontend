@@ -13,4 +13,9 @@ const useQuotes = () => {
   return (useData<Quote>('/quotes/', {}, []))
 }
 
+const useQuotesByClient = (clientId: string) => {
+  return (useData<Quote>('/quotes/', {params: {client: clientId}}, [clientId] ))
+}
+
 export default useQuotes
+export { useQuotesByClient }
