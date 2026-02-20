@@ -1,18 +1,9 @@
-
+import api from "./api";
 
 export const searchTemplates = async (searchText: string) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/templates/?search=${searchText}`,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-    }
-  );
+  const { data } = await api.get("/templates/", {
+    params: { search: searchText },
+  });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch templates");
-  }
-
-  return response.json();
+  return data;
 };

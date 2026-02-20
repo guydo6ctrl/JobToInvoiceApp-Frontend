@@ -8,6 +8,7 @@ import {
   NativeSelect,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 export interface LineItem {
   name: string;
@@ -62,19 +63,12 @@ const LineItemsInput = ({
   const addLineItem = async () => {
     if (newItem.description && newItem.unit_price > 0) {
       if (newItem.saveAsTemplate) {
-        await fetch("http://localhost:8000/templates/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-          body: JSON.stringify({
-            name: newItem.name,
-            description: newItem.description,
-            unit_price: newItem.unit_price,
-            type: newItem.type,
-            client_id: parseInt(clientId),
-          }),
+        await api.post("/templates/", {
+          name: newItem.name,
+          description: newItem.description,
+          unit_price: newItem.unit_price,
+          type: newItem.type,
+          client_id: Number(clientId),
         });
       }
 
