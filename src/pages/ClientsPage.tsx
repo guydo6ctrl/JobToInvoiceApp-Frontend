@@ -1,6 +1,6 @@
 import { Box, HStack, SimpleGrid } from "@chakra-ui/react";
-import AddClientForm from "../components/Clients Page/AddClientForm";
-import ClientsList from "../components/Clients Page/ClientsList";
+import AddClientForm from "../components/ClientsPageComponents/AddClientForm";
+import ClientsList from "../components/ClientsPageComponents/ClientsList";
 
 const ClientsPage = () => {
   return (

@@ -1,6 +1,6 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
-import JobsList from "../components/Jobs page/JobsList";
-import AddJobForm from "../components/Jobs page/AddJobForm";
+import JobsList from "../components/JobsPageComponents/JobsList";
+import AddJobForm from "../components/JobsPageComponents/AddJobForm";
 
 const JobsPage = () => {
   return (

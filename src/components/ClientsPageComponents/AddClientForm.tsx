@@ -50,7 +50,7 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
   };
 
   return (
-    <Box mx="auto" py={8}>
+    <Box mx="auto">
       <form onSubmit={handleSubmit}>
         <Heading size="lg" mb={6}>
           Add New Client

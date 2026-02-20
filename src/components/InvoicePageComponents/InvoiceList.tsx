@@ -1,5 +1,5 @@
 import React from "react";
-import useInvoice from "../hooks/useInvoice";
+import useInvoice from "../../hooks/useInvoice";
 
 const InvoiceList = () => {
   const { data, isLoading, error } = useInvoice();

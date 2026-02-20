@@ -1,7 +1,7 @@
 import React from "react";
-import QuotesList from "../components/Quotes page/QuotesList";
+import QuotesList from "../components/QuotesPageComponents/QuotesList";
 import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
-import AddQuoteForm from "../components/Quotes page/AddQuoteForm";
+import AddQuoteForm from "../components/QuotesPageComponents/AddQuoteForm";
 
 const QuotesPage = () => {
   return (
