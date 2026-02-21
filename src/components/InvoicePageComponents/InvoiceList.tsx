@@ -1,5 +1,5 @@
-import React from "react";
 import useInvoice from "../../hooks/useInvoice";
+import { Box, Text } from "@chakra-ui/react";
 
 const InvoiceList = () => {
   const { data, isLoading, error } = useInvoice();
@@ -9,11 +9,17 @@ const InvoiceList = () => {
   if (!data || data.length === 0) return <p>No invoices found</p>;
 
   return (
-    <ul>
+    <Box>
       {data.map((invoice) => (
-        <li key={invoice.id}>{invoice.job_id}</li>
+        <Box key={invoice.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
+          <Text fontWeight="bold">{invoice.client}</Text>
+          <Text fontSize="sm">{invoice.job_id}</Text>
+          <Text fontSize="sm">{invoice.status}</Text>
+          <Text fontSize="sm">{invoice.issue_date}</Text>
+          <Text fontSize="sm">{invoice.due_date}</Text>
+        </Box>
       ))}
-    </ul>
+    </Box>
   );
 };
 

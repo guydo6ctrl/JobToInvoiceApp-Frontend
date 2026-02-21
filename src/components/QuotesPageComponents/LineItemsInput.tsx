@@ -46,7 +46,7 @@ const LineItemsInput = ({
       onChange([
         ...lineItems,
         {
-          name: selectedTemplate.description,
+          name: selectedTemplate.name,
           description: selectedTemplate.description,
           quantity: 1,
           unit_price: parseFloat(selectedTemplate.unit_price),

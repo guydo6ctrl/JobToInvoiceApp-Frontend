@@ -16,8 +16,9 @@ import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
 
-interface QuoteFormData {
+interface QuoteFormDataProps {
   client: string;
+  description: string;
   issue_date: string;
   expiry_date: string;
   line_items: LineItem[];
@@ -33,6 +34,7 @@ export interface Template {
 
 const defaultFormData = {
   client: "",
+  description: "",
   issue_date: "",
   expiry_date: "",
   line_items: [],
@@ -41,7 +43,7 @@ const defaultFormData = {
 
 const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
   const [searchResults, setSearchResults] = useState([]);
-  const [formData, setFormData] = useState<QuoteFormData>(defaultFormData);
+  const [formData, setFormData] = useState<QuoteFormDataProps>(defaultFormData);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
     null,
   );
@@ -89,6 +91,14 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
         <Fieldset.Root size="lg">
           <Fieldset.Content>
             <SelectClient formData={formData} handleChange={handleChange} />
+            <Field.Root>
+              <Text>Description</Text>
+              <Input
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </Field.Root>
             <GenericDateInput
               name="issue_date"
               value={formData.issue_date}
