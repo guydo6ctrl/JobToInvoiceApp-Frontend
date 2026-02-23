@@ -12,7 +12,7 @@ const QuotesList = () => {
     <Box>
       {data.map((quote) => (
         <Box key={quote.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
-          <Text fontWeight="bold">{quote.client}</Text>
+          <Text fontWeight="bold">{quote.client.name}</Text>
           <Text fontSize="sm">{quote.status}</Text>
           <Text fontSize="sm">{quote.issue_date}</Text>
           <Text fontSize="sm">{quote.expiry_date}</Text>

@@ -5,14 +5,14 @@ import SelectClient from "../General/SelectClient";
 import SelectQuote from "../General/SelectQuote";
 
 interface JobFormData {
-  client: string;
+  client_id: string;
   title: string;
   description: string;
   source_quote: string;
 }
 
 const defaultFormData = {
-  client: "",
+  client_id: "",
   title: "",
   description: "",
   source_quote: "",
@@ -65,7 +65,7 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
         <SelectQuote
           formData={formData}
           handleChange={handleChange}
-          client={formData.client}
+          client={formData.client_id}
         />
         {error && <Text>{error}</Text>}
         <Button type="submit" colorScheme="blue" mt={6} loading={loading}>

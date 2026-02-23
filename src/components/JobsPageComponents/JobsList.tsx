@@ -12,7 +12,7 @@ const JobsList = () => {
     <Box>
       {data.map((job) => (
         <Box key={job.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
-          <Text fontWeight="bold">{job.client}</Text>
+          <Text fontWeight="bold">{job.client.name}</Text>
           <Text fontWeight="bold">{job.title}</Text>
           <Text fontSize="sm">{job.description}</Text>
           <Text fontSize="sm">Source Quote #{job.source_quote}</Text>

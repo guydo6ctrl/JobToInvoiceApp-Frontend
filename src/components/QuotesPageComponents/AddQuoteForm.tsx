@@ -17,7 +17,7 @@ import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
 
 interface QuoteFormDataProps {
-  client: string;
+  client_id: string;
   description: string;
   issue_date: string;
   expiry_date: string;
@@ -33,7 +33,7 @@ export interface Template {
 }
 
 const defaultFormData = {
-  client: "",
+  client_id: "",
   description: "",
   issue_date: "",
   expiry_date: "",
@@ -125,7 +125,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                   onChange={(items) =>
                     setFormData({ ...formData, line_items: items })
                   }
-                  clientId={formData.client}
+                  clientId={formData.client_id}
                   selectedTemplate={selectedTemplate}
                 />
               </Box>

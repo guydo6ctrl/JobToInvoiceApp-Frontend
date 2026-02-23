@@ -1,11 +1,15 @@
 import useData from "./Generic/useData";
 
+interface ClientJob {
+  id: number | '';
+  name: string;
+}
 interface Job{
   id: number;
   title: string;
   description: string;
   status: string;
-  client: number;
+  client: ClientJob;
   source_quote: string;
 }
 

@@ -1,8 +1,13 @@
 import useData from "./Generic/useData";
 
+interface QuoteClient {
+  id: number | ""; 
+  name: string;
+}
+
 interface Quote{
     id: number;
-    client: number;
+    client: QuoteClient;
     issue_date: string;
     expiry_date: string;
     line_items: string;

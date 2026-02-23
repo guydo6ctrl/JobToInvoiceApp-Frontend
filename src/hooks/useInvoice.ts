@@ -1,8 +1,13 @@
 import useData from "./Generic/useData";
 
+interface InvoiceClient{
+  id: number | '';
+  name: string;
+}
+
 interface Invoice{
-  id: number;
-    client: number;
+    id: number;
+    client: InvoiceClient;
     source_quote: number;
     issue_date: string;
     due_date: string;

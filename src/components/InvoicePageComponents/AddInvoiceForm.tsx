@@ -23,7 +23,7 @@ import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
 
 interface InvoiceFormDataProps {
-  client: string;
+  client_id: string;
   job: string;
   source_quote: string;
   description: string;
@@ -34,7 +34,7 @@ interface InvoiceFormDataProps {
 }
 
 const defaultFormData = {
-  client: "",
+  client_id: "",
   job: "",
   source_quote: "",
   description: "",
@@ -113,12 +113,12 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
             <SelectJob
               formData={formData}
               handleChange={handleChange}
-              client={formData.client}
+              client={formData.client_id}
             />
             <SelectQuote
               formData={formData}
               handleChange={handleChange}
-              client={formData.client}
+              client={formData.client_id}
               onSelectQuote={handleSelectQuote}
             />
             <Field.Root>
@@ -155,7 +155,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
                   onChange={(items) =>
                     setFormData({ ...formData, line_items: items })
                   }
-                  clientId={formData.client}
+                  clientId={formData.client_id}
                   selectedTemplate={selectedTemplate}
                 />
               </Box>
