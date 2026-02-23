@@ -10,6 +10,10 @@ import JobsPage from "./pages/JobsPage";
 import InvoicePage from "./pages/InvoicePage";
 import QuotesPage from "./pages/QuotesPage";
 
+// Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
+// Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
+// PDF export — Generate PDF quotes/invoicess
+
 function Logout(): JSX.Element {
   localStorage.clear();
   return <Navigate to="/login" />;
