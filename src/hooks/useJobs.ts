@@ -10,7 +10,7 @@ interface Job{
 }
 
 const useJobs = () => {
-  return (useData<Job>('/jobs/', {}, []))
+  return (useData<Job>('jobs/', {}, []))
 }
 
 export default useJobs

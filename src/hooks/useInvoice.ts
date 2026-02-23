@@ -11,7 +11,7 @@ interface Invoice{
 }
 
 const useInvoice = () => {
-  return (useData<Invoice>('/invoices/', {}, []))
+  return (useData<Invoice>('invoices/', {}, []))
 }
 
 export default useInvoice

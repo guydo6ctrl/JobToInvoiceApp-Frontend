@@ -9,7 +9,7 @@ export interface Client{
 }
 
 const useClients = () => {
-  return useData<Client>('/clients/', {}, [])
+  return useData<Client>('clients/', {}, [])
 }
 
 export default useClients
