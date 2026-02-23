@@ -1,5 +1,6 @@
-import { Button, Flex, IconButton } from "@chakra-ui/react";
+import { Button, Flex, Icon, IconButton } from "@chakra-ui/react";
 import { CiSettings } from "react-icons/ci";
+import { BiSolidHome } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import AvatarItem from "./AvatarItem";
 import NavButton from "./NavButton";
@@ -10,7 +11,9 @@ const NavBar = () => {
     <Flex justifyContent="space-between" p={1} gap={4}>
       <Flex justify="flex-start" gap={4}>
         <AvatarItem />
-        <NavButton route="">Home</NavButton>
+        <NavButton route="">
+          <Icon as={BiSolidHome} />
+        </NavButton>
         <NavButton route="clients">Clients</NavButton>
         <NavButton route="quotes">Quotes</NavButton>
         <NavButton route="jobs">Jobs</NavButton>

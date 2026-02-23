@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  children: ReactNode;
+  children: ReactNode ;
   route: string;
 }
 const NavButton = ({ children, route }: Props) => {
