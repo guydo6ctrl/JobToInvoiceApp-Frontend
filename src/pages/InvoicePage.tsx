@@ -5,7 +5,7 @@ import AddInvoiceForm from "../components/InvoicePageComponents/AddInvoiceForm";
 
 const InvoicePage = () => {
   return (
-    <SimpleGrid columns={{ base: 1, lg: 2 }} gap="40px">
+    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
       <GridItem colSpan={{ base: 1, lg: 1 }}>
         <InvoiceList />
       </GridItem>

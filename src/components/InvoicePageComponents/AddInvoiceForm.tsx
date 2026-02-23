@@ -1,4 +1,13 @@
-import { Box, Button, Field, Fieldset, Heading, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Field,
+  Fieldset,
+  Heading,
+  HStack,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import SelectClient from "../General/SelectClient";
 import GenericDateInput from "../QuotesPageComponents/GenericDateInput";
 import SearchTemplatesInput from "../QuotesPageComponents/SearchTemplatesInput";
@@ -10,9 +19,11 @@ import { useState } from "react";
 import { Template } from "../QuotesPageComponents/AddQuoteForm";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { searchTemplates } from "../../services/templateService";
+import SelectQuote from "../General/SelectQuote";
 
 interface InvoiceFormDataProps {
   client: string;
+  source_quote: string;
   description: string;
   issue_date: string;
   due_date: string;
@@ -22,6 +33,7 @@ interface InvoiceFormDataProps {
 
 const defaultFormData = {
   client: "",
+  source_quote: "",
   description: "",
   issue_date: "",
   due_date: "",
@@ -71,6 +83,21 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
     await submit(formData);
   };
 
+  const handleSelectQuote = (quote: any) => {
+    setFormData({
+      ...formData,
+      source_quote: formData.source_quote.toString(),
+      line_items: quote.line_items.map((item: any) => ({
+        name: item.name || item.description,
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price,
+        type: item.type,
+        saveAsTemplate: false,
+      })),
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <Box mx="auto" py={8} width="100%">
@@ -80,6 +107,12 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
         <Fieldset.Root size="lg">
           <Fieldset.Content>
             <SelectClient formData={formData} handleChange={handleChange} />
+            <SelectQuote
+              formData={formData}
+              handleChange={handleChange}
+              client={formData.client}
+              onSelectQuote={handleSelectQuote}
+            />
             <Field.Root>
               <Text>Description</Text>
               <Input

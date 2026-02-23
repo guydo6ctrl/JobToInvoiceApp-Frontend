@@ -5,10 +5,27 @@ interface SelectQuoteProps {
   formData: { source_quote: string | number };
   client: string;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSelectQuote?: (quote: any) => void;
 }
 
-const SelectQuote = ({ formData, client, handleChange }: SelectQuoteProps) => {
+const SelectQuote = ({
+  formData,
+  client,
+  handleChange,
+  onSelectQuote,
+}: SelectQuoteProps) => {
   const { data: quotes = [], isLoading, error } = useQuotesByClient(client);
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(e.target.value);
+    const selectedQuote = quotes.find((q) => q.id === selectedId);
+
+    if (selectedQuote && onSelectQuote) {
+      onSelectQuote(selectedQuote);
+    }
+
+    handleChange(e);
+  };
 
   if (client === "") {
     return (
@@ -30,7 +47,7 @@ const SelectQuote = ({ formData, client, handleChange }: SelectQuoteProps) => {
         <NativeSelect.Field
           name="source_quote"
           value={formData.source_quote.toString()}
-          onChange={handleChange}
+          onChange={handleSelectChange}
         >
           <option value="">Select a quote</option>
           {isLoading && <option disabled>Loading quotes...</option>}
