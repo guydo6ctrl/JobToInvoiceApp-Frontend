@@ -20,9 +20,11 @@ import { Template } from "../QuotesPageComponents/AddQuoteForm";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { searchTemplates } from "../../services/templateService";
 import SelectQuote from "../General/SelectQuote";
+import SelectJob from "../General/SelectJob";
 
 interface InvoiceFormDataProps {
   client: string;
+  job: string;
   source_quote: string;
   description: string;
   issue_date: string;
@@ -33,6 +35,7 @@ interface InvoiceFormDataProps {
 
 const defaultFormData = {
   client: "",
+  job: "",
   source_quote: "",
   description: "",
   issue_date: "",
@@ -107,6 +110,11 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
         <Fieldset.Root size="lg">
           <Fieldset.Content>
             <SelectClient formData={formData} handleChange={handleChange} />
+            <SelectJob
+              formData={formData}
+              handleChange={handleChange}
+              client={formData.client}
+            />
             <SelectQuote
               formData={formData}
               handleChange={handleChange}

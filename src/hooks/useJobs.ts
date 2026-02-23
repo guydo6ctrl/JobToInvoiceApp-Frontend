@@ -13,4 +13,9 @@ const useJobs = () => {
   return (useData<Job>('jobs/', {}, []))
 }
 
+const useJobsByClient = (clientId: string) => {
+  return (useData<Job>('quotes/', {params: {client: clientId}}, [clientId] ))
+}
+
 export default useJobs
+export { useJobsByClient }

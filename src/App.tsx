@@ -9,10 +9,11 @@ import ClientsPage from "./pages/ClientsPage";
 import JobsPage from "./pages/JobsPage";
 import InvoicePage from "./pages/InvoicePage";
 import QuotesPage from "./pages/QuotesPage";
+import InvoiceDetailPage from "./pages/InvoiceDetailPage";
 
 // Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
 // Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
-// PDF export — Generate PDF quotes/invoicess
+// PDF export — Generate PDF quotes/invoices
 
 function Logout(): JSX.Element {
   localStorage.clear();
@@ -45,6 +46,7 @@ function App(): JSX.Element {
           <Route path="/clients" element={<ClientsPage />} />
           <Route path="/jobs" element={<JobsPage />} />
           <Route path="/invoices" element={<InvoicePage />} />
+          <Route path="/invoices/:id" element={<InvoiceDetailPage />} />
           <Route path="/quotes" element={<QuotesPage />} />
         </Route>
 

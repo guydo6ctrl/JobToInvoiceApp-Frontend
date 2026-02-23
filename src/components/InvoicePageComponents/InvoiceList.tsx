@@ -1,8 +1,10 @@
 import useInvoice from "../../hooks/useInvoice";
 import { Box, Button, Text } from "@chakra-ui/react";
 import useUpdateInvoice from "../../hooks/useUpdateInvoice";
+import { useNavigate } from "react-router-dom";
 
 const InvoiceList = () => {
+  const navigate = useNavigate();
   const { data, setData, isLoading, error } = useInvoice();
   const { update } = useUpdateInvoice();
 
@@ -17,19 +19,45 @@ const InvoiceList = () => {
       setData((prev) => prev.filter((invoice) => invoice.id !== id));
     }
   };
+
+  const handleClick = (id: number) => {
+    navigate(`${id}`);
+  };
+
   return (
     <Box>
+      <Button
+        size="sm"
+        colorScheme="gray"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        See all
+      </Button>
       {data.map((invoice) => (
-        <Box key={invoice.id} bg="gray.100" p={4} borderRadius="md" mb={3}>
+        <Box
+          key={invoice.id}
+          bg="gray.100"
+          p={4}
+          borderRadius="md"
+          mb={3}
+          cursor="pointer"
+          _hover={{ bg: "gray.200" }}
+          onClick={() => handleClick(invoice.id)}
+        >
           <Text fontWeight="bold">{invoice.client}</Text>
-          <Text fontSize="sm">{invoice.job_id}</Text>
+          <Text fontSize="bold">{invoice.job_id}</Text>
           <Text fontSize="sm">{invoice.status}</Text>
           <Text fontSize="sm">{invoice.issue_date}</Text>
           <Text fontSize="sm">{invoice.due_date}</Text>
           <Button
             size="sm"
             colorScheme="gray"
-            onClick={() => handleArchive(invoice.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleArchive(invoice.id);
+            }}
           >
             Archive
           </Button>
