@@ -1,12 +1,25 @@
 import useInvoice from "../../hooks/useInvoice";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import useUpdateInvoice from "../../hooks/useUpdateInvoice";
 import { useNavigate } from "react-router-dom";
 
-const InvoiceList = () => {
+interface Props {
+  limit?: number;
+}
+
+const InvoiceList = ({ limit }: Props) => {
   const navigate = useNavigate();
   const { data, setData, isLoading, error } = useInvoice();
   const { update } = useUpdateInvoice();
+
+  const sortedInvoices = [...data].sort((a, b) => {
+    const dateA = new Date(a.issue_date.split("-").reverse().join("-"));
+    const dateB = new Date(b.issue_date.split("-").reverse().join("-"));
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  const displayedInvoices = limit ? sortedInvoices.slice(0, limit) : data;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading invoices</p>;
@@ -26,16 +39,20 @@ const InvoiceList = () => {
 
   return (
     <Box>
-      <Button
-        size="sm"
-        colorScheme="gray"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        See all
-      </Button>
-      {data.map((invoice) => (
+      <HStack justifyContent="space-between" mb={3}>
+        <Text fontSize="2xl" fontWeight="bold" flex={1}>
+          Invoice List
+        </Text>
+        <Button
+          size="sm"
+          colorScheme="gray"
+          onClick={(e) => e.stopPropagation()}
+        >
+          See All
+        </Button>
+      </HStack>
+
+      {displayedInvoices.map((invoice) => (
         <Box
           key={invoice.id}
           bg="gray.100"
@@ -46,7 +63,7 @@ const InvoiceList = () => {
           _hover={{ bg: "gray.200" }}
           onClick={() => handleClick(invoice.id)}
         >
-          <Text fontWeight="bold">{invoice.client}</Text>
+          <Text fontWeight="bold">{invoice.client.name}</Text>
           <Text fontSize="bold">{invoice.job_id}</Text>
           <Text fontSize="sm">{invoice.status}</Text>
           <Text fontSize="sm">{invoice.issue_date}</Text>
