@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useInvoice from "../hooks/useInvoice"; // or use a fetch hook
+import useInvoice from "../../hooks/useInvoice";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +14,7 @@ const InvoiceDetailPage = () => {
   return (
     <div>
       <h2>Invoice #{invoice.id}</h2>
-      <p>Client: {invoice.client}</p>
+      <p>Client: {invoice.client.name}</p>
       <p>Job: {invoice.job_id}</p>
       <p>Status: {invoice.status}</p>
       <p>Issue Date: {invoice.issue_date}</p>

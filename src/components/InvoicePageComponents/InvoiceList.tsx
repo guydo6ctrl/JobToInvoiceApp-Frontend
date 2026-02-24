@@ -39,19 +39,6 @@ const InvoiceList = ({ limit }: Props) => {
 
   return (
     <Box>
-      <HStack justifyContent="space-between" mb={3}>
-        <Text fontSize="2xl" fontWeight="bold" flex={1}>
-          Invoice List
-        </Text>
-        <Button
-          size="sm"
-          colorScheme="gray"
-          onClick={(e) => e.stopPropagation()}
-        >
-          See All
-        </Button>
-      </HStack>
-
       {displayedInvoices.map((invoice) => (
         <Box
           key={invoice.id}

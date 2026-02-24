@@ -1,11 +1,13 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
-import InvoiceList from "../components/InvoicePageComponents/InvoiceList";
-import AddInvoiceForm from "../components/InvoicePageComponents/AddInvoiceForm";
+import InvoiceList from "../../components/InvoicePageComponents/InvoiceList";
+import AddInvoiceForm from "../../components/InvoicePageComponents/AddInvoiceForm";
+import InvoiceTitleSeeAll from "../../components/InvoicePageComponents/InvoiceTitleSeeAll";
 
 const InvoicePage = () => {
   return (
     <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
       <GridItem colSpan={{ base: 1, lg: 1 }}>
+        <InvoiceTitleSeeAll />
         <InvoiceList limit={5} />
       </GridItem>
       <GridItem colSpan={{ base: 1, lg: 2 }} mt={-7}>
