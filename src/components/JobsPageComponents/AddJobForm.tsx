@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
-import { Box, Button, Field, Heading, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Field,
+  Heading,
+  Input,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import SelectClient from "../General/SelectClient";
 import SelectQuote from "../General/SelectQuote";
 
@@ -44,35 +53,71 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Heading size="lg" mb={6}>
+    <Box
+      bg="white"
+      p={6}
+      borderRadius="lg"
+      shadow="md"
+      maxW="700px"
+      mx="auto"
+      mt={8}
+    >
+      <Heading size="lg" mb={6} textAlign="center">
         Add New Job
       </Heading>
-      <Box>
-        <SelectClient formData={formData} handleChange={handleChange} />
-        <Field.Root>
-          <Text>Title</Text>
-          <Input name="title" value={formData.title} onChange={handleChange} />
-        </Field.Root>
-        <Field.Root>
-          <Text>Description</Text>
-          <Input
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </Field.Root>
-        <SelectQuote
-          formData={formData}
-          handleChange={handleChange}
-          client={formData.client_id}
-        />
-        {error && <Text>{error}</Text>}
-        <Button type="submit" colorScheme="blue" mt={6} loading={loading}>
+
+      <form onSubmit={handleSubmit}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+          <Box>
+            <SelectClient formData={formData} handleChange={handleChange} />
+          </Box>
+
+          <Box>
+            <SelectQuote
+              formData={formData}
+              handleChange={handleChange}
+              client={formData.client_id}
+            />
+          </Box>
+        </SimpleGrid>
+
+        <VStack align="stretch" gap={4} mt={4}>
+          <Field.Root>
+            <Text>Title</Text>
+            <Input
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </Field.Root>
+
+          <Field.Root>
+            <Text>Description</Text>
+            <Input
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </Field.Root>
+        </VStack>
+
+        {error && (
+          <Text color="red.500" mt={4}>
+            {error}
+          </Text>
+        )}
+
+        <Button
+          type="submit"
+          colorScheme="blue"
+          mt={6}
+          w="full"
+          loading={loading}
+        >
           Add Job
         </Button>
-      </Box>
-    </form>
+      </form>
+    </Box>
   );
 };
 

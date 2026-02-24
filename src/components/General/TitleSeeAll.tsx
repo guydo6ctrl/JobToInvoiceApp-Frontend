@@ -1,7 +1,12 @@
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
-const InvoiceTitleSeeAll = () => {
+interface Props {
+  children: ReactNode;
+}
+
+const TitleSeeAll = ({ children }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +21,7 @@ const InvoiceTitleSeeAll = () => {
     >
       <HStack justifyContent="space-between">
         <Text fontSize="2xl" fontWeight="bold">
-          Invoice List
+          {children}
         </Text>
         <Button
           size="sm"
@@ -33,4 +38,4 @@ const InvoiceTitleSeeAll = () => {
   );
 };
 
-export default InvoiceTitleSeeAll;
+export default TitleSeeAll;

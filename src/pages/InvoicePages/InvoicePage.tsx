@@ -10,7 +10,7 @@ const InvoicePage = () => {
         <TitleSeeAll children="Invoice List" />
         <InvoiceList limit={5} />
       </GridItem>
-      <GridItem colSpan={{ base: 1, lg: 2 }} mt={-8}>
+      <GridItem colSpan={{ base: 1, lg: 2 }} mt={-7}>
         <AddInvoiceForm endpoint="invoices" />
       </GridItem>
     </SimpleGrid>

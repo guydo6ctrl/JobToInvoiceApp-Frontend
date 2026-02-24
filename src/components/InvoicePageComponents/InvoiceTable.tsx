@@ -30,8 +30,8 @@ const InvoiceTable = () => {
               key={invoice.id}
               _hover={{ bg: "gray.50", cursor: "pointer" }}
             >
-              <Table.Cell>{invoice.number}</Table.Cell>
-              <Table.Cell>{invoice.client.name}</Table.Cell>
+              <Table.Cell fontWeight="bold">{invoice.number}</Table.Cell>
+              <Table.Cell fontWeight="medium">{invoice.client.name}</Table.Cell>
               <Table.Cell>{invoice.job_number}</Table.Cell>
               <Table.Cell>{invoice.status}</Table.Cell>
               <Table.Cell>{invoice.issue_date}</Table.Cell>

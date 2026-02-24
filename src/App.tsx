@@ -12,6 +12,7 @@ import InvoicesPage from "./pages/InvoicesPages/InvoicesPage";
 import InvoicesListPage from "./pages/InvoicesPages/InvoicesListPage";
 import InvoicesDetailPage from "./pages/InvoicesPages/InvoicesDetailPage";
 import JobsPage from "./pages/JobsPages/JobsPage";
+import JobsListPage from "./pages/JobsPages/JobsListPage";
 
 // Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
 // Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
@@ -51,6 +52,7 @@ function App(): JSX.Element {
 
           <Route path="/jobs">
             <Route index element={<JobsPage />} />
+            <Route path="all" element={<JobsListPage />} />{" "}
             <Route path=":id" element={<JobsDetailPage />} />{" "}
           </Route>
 
