@@ -174,7 +174,7 @@ const LineItemsInput = ({
 
       {!showForm && (
         <Button colorScheme="blue" onClick={() => setShowForm(true)}>
-          Add Line Item
+          Add New Line Item
         </Button>
       )}
     </Box>

@@ -6,7 +6,9 @@ import {
   Heading,
   HStack,
   Input,
+  SimpleGrid,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import SelectClient from "../General/SelectClient";
 import GenericDateInput from "../QuotesPageComponents/GenericDateInput";
@@ -103,12 +105,23 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box mx="auto" py={8} width="100%">
-        <Heading size="lg" mb={6}>
-          Add New Invoice
-        </Heading>
-        <Fieldset.Root size="lg">
-          <Fieldset.Content>
+      <Box
+        mx="auto"
+        my={8}
+        p={6}
+        maxW="800px"
+        bg="white"
+        borderRadius="md"
+        shadow="md"
+      >
+        <VStack gap={6} align="stretch">
+          {/* Heading */}
+          <Heading size="lg" textAlign="center">
+            Add New Invoice
+          </Heading>
+
+          {/* Client / Job / Quote selectors */}
+          <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
             <SelectClient formData={formData} handleChange={handleChange} />
             <SelectJob
               formData={formData}
@@ -121,14 +134,23 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
               client={formData.client_id}
               onSelectQuote={handleSelectQuote}
             />
-            <Field.Root>
-              <Text>Description</Text>
-              <Input
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </Field.Root>
+          </SimpleGrid>
+
+          {/* Description */}
+          <Box>
+            <Text fontWeight="semibold" mb={1}>
+              Description
+            </Text>
+            <Input
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter invoice description"
+            />
+          </Box>
+
+          {/* Dates */}
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
             <GenericDateInput
               name="issue_date"
               value={formData.issue_date}
@@ -141,39 +163,54 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
               children="Due Date"
               onChange={handleChange}
             />
-            <Field.Root>
-              <Box flex="3" width="100%">
-                <SearchTemplatesInput
-                  onSearch={handleSearch}
-                  onSelect={(result) => setSelectedTemplate(result)}
-                  results={searchResults}
-                />
-              </Box>
-              <Box flex="1" width="100%">
-                <LineItemsInput
-                  lineItems={formData.line_items}
-                  onChange={(items) =>
-                    setFormData({ ...formData, line_items: items })
-                  }
-                  clientId={formData.client_id}
-                  selectedTemplate={selectedTemplate}
-                />
-              </Box>
-            </Field.Root>
+          </SimpleGrid>
+
+          {/* Templates and Line Items */}
+
+          <Box>
+            <SearchTemplatesInput
+              onSearch={handleSearch}
+              onSelect={(result) => setSelectedTemplate(result)}
+              results={searchResults}
+            />
+          </Box>
+          <Box>
+            <LineItemsInput
+              lineItems={formData.line_items}
+              onChange={(items) =>
+                setFormData({ ...formData, line_items: items })
+              }
+              clientId={formData.client_id}
+              selectedTemplate={selectedTemplate}
+            />
+          </Box>
+
+          {/* Status selector */}
+          <Box>
             <SelectInvoiceStatus
               status={formData.status}
               onChange={handleChange}
             />
-          </Fieldset.Content>
+          </Box>
+
+          {/* Error message */}
           {error && (
-            <Text color="red.500" mt={4}>
+            <Text color="red.500" fontWeight="medium" textAlign="center">
               {error}
             </Text>
           )}
-          <Button type="submit" colorScheme="blue" mt={6} loading={loading}>
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            colorScheme="blue"
+            size="lg"
+            w="full"
+            loading={loading}
+          >
             Add Invoice
           </Button>
-        </Fieldset.Root>
+        </VStack>
       </Box>
     </form>
   );

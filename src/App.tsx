@@ -6,11 +6,12 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/General/ProtectedRoute";
 import Layout from "./components/Global/Layout";
 import ClientsPage from "./pages/ClientsPage";
-import JobsPage from "./pages/JobsPage";
-import InvoicePage from "./pages/InvoicePages/InvoicePage";
 import QuotesPage from "./pages/QuotesPage";
-import InvoiceDetailPage from "./pages/InvoicePages/InvoiceDetailPage";
-import InvoiceListPage from "./pages/InvoicePages/InvoiceListPage";
+import JobsDetailPage from "./pages/JobsPages/JobsDetailPage";
+import InvoicesPage from "./pages/InvoicesPages/InvoicesPage";
+import InvoicesListPage from "./pages/InvoicesPages/InvoicesListPage";
+import InvoicesDetailPage from "./pages/InvoicesPages/InvoicesDetailPage";
+import JobsPage from "./pages/JobsPages/JobsPage";
 
 // Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
 // Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
@@ -48,12 +49,15 @@ function App(): JSX.Element {
           <Route path="/jobs" element={<JobsPage />} />
           <Route path="/quotes" element={<QuotesPage />} />
 
+          <Route path="/jobs">
+            <Route index element={<JobsPage />} />
+            <Route path=":id" element={<JobsDetailPage />} />{" "}
+          </Route>
+
           <Route path="/invoices">
-            <Route index element={<InvoicePage />} /> {/* /invoices */}
-            <Route path="all" element={<InvoiceListPage />} />{" "}
-            {/* /invoices/all */}
-            <Route path=":id" element={<InvoiceDetailPage />} />{" "}
-            {/* /invoices/:id */}
+            <Route index element={<InvoicesPage />} />
+            <Route path="all" element={<InvoicesListPage />} />{" "}
+            <Route path=":id" element={<InvoicesDetailPage />} />{" "}
           </Route>
         </Route>
 

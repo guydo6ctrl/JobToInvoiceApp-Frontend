@@ -1,5 +1,5 @@
 import useInvoice from "../../hooks/useInvoice";
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import useUpdateInvoice from "../../hooks/useUpdateInvoice";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const InvoiceList = ({ limit }: Props) => {
   };
 
   const handleClick = (id: number) => {
-    navigate(`${id}`);
+    navigate(`/invoices/${id}`);
   };
 
   return (
@@ -42,29 +42,71 @@ const InvoiceList = ({ limit }: Props) => {
       {displayedInvoices.map((invoice) => (
         <Box
           key={invoice.id}
-          bg="gray.100"
-          p={4}
-          borderRadius="md"
-          mb={3}
+          bg="white"
+          p={5}
+          borderRadius="lg"
+          mb={4}
+          shadow="md"
           cursor="pointer"
-          _hover={{ bg: "gray.200" }}
+          _hover={{ shadow: "lg", transform: "scale(1.01)" }}
+          transition="all 0.2s"
           onClick={() => handleClick(invoice.id)}
         >
-          <Text fontWeight="bold">{invoice.client.name}</Text>
-          <Text fontSize="bold">{invoice.job_id}</Text>
-          <Text fontSize="sm">{invoice.status}</Text>
-          <Text fontSize="sm">{invoice.issue_date}</Text>
-          <Text fontSize="sm">{invoice.due_date}</Text>
-          <Button
-            size="sm"
-            colorScheme="gray"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleArchive(invoice.id);
-            }}
-          >
-            Archive
-          </Button>
+          <HStack justifyContent="space-between" mb={2}>
+            <VStack align="start" gap={0}>
+              <Text fontWeight="bold" fontSize="lg">
+                {invoice.client.name}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                Job: {invoice.job_number ?? invoice.job_id}
+              </Text>
+            </VStack>
+            <Badge
+              colorScheme={
+                invoice.status === "paid"
+                  ? "green"
+                  : invoice.status === "draft"
+                    ? "yellow"
+                    : invoice.status === "overdue"
+                      ? "red"
+                      : "blue"
+              }
+            >
+              {invoice.status}
+            </Badge>
+          </HStack>
+
+          <HStack justifyContent="space-between" mt={2}>
+            <Text fontSize="sm" color="gray.600">
+              Issue: {invoice.issue_date}
+            </Text>
+            <Text fontSize="sm" color="gray.600">
+              Due: {invoice.due_date}
+            </Text>
+          </HStack>
+
+          <HStack mt={3} justifyContent="flex-end" gap={2}>
+            <Button
+              size="sm"
+              colorScheme="gray"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleArchive(invoice.id);
+              }}
+            >
+              Archive
+            </Button>
+            <Button
+              size="sm"
+              colorScheme="blue"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick(invoice.id);
+              }}
+            >
+              View
+            </Button>
+          </HStack>
         </Box>
       ))}
     </Box>
