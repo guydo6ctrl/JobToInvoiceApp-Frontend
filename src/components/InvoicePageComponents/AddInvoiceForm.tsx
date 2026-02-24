@@ -146,6 +146,8 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
               name="description"
               value={formData.description}
               onChange={handleChange}
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
               placeholder="Enter invoice description"
             />
           </Box>

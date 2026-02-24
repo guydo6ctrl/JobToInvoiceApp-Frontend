@@ -19,6 +19,8 @@ const GenericDateInput = ({ value, children, name, onChange }: Props) => {
         name={name}
         type="date"
         value={value}
+        bg="gray.50"
+        _hover={{ bg: "gray.100" }}
         onChange={onChange}
         placeholder="01-01-2000"
       />

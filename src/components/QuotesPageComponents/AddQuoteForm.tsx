@@ -105,6 +105,8 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 <Input
                   name="description"
                   value={formData.description}
+                  bg="gray.50"
+                  _hover={{ bg: "gray.100" }}
                   onChange={handleChange}
                 />
               </Field.Root>
@@ -167,11 +169,16 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
             )}
 
             {/* Actions */}
-            <HStack justify="flex-end" mt={6}>
-              <Button type="submit" colorScheme="blue" loading={loading}>
-                Add Quote
-              </Button>
-            </HStack>
+
+            <Button
+              type="submit"
+              colorScheme="blue"
+              mt={6}
+              loading={loading}
+              size="md"
+            >
+              Add Quote
+            </Button>
           </Fieldset.Root>
         </Box>
       </Box>

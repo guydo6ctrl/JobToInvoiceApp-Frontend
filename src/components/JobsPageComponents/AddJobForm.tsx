@@ -87,6 +87,8 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
             <Input
               name="title"
               value={formData.title}
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
               onChange={handleChange}
             />
           </Field.Root>
@@ -96,6 +98,8 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
             <Input
               name="description"
               value={formData.description}
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
               onChange={handleChange}
             />
           </Field.Root>

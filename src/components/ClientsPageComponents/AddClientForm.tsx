@@ -6,6 +6,7 @@ import {
   Heading,
   Text,
   Box,
+  VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
@@ -50,55 +51,95 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
   };
 
   return (
-    <Box mx="auto">
+    <Box
+      mx="auto"
+      my={8}
+      maxW="900px"
+      width="100%"
+      bg="white"
+      p={6}
+      borderRadius="lg"
+      shadow="md"
+    >
       <form onSubmit={handleSubmit}>
-        <Heading size="lg" mb={6}>
-          Add New Client
-        </Heading>
-        <Field.Root>
-          <Text>Name *</Text>
-          <Input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </Field.Root>
+        <VStack gap={6} align="stretch">
+          <Heading size="lg" mb={4} textAlign="center">
+            Add New Client
+          </Heading>
 
-        <Field.Root>
-          <Text>Email *</Text>
-          <Input
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </Field.Root>
+          {/* Name */}
+          <Field.Root>
+            <Text fontWeight="medium">Name</Text>
+            <Input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
+              borderRadius="md"
+            />
+          </Field.Root>
 
-        <Field.Root>
-          <Text>Phone</Text>
-          <Input name="phone" value={formData.phone} onChange={handleChange} />
-        </Field.Root>
+          {/* Email */}
+          <Field.Root>
+            <Text fontWeight="medium">Email</Text>
+            <Input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
+              borderRadius="md"
+            />
+          </Field.Root>
 
-        <Field.Root>
-          <Text>Address</Text>
-          <Textarea
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </Field.Root>
+          {/* Phone */}
+          <Field.Root>
+            <Text fontWeight="medium">Phone</Text>
+            <Input
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
+              borderRadius="md"
+            />
+          </Field.Root>
 
-        {error && (
-          <Text color="red.500" mt={4}>
-            {error}
-          </Text>
-        )}
+          {/* Address */}
+          <Field.Root>
+            <Text fontWeight="medium">Address</Text>
+            <Textarea
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              bg="gray.50"
+              _hover={{ bg: "gray.100" }}
+              borderRadius="md"
+            />
+          </Field.Root>
 
-        <Button type="submit" colorScheme="blue" mt={6} loading={loading}>
-          Add Client
-        </Button>
+          {/* Error message */}
+          {error && (
+            <Text color="red.500" mt={2}>
+              {error}
+            </Text>
+          )}
+
+          {/* Submit button */}
+          <Button
+            type="submit"
+            colorScheme="blue"
+            mt={2}
+            loading={loading}
+            size="md"
+          >
+            Add Client
+          </Button>
+        </VStack>
       </form>
     </Box>
   );

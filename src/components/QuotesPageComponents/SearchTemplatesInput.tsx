@@ -24,6 +24,8 @@ const SearchTemplatesInput = ({ onSearch, onSelect, results = [] }: Props) => {
       >
         <InputGroup startElement={<BsSearch />} w="100%">
           <Input
+            bg="gray.50"
+            _hover={{ bg: "gray.100" }}
             ref={ref}
             placeholder="Search existing line items"
             onChange={(e) => {

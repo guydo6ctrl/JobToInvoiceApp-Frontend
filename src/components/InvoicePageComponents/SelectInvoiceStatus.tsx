@@ -10,7 +10,13 @@ const SelectInvoiceStatus = ({ status, onChange }: Props) => {
     <Field.Root>
       <Text>Status</Text>
       <NativeSelect.Root>
-        <NativeSelect.Field name="status" value={status} onChange={onChange}>
+        <NativeSelect.Field
+          name="status"
+          value={status}
+          bg="gray.50"
+          _hover={{ bg: "gray.100" }}
+          onChange={onChange}
+        >
           <option value="">Select status</option>
           <option value="draft">Draft</option>
           <option value="sent">Sent</option>

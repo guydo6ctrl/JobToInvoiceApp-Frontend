@@ -16,6 +16,8 @@ const SelectClient = ({ formData, handleChange }: SelectClientProps) => {
         <NativeSelect.Field
           name="client_id"
           value={formData.client_id.toString()}
+          bg="gray.50"
+          _hover={{ bg: "gray.100" }}
           onChange={handleChange}
         >
           <option value="">Select a client</option>

@@ -47,6 +47,8 @@ const SelectJob = ({
         <NativeSelect.Field
           name="job"
           value={formData.job.toString()}
+          bg="gray.50"
+          _hover={{ bg: "gray.100" }}
           onChange={handleSelectChange}
         >
           <option value="">Select a job</option>
