@@ -58,6 +58,9 @@ const InvoiceList = ({ limit }: Props) => {
                 {invoice.client.name}
               </Text>
               <Text fontSize="sm" color="gray.500">
+                {invoice.number ?? invoice.id}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
                 Job ID: {invoice.job_number ?? invoice.job_id}
               </Text>
             </VStack>

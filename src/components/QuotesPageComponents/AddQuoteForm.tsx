@@ -4,8 +4,11 @@ import {
   Field,
   Fieldset,
   Heading,
+  HStack,
   Input,
+  SimpleGrid,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import SelectClient from "../General/SelectClient";
@@ -84,42 +87,61 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box mx="auto" py={8} width="100%">
-        <Heading size="lg" mb={6}>
-          Add New Quote
-        </Heading>
-        <Fieldset.Root size="lg">
-          <Fieldset.Content>
-            <SelectClient formData={formData} handleChange={handleChange} />
-            <Field.Root>
-              <Text>Description</Text>
-              <Input
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </Field.Root>
-            <GenericDateInput
-              name="issue_date"
-              value={formData.issue_date}
-              children="Issue Date"
-              onChange={handleChange}
-            />
-            <GenericDateInput
-              name="expiry_date"
-              value={formData.expiry_date}
-              children="Expiry Date"
-              onChange={handleChange}
-            />
-            <Field.Root>
-              <Box flex="3" width="100%">
+      <Box mx="auto" py={8} maxW="900px" width="100%">
+        {/* Card */}
+        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+          <Heading size="lg" mb={6} textAlign="center">
+            Add New Quote
+          </Heading>
+
+          <Fieldset.Root size="lg">
+            <Fieldset.Content gap={5}>
+              {/* Client */}
+              <SelectClient formData={formData} handleChange={handleChange} />
+
+              {/* Description */}
+              <Field.Root>
+                <Text fontWeight="medium">Description</Text>
+                <Input
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                />
+              </Field.Root>
+
+              {/* Dates */}
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                <GenericDateInput
+                  name="issue_date"
+                  value={formData.issue_date}
+                  onChange={handleChange}
+                >
+                  Issue Date
+                </GenericDateInput>
+
+                <GenericDateInput
+                  name="expiry_date"
+                  value={formData.expiry_date}
+                  onChange={handleChange}
+                >
+                  Expiry Date
+                </GenericDateInput>
+              </SimpleGrid>
+
+              {/* Templates + Line Items */}
+
+              <Box>
+                <Text fontWeight="medium" mb={2}>
+                  Line Item Templates
+                </Text>
                 <SearchTemplatesInput
                   onSearch={handleSearch}
                   onSelect={(result) => setSelectedTemplate(result)}
                   results={searchResults}
                 />
               </Box>
-              <Box flex="1" width="100%">
+
+              <Box>
                 <LineItemsInput
                   lineItems={formData.line_items}
                   onChange={(items) =>
@@ -129,21 +151,29 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                   selectedTemplate={selectedTemplate}
                 />
               </Box>
-            </Field.Root>
-            <SelectQuoteStatus
-              status={formData.status}
-              onChange={handleChange}
-            />
-          </Fieldset.Content>
-          {error && (
-            <Text color="red.500" mt={4}>
-              {error}
-            </Text>
-          )}
-          <Button type="submit" colorScheme="blue" mt={6} loading={loading}>
-            Add Quote
-          </Button>
-        </Fieldset.Root>
+
+              {/* Status */}
+              <SelectQuoteStatus
+                status={formData.status}
+                onChange={handleChange}
+              />
+            </Fieldset.Content>
+
+            {/* Error */}
+            {error && (
+              <Text color="red.500" mt={4}>
+                {error}
+              </Text>
+            )}
+
+            {/* Actions */}
+            <HStack justify="flex-end" mt={6}>
+              <Button type="submit" colorScheme="blue" loading={loading}>
+                Add Quote
+              </Button>
+            </HStack>
+          </Fieldset.Root>
+        </Box>
       </Box>
     </form>
   );

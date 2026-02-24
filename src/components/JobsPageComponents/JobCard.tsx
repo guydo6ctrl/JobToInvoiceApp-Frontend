@@ -50,7 +50,7 @@ const JobCard = ({ job, onView, onArchive }: JobCardProps) => {
 
       <HStack justifyContent="space-between" mt={2}>
         <Text fontSize="sm" color="gray.600">
-          Source Quote: #{job.source_quote}
+          {job.quote_number}
         </Text>
         <Text fontSize="sm" color="gray.600">
           Job ID: {job.number ?? job.id}

@@ -5,14 +5,18 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/General/ProtectedRoute";
 import Layout from "./components/Global/Layout";
-import ClientsPage from "./pages/ClientsPage";
-import QuotesPage from "./pages/QuotesPage";
-import JobsDetailPage from "./pages/JobsPages/JobsDetailPage";
 import InvoicesPage from "./pages/InvoicesPages/InvoicesPage";
 import InvoicesListPage from "./pages/InvoicesPages/InvoicesListPage";
 import InvoicesDetailPage from "./pages/InvoicesPages/InvoicesDetailPage";
 import JobsPage from "./pages/JobsPages/JobsPage";
 import JobsListPage from "./pages/JobsPages/JobsListPage";
+import JobsDetailPage from "./pages/JobsPages/JobsDetailPage";
+import QuotesPage from "./pages/QuotesPages/QuotesPage";
+import QuotesListPage from "./pages/QuotesPages/QuotesListPage";
+import QuotesDetailPage from "./pages/QuotesPages/QuotesDetailPage";
+import ClientsPage from "./pages/ClientsPages/ClientsPage";
+import ClientsListPage from "./pages/ClientsPages/ClientsListPage";
+import ClientsDetailPage from "./pages/ClientsPages/ClientsDetailPage";
 
 // Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
 // Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
@@ -46,9 +50,17 @@ function App(): JSX.Element {
           }
         >
           <Route path="/" element={<Home />} />
-          <Route path="/clients" element={<ClientsPage />} />
-          <Route path="/jobs" element={<JobsPage />} />
-          <Route path="/quotes" element={<QuotesPage />} />
+          <Route path="/clients">
+            <Route index element={<ClientsPage />} />
+            <Route path="all" element={<ClientsListPage />} />
+            <Route path=":id" element={<ClientsDetailPage />} />
+          </Route>
+
+          <Route path="/quotes">
+            <Route index element={<QuotesPage />} />
+            <Route path="all" element={<QuotesListPage />} />{" "}
+            <Route path=":id" element={<QuotesDetailPage />} />{" "}
+          </Route>
 
           <Route path="/jobs">
             <Route index element={<JobsPage />} />

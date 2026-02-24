@@ -109,7 +109,8 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
         mx="auto"
         my={8}
         p={6}
-        maxW="800px"
+        maxW="900px"
+        width="100%"
         bg="white"
         borderRadius="md"
         shadow="md"
@@ -168,6 +169,9 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
           {/* Templates and Line Items */}
 
           <Box>
+            <Text fontWeight="medium" mb={2}>
+              Line Item Templates
+            </Text>
             <SearchTemplatesInput
               onSearch={handleSearch}
               onSelect={(result) => setSelectedTemplate(result)}

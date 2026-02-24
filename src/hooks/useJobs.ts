@@ -12,6 +12,7 @@ interface Job{
   status: string;
   client: ClientJob;
   source_quote: string;
+  quote_number: string;
   date_created: string;
 }
 
