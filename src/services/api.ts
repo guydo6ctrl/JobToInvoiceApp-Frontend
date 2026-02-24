@@ -11,7 +11,11 @@ api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem(ACCESS_TOKEN);
 
-    if (token) {
+    if (
+    token &&
+    !config.url?.includes("/login") &&
+    !config.url?.includes("/register")
+  ) {
       config.headers.set("Authorization", `Bearer ${token}`);
     }
 

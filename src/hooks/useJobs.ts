@@ -6,6 +6,7 @@ interface ClientJob {
 }
 interface Job{
   id: number;
+  number: string;
   title: string;
   description: string;
   status: string;
@@ -18,7 +19,7 @@ const useJobs = () => {
 }
 
 const useJobsByClient = (clientId: string) => {
-  return (useData<Job>('quotes/', {params: {client: clientId}}, [clientId] ))
+  return (useData<Job>('jobs/', {params: {client: clientId}}, [clientId] ))
 }
 
 export default useJobs

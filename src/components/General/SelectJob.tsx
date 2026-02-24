@@ -54,7 +54,7 @@ const SelectJob = ({
           {error && <option disabled>Error loading jobs</option>}
           {jobs.map((job) => (
             <option key={job.id} value={job.id.toString()}>
-              Job #{job.id}
+              Job #{job.number}
             </option>
           ))}
         </NativeSelect.Field>

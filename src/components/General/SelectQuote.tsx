@@ -1,5 +1,5 @@
 import { Field, NativeSelect, NativeSelectRoot, Text } from "@chakra-ui/react";
-import useQuotes, { useQuotesByClient } from "../../hooks/useQuotes";
+import  { useQuotesByClient } from "../../hooks/useQuotes";
 
 interface SelectQuoteProps {
   formData: { source_quote: string | number };
@@ -54,7 +54,7 @@ const SelectQuote = ({
           {error && <option disabled>Error loading quotes</option>}
           {quotes.map((quote) => (
             <option key={quote.id} value={quote.id.toString()}>
-              Quote #{quote.id}
+              Quote #{quote.number}
             </option>
           ))}
         </NativeSelect.Field>

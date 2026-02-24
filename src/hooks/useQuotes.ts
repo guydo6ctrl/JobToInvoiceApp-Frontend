@@ -7,6 +7,7 @@ interface QuoteClient {
 
 interface Quote{
     id: number;
+    number: string;
     client: QuoteClient;
     issue_date: string;
     expiry_date: string;
