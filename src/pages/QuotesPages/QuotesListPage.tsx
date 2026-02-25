@@ -1,7 +1,8 @@
 import React from "react";
+import QuotesTable from "../../components/QuotesPageComponents/QuoteTable";
 
 const QuotesListPage = () => {
-  return <div>QuotesListPage</div>;
+  return <QuotesTable />;
 };
 
 export default QuotesListPage;

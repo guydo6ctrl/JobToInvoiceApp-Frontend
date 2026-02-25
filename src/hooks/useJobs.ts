@@ -9,7 +9,7 @@ interface Job{
   number: string;
   title: string;
   description: string;
-  status: string;
+  status_display: string;
   client: ClientJob;
   source_quote: string;
   quote_number: string;

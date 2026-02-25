@@ -11,7 +11,7 @@ const JobCard = ({ job, onView, onArchive }: JobCardProps) => {
     switch (status) {
       case "completed":
         return "green";
-      case "in-progress":
+      case "in_progress":
         return "yellow";
       case "cancelled":
         return "red";
@@ -41,12 +41,10 @@ const JobCard = ({ job, onView, onArchive }: JobCardProps) => {
             Title: {job.title}
           </Text>
         </VStack>
-        <Badge colorScheme={getStatusColor(job.status)}>{job.status}</Badge>
+        <Badge bg={`${getStatusColor(job.status)}.300`}>
+          {job.status_display}
+        </Badge>
       </HStack>
-
-      <Text fontSize="sm" color="gray.600" mb={2}>
-        {job.description}
-      </Text>
 
       <HStack justifyContent="space-between" mt={2}>
         <Text fontSize="sm" color="gray.600">

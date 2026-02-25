@@ -12,12 +12,14 @@ import {
 } from "@chakra-ui/react";
 import SelectClient from "../General/SelectClient";
 import SelectQuote from "../General/SelectQuote";
+import SelectJobStatus from "./SelectJobStatus";
 
 interface JobFormData {
   client_id: string;
   title: string;
   description: string;
   source_quote: string;
+  status: string;
 }
 
 const defaultFormData = {
@@ -25,6 +27,7 @@ const defaultFormData = {
   title: "",
   description: "",
   source_quote: "",
+  status: "",
 };
 
 const AddJobForm = ({ endpoint }: { endpoint: string }) => {
@@ -103,6 +106,7 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
               onChange={handleChange}
             />
           </Field.Root>
+          <SelectJobStatus status={formData.status} onChange={handleChange} />
         </VStack>
 
         {error && (

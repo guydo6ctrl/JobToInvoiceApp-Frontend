@@ -5,9 +5,10 @@ interface QuoteClient {
   name: string;
 }
 
-interface Quote{
+export interface Quote{
     id: number;
     number: string;
+    description: string;
     client: QuoteClient;
     issue_date: string;
     expiry_date: string;

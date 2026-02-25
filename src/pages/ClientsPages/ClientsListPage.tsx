@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import ClientsTable from "../../components/ClientsPageComponents/ClientTable";
 
 const ClientsListPage = () => {
-  return (
-    <div>ClientsListPage</div>
-  )
-}
+  return <ClientsTable />;
+};
 
-export default ClientsListPage
+export default ClientsListPage;

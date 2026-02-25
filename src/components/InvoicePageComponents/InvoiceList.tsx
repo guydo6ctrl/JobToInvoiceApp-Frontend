@@ -1,6 +1,6 @@
 import useInvoice from "../../hooks/useInvoice";
 import { Badge, Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
-import useUpdateInvoice from "../../hooks/useUpdateInvoice";
+import useUpdateInvoice from "../../hooks/usePatchInvoice";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

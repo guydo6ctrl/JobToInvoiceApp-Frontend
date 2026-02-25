@@ -7,7 +7,7 @@ interface Props{
     onSuccess?: () => void;
 }
 
-const useUpdateData = <T extends Record<string, any>>({endpoint, onSuccess}: Props) => {
+const usePatchData = <T extends Record<string, any>>({endpoint, onSuccess}: Props) => {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
 
@@ -38,4 +38,4 @@ const useUpdateData = <T extends Record<string, any>>({endpoint, onSuccess}: Pro
    return { update, error, loading, setError };
 }
 
-export default useUpdateData
+export default usePatchData

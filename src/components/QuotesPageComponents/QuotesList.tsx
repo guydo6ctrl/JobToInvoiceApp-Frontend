@@ -49,14 +49,14 @@ const QuotesList = () => {
             </VStack>
 
             <Badge
-              colorScheme={
+              bg={
                 quote.status === "accepted"
-                  ? "green"
+                  ? "green.300"
                   : quote.status === "draft"
-                    ? "yellow"
-                    : quote.status === "expired"
-                      ? "red"
-                      : "blue"
+                    ? "blue.300"
+                    : quote.status === "rejected"
+                      ? "red.300"
+                      : "yellow.300"
               }
             >
               {quote.status}
