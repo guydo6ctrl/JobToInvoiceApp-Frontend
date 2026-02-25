@@ -15,6 +15,7 @@ interface Job{
   source_quote: string;
   quote_number: string;
   date_created: string;
+  archived: boolean;
 }
 
 const useJobs = (showArchived: boolean) => {

@@ -15,6 +15,7 @@ export interface Quote{
     line_items: string;
     status: string;
     status_display: string;
+    archived: boolean
 }
 
 const useQuotes = (showArchived: boolean) => {

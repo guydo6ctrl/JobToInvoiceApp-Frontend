@@ -16,6 +16,7 @@ interface Invoice{
     status_display: string;
     job_id: number;
     job_number: string;
+    archived: boolean;
 }
 
 const useInvoice = (showArchived: boolean) => {

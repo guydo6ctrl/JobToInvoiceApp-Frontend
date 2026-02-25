@@ -14,9 +14,9 @@ const InvoiceTable = () => {
   if (isLoading) return <Text>Loading invoices...</Text>;
   if (error) return <Text color="red.500">Error loading invoices</Text>;
 
-  const handleArchive = async (id: number) => {
+  const handleArchive = async (id: number, status: boolean) => {
     {
-      await update(id, { archived: true });
+      await update(id, { archived: !status });
 
       setData((prev) => prev.filter((invoice) => invoice.id !== id));
     }
@@ -75,10 +75,10 @@ const InvoiceTable = () => {
                     colorScheme="gray"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleArchive(invoice.id);
+                      handleArchive(invoice.id, invoice.archived);
                     }}
                   >
-                    Archive
+                    {invoice.archived === false ? "Archive" : "Unarchive"}
                   </Button>
                 </Table.Cell>
               </Table.Row>

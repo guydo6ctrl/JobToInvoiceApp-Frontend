@@ -19,9 +19,9 @@ const ClientsTable = () => {
   if (isLoading) return <p>Loading clients...</p>;
   if (error) return <p>Error loading clients</p>;
 
-  const handleArchive = async (id: number) => {
+  const handleArchive = async (id: number, status: boolean) => {
     {
-      await update(id, { archived: true });
+      await update(id, { archived: !status });
 
       setData((prev) => prev.filter((client) => client.id !== id));
     }
@@ -80,10 +80,10 @@ const ClientsTable = () => {
                     colorScheme="gray"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleArchive(client.id);
+                      handleArchive(client.id, client.archived);
                     }}
                   >
-                    Archive
+                    {client.archived === false ? "Archive" : "Unarchive"}
                   </Button>
                 </Table.Cell>
               </Table.Row>

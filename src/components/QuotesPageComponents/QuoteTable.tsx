@@ -42,9 +42,9 @@ const QuotesTable = () => {
     }
   };
 
-  const handleArchive = async (id: number) => {
+  const handleArchive = async (id: number, status: boolean) => {
     {
-      await update(id, { archived: true });
+      await update(id, { archived: !status });
 
       setData((prev) => prev.filter((quote) => quote.id !== id));
     }
@@ -103,10 +103,10 @@ const QuotesTable = () => {
                     colorScheme="gray"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleArchive(quote.id);
+                      handleArchive(quote.id, quote.archived);
                     }}
                   >
-                    Archive
+                    {quote.archived === false ? "Archive" : "Unarchive"}
                   </Button>
                 </Table.Cell>
               </Table.Row>

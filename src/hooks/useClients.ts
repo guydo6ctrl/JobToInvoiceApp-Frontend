@@ -6,6 +6,7 @@ export interface Client{
     email: string;
     phone: string;
     address: string;
+    archived: boolean;
 }
 
 const useClients = (showArchived: boolean) => {

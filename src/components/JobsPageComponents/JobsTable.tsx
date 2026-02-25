@@ -27,11 +27,11 @@ const JobsTable = () => {
     }
   };
 
-  const handleArchive = async (id: number) => {
+  const handleArchive = async (id: number, status: boolean) => {
     {
-      await update(id, { archived: true });
+      await update(id, { archived: !status });
 
-      setData((prev) => prev.filter((quote) => quote.id !== id));
+      setData((prev) => prev.filter((job) => job.id !== id));
     }
   };
 
@@ -96,10 +96,10 @@ const JobsTable = () => {
                     colorScheme="gray"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleArchive(job.id);
+                      handleArchive(job.id, job.archived);
                     }}
                   >
-                    Archive
+                    {job.archived === false ? "Archive" : "Unarchive"}
                   </Button>
                 </Table.Cell>
               </Table.Row>
