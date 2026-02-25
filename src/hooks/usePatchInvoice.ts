@@ -1,10 +1,8 @@
 import usePatchData from "./Generic/usePatchData";
 
 
-interface Patch {
+export interface Patch {
     archived?: Boolean;
-    status?: "draft" | "sent" | "paid" | "overdue";
-    due_date?: string;
 }
 
 const usePatchInvoice = (onSuccess?: () => void) => {

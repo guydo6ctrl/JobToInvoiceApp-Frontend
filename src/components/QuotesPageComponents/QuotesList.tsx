@@ -9,22 +9,48 @@ import {
 } from "@chakra-ui/react";
 import useQuotes from "../../hooks/useQuotes";
 import { useNavigate } from "react-router-dom";
+import usePatchQuote from "../../hooks/usePatchQuote";
+import { useState } from "react";
 
-const QuotesList = () => {
-  const { data, isLoading, error } = useQuotes();
+interface Props {
+  limit?: number;
+}
+
+const QuotesList = ({ limit }: Props) => {
+  const [showArchived] = useState(false);
+  const { data, isLoading, error, setData } = useQuotes(showArchived);
+  const { update } = usePatchQuote();
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
   if (error) return <Text color="red.500">Error loading quotes</Text>;
   if (!data || data.length === 0) return <Text>No quotes found</Text>;
 
+  const sortedQuotes = [...data].sort((a, b) => {
+    const dateA = new Date(a.issue_date.split("-").reverse().join("-"));
+    const dateB = new Date(b.issue_date.split("-").reverse().join("-"));
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  const displayedQuotes = limit ? sortedQuotes.slice(0, limit) : data;
+
   const handleClick = (id: number) => {
     navigate(`/quotes/${id}`);
   };
 
+  const handleArchive = async (id: number) => {
+    {
+      await update(id, { archived: true });
+
+      setData((prev) => prev.filter((quote) => quote.id !== id));
+    }
+  };
+
+
   return (
     <Box>
-      {data.map((quote) => (
+      {displayedQuotes.map((quote) => (
         <Box
           key={quote.id}
           bg="white"
@@ -80,7 +106,7 @@ const QuotesList = () => {
               colorScheme="gray"
               onClick={(e) => {
                 e.stopPropagation();
-                handleArchive?.(quote.id);
+                handleArchive(quote.id);
               }}
             >
               Archive

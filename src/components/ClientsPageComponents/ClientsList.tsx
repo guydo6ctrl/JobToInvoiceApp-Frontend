@@ -2,7 +2,11 @@ import { Badge, Box, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
 import useClients from "../../hooks/useClients";
 import { useNavigate } from "react-router-dom";
 
-const ClientsList = () => {
+interface Props {
+  limit?: number;
+}
+
+const ClientsList = ({ limit }: Props) => {
   const { data, isLoading, error } = useClients();
   const navigate = useNavigate();
 
@@ -14,9 +18,11 @@ const ClientsList = () => {
     navigate(`/clients/${id}`);
   };
 
+  const displayedClients = limit ? data.slice(0, limit) : data;
+
   return (
     <Box>
-      {data.map((client) => (
+      {displayedClients.map((client) => (
         <Box
           key={client.id}
           bg="white"

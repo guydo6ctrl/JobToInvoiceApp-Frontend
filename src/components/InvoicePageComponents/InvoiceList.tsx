@@ -1,6 +1,6 @@
 import useInvoice from "../../hooks/useInvoice";
 import { Badge, Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
-import useUpdateInvoice from "../../hooks/usePatchInvoice";
+import usePatchInvoice from "../../hooks/usePatchInvoice";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const InvoiceList = ({ limit }: Props) => {
   const navigate = useNavigate();
   const { data, setData, isLoading, error } = useInvoice();
-  const { update } = useUpdateInvoice();
+  const { update } = usePatchInvoice();
 
   const sortedInvoices = [...data].sort((a, b) => {
     const dateA = new Date(a.issue_date.split("-").reverse().join("-"));

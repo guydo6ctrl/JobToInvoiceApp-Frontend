@@ -8,9 +8,9 @@ const JobsPage = () => {
     <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
       <GridItem colSpan={{ base: 1, lg: 1 }}>
         <TitleSeeAll children="Jobs List" />
-        <JobsList />
+        <JobsList limit={5} />
       </GridItem>
-      <GridItem marginTop={-8} colSpan={{ base: 1, lg: 2}}>
+      <GridItem marginTop={-8} colSpan={{ base: 1, lg: 2 }}>
         <AddJobForm endpoint="jobs" />
       </GridItem>
     </SimpleGrid>

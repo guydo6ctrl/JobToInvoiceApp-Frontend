@@ -9,7 +9,7 @@ const QuotesPage = () => {
     <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
       <GridItem colSpan={{ base: 1, lg: 1 }}>
         <TitleSeeAll children="Quotes List" />
-        <QuotesList />
+        <QuotesList limit={5} />
       </GridItem>
       <GridItem colSpan={{ base: 1, lg: 2 }} mt={-8}>
         <AddQuoteForm endpoint="quotes" />

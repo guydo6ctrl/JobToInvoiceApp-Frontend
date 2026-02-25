@@ -17,12 +17,12 @@ export interface Quote{
     status_display: string;
 }
 
-const useQuotes = () => {
-  return (useData<Quote>('quotes/', {}, []))
+const useQuotes = (showArchived: boolean) => {
+  return (useData<Quote>('quotes/', {params: {archived: showArchived}}, [showArchived]))
 }
 
 const useQuotesByClient = (clientId: string) => {
-  return (useData<Quote>('quotes/', {params: {client: clientId}}, [clientId] ))
+  return (useData<Quote>('quotes/', {params: {client: clientId},}, [clientId] ))
 }
 
 export default useQuotes
