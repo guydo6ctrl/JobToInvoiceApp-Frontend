@@ -18,6 +18,7 @@ import SearchTemplatesInput from "../../components/QuotesPageComponents/SearchTe
 import { searchTemplates } from "../../services/templateService";
 import { Template } from "../../components/QuotesPageComponents/AddQuoteForm";
 import { formatDateForAPI, formatDateForInput } from "../../utilities/date";
+import SelectQuoteStatus from "../../components/QuotesPageComponents/SelectQuoteStatus";
 
 const QuotesDetailPage = () => {
   const { id } = useParams();
@@ -72,7 +73,9 @@ const QuotesDetailPage = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -199,6 +202,21 @@ const QuotesDetailPage = () => {
                     </Box>
                   ))}
                 </VStack>
+              )}
+            </VStack>
+
+            {/* Status */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                Status
+              </Text>
+              {isEditing ? (
+                <SelectQuoteStatus
+                  status={formData.status}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Text fontSize="md">{quote.status_display}</Text>
               )}
             </VStack>
           </VStack>

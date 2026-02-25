@@ -63,7 +63,7 @@ const SelectQuote = ({
           {error && <option disabled>Error loading quotes</option>}
           {quotes.map((quote) => (
             <option key={quote.id} value={quote.id.toString()}>
-              Quote #{quote.number}
+              {quote.number}
             </option>
           ))}
         </NativeSelect.Field>

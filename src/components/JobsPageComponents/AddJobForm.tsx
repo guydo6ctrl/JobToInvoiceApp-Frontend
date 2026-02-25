@@ -61,7 +61,8 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
       p={6}
       borderRadius="lg"
       shadow="md"
-      maxW="700px"
+      maxW="900px"
+      width="100%"
       mx="auto"
       mt={8}
     >

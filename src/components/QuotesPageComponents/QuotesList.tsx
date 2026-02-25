@@ -59,7 +59,7 @@ const QuotesList = () => {
                       : "yellow.300"
               }
             >
-              {quote.status}
+              {quote.status_display}
             </Badge>
           </HStack>
 

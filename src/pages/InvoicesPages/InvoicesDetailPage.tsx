@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import SearchTemplatesInput from "../../components/QuotesPageComponents/SearchTemplatesInput";
 import LineItemsInput from "../../components/QuotesPageComponents/LineItemsInput";
+import SelectInvoiceStatus from "../../components/InvoicePageComponents/SelectInvoiceStatus";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const InvoiceDetailPage = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
     null,
   );
-  const [quote, setQuote] = useState<any>(null);
+  const [invoice, setInvoice] = useState<any>(null);
   const [formData, setFormData] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -35,10 +36,10 @@ const InvoiceDetailPage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchQuote = async () => {
+    const fetchInvoice = async () => {
       try {
         const res = await api.get(`/invoices/${id}/`);
-        setQuote(res.data);
+        setInvoice(res.data);
         setFormData(res.data);
       } catch {
         setError("Failed to load client");
@@ -47,7 +48,7 @@ const InvoiceDetailPage = () => {
       }
     };
 
-    fetchQuote();
+    fetchInvoice();
   }, [id]);
 
   const handleSave = async () => {
@@ -62,7 +63,7 @@ const InvoiceDetailPage = () => {
         status: formData.status,
       };
       const res = await api.put(`/invoices/${id}/`, dataToSave);
-      setQuote(res.data);
+      setInvoice(res.data);
       setIsEditing(false);
     } catch {
       alert("Failed to save changes");
@@ -72,7 +73,9 @@ const InvoiceDetailPage = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -95,7 +98,7 @@ const InvoiceDetailPage = () => {
       <VStack align="stretch" mb={8}>
         <HStack justify="space-between" align="start">
           <VStack align="start" gap={1}>
-            <Heading size="xl">{quote.client.name}</Heading>
+            <Heading size="xl">{invoice.client.name}</Heading>
             <Text color="gray.500" fontSize="sm">
               Invoice Details
             </Text>
@@ -113,7 +116,7 @@ const InvoiceDetailPage = () => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setFormData(quote);
+                  setFormData(invoice);
                   setIsEditing(false);
                 }}
               >
@@ -143,7 +146,7 @@ const InvoiceDetailPage = () => {
                   minH="100px"
                 />
               ) : (
-                <Text fontSize="md">{quote.description}</Text>
+                <Text fontSize="md">{invoice.description}</Text>
               )}
             </VStack>
 
@@ -162,7 +165,7 @@ const InvoiceDetailPage = () => {
                   size="md"
                 />
               ) : (
-                <Text fontSize="md">{quote.due_date}</Text>
+                <Text fontSize="md">{invoice.due_date}</Text>
               )}
             </VStack>
 
@@ -189,7 +192,7 @@ const InvoiceDetailPage = () => {
                 </Box>
               ) : (
                 <VStack gap={2} align="stretch">
-                  {quote.line_items.map((item: any) => (
+                  {invoice.line_items.map((item: any) => (
                     <Box key={item.id} p={3} bg="gray.50" borderRadius="md">
                       <Text fontWeight="medium">{item.name}</Text>
                       <Text fontSize="sm">
@@ -201,12 +204,27 @@ const InvoiceDetailPage = () => {
                 </VStack>
               )}
             </VStack>
+
+            {/* Status */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                Status
+              </Text>
+              {isEditing ? (
+                <SelectInvoiceStatus
+                  status={formData.status}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Text fontSize="md">{invoice.status_display}</Text>
+              )}
+            </VStack>
           </VStack>
         </Card.Body>
       </Card.Root>
 
       {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate("/quotes")} size="md">
+      <Button variant="ghost" onClick={() => navigate("/invoices")} size="md">
         ← Back to Invoices
       </Button>
     </Box>

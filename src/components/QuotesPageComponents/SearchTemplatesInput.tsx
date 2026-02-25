@@ -15,7 +15,7 @@ const SearchTemplatesInput = ({ onSearch, onSelect, results = [] }: Props) => {
 
   return (
     <Box position="relative" w="100%">
-      <form
+      <Box
         style={{ width: "100%" }}
         onSubmit={(event) => {
           event.preventDefault();
@@ -35,7 +35,7 @@ const SearchTemplatesInput = ({ onSearch, onSelect, results = [] }: Props) => {
             onBlur={() => setTimeout(() => setShowResults(false), 200)}
           />
         </InputGroup>
-      </form>
+      </Box>
 
       {/* Dropdown results */}
       {showResults && results.length > 0 && (

@@ -8,7 +8,6 @@ interface Props {
 const SelectQuoteStatus = ({ status, onChange }: Props) => {
   return (
     <Field.Root>
-      <Text>Status</Text>
       <NativeSelect.Root>
         <NativeSelect.Field
           name="status"

@@ -13,6 +13,7 @@ interface Invoice{
     issue_date: string;
     due_date: string;
     status: string;
+    status_display: string;
     job_id: number;
     job_number: string;
 }

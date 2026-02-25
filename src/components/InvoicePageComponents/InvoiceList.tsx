@@ -65,17 +65,17 @@ const InvoiceList = ({ limit }: Props) => {
               </Text>
             </VStack>
             <Badge
-              colorScheme={
+              bg={
                 invoice.status === "paid"
-                  ? "green"
+                  ? "green.300"
                   : invoice.status === "draft"
-                    ? "yellow"
-                    : invoice.status === "overdue"
-                      ? "red"
-                      : "blue"
+                    ? "yellow.300"
+                    : invoice.status === "sent"
+                      ? "blue"
+                      : "red"
               }
             >
-              {invoice.status}
+              {invoice.status_display}
             </Badge>
           </HStack>
 

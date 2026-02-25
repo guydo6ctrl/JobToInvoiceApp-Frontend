@@ -14,6 +14,7 @@ export interface Quote{
     expiry_date: string;
     line_items: string;
     status: string;
+    status_display: string;
 }
 
 const useQuotes = () => {
