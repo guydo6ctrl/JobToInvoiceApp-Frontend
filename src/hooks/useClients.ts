@@ -8,8 +8,8 @@ export interface Client{
     address: string;
 }
 
-const useClients = () => {
-  return useData<Client>('clients/', {}, [])
+const useClients = (showArchived: boolean) => {
+  return useData<Client>('clients/', {params: {archived: showArchived}}, [showArchived])
 }
 
 export default useClients

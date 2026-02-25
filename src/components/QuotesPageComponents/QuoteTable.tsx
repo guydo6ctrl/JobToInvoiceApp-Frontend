@@ -26,7 +26,6 @@ const QuotesTable = () => {
 
   if (isLoading) return <p>Loading quotes...</p>;
   if (error) return <p>Error loading quotes</p>;
-  if (!quotes || quotes.length === 0) return <p>No quotes found</p>;
 
   const getStatusColor = (status: string) => {
     switch (status) {

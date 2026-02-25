@@ -3,13 +3,15 @@ import useJobs from "../../hooks/useJobs";
 import { Box, Text } from "@chakra-ui/react";
 import JobCard from "./JobCard";
 import usePatchJob from "../../hooks/usePatchJob";
+import { useState } from "react";
 
 interface Props {
   limit?: number;
 }
 
 const JobsList = ({ limit }: Props) => {
-  const { data, isLoading, error, setData } = useJobs();
+  const [showArchived] = useState(false);
+  const { data, isLoading, error, setData } = useJobs(showArchived);
   const { update } = usePatchJob();
   const navigate = useNavigate();
 

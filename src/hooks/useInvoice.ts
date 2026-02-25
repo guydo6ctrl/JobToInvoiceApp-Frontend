@@ -18,8 +18,8 @@ interface Invoice{
     job_number: string;
 }
 
-const useInvoice = () => {
-  return (useData<Invoice>('invoices/', {}, []))
+const useInvoice = (showArchived: boolean) => {
+  return (useData<Invoice>('invoices/', {params: {archived: showArchived}}, [showArchived]))
 }
 
 export default useInvoice

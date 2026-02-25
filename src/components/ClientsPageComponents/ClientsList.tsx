@@ -1,14 +1,26 @@
-import { Badge, Box, HStack, Spinner, Text, VStack } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  HStack,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import useClients from "../../hooks/useClients";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import usePatchClient from "../../hooks/usePatchClient";
 
 interface Props {
   limit?: number;
 }
 
 const ClientsList = ({ limit }: Props) => {
-  const { data, isLoading, error } = useClients();
+  const [showArchived] = useState(false);
+  const { data, isLoading, error, setData } = useClients(showArchived);
   const navigate = useNavigate();
+  const { update } = usePatchClient();
 
   if (isLoading) return <Spinner />;
   if (error) return <Text color="red.500">Error loading clients</Text>;
@@ -16,6 +28,14 @@ const ClientsList = ({ limit }: Props) => {
 
   const handleClick = (id: number) => {
     navigate(`/clients/${id}`);
+  };
+
+  const handleArchive = async (id: number) => {
+    {
+      await update(id, { archived: true });
+
+      setData((prev) => prev.filter((client) => client.id !== id));
+    }
   };
 
   const displayedClients = limit ? data.slice(0, limit) : data;
@@ -64,6 +84,28 @@ const ClientsList = ({ limit }: Props) => {
               </Text>
             )}
           </VStack>
+          <HStack mt={3} justifyContent="flex-end" gap={2}>
+            <Button
+              size="sm"
+              colorScheme="gray"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleArchive(client.id);
+              }}
+            >
+              Archive
+            </Button>
+            <Button
+              size="sm"
+              colorScheme="blue"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick(client.id);
+              }}
+            >
+              View
+            </Button>
+          </HStack>
         </Box>
       ))}
     </Box>

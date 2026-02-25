@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import useJobs from "../../hooks/useJobs";
 import DataTableHeader from "../General/DataTableHeader";
 import { useState } from "react";
-import usePatchQuote from "../../hooks/usePatchQuote";
 import usePatchJob from "../../hooks/usePatchJob";
 
 const JobsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
-  const { data: jobs, isLoading, error, setData } = useJobs();
+  const { data: jobs, isLoading, error, setData } = useJobs(showArchived);
   const { update } = usePatchJob();
   const navigate = useNavigate();
+
+  if (isLoading) return <Text>Loading jobs...</Text>;
+  if (error) return <Text color="red.500">Error loading jobs</Text>;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -36,7 +38,7 @@ const JobsTable = () => {
   return (
     <Box width="100%">
       <DataTableHeader
-        children="Quotes"
+        children="Jobs"
         showArchived={showArchived}
         onCheckedChange={(e) => setShowArchived(e.checked)}
       />
