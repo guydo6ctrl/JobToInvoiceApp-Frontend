@@ -19,8 +19,8 @@ interface Invoice{
     archived: boolean;
 }
 
-const useInvoice = (showArchived: boolean, clientSearch: string) => {
-  return (useData<Invoice>('invoices/', {params: {archived: showArchived, client: clientSearch}}, [showArchived, clientSearch]))
+const useInvoice = (showArchived: boolean, searchText?: string) => {
+  return (useData<Invoice>('invoices/', {params: {archived: showArchived, search: searchText}}, [showArchived, searchText]))
 }
 
 export default useInvoice

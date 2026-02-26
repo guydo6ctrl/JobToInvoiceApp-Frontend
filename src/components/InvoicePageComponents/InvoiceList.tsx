@@ -14,14 +14,7 @@ const InvoiceList = ({ limit }: Props) => {
   const { data, setData, isLoading, error } = useInvoice(showArchived);
   const { update } = usePatchInvoice();
 
-  const sortedInvoices = [...data].sort((a, b) => {
-    const dateA = new Date(a.issue_date.split("-").reverse().join("-"));
-    const dateB = new Date(b.issue_date.split("-").reverse().join("-"));
-
-    return dateB.getTime() - dateA.getTime();
-  });
-
-  const displayedInvoices = limit ? sortedInvoices.slice(0, limit) : data;
+  const displayedInvoices = limit ? data.slice(0, limit) : data;
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading invoices</p>;

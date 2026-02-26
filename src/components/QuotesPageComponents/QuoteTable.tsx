@@ -33,13 +33,13 @@ const QuotesTable = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "draft":
-        return "gray";
+        return "yellow.300";
       case "sent":
-        return "blue";
+        return "blue.300";
       case "accepted":
-        return "green";
+        return "green.300";
       case "rejected":
-        return "red";
+        return "red.300";
       default:
         return "gray";
     }
@@ -63,7 +63,7 @@ const QuotesTable = () => {
         />
         <SearchInput
           onSearch={(searchText) => setClientSearch(searchText)}
-          placeholder="Search by client..."
+          placeholder="Search by client/ quote number/ status..."
           maxW="500px"
         />
       </Box>
@@ -91,7 +91,7 @@ const QuotesTable = () => {
                 <Table.Cell fontWeight="bold">{quote.number}</Table.Cell>
                 <Table.Cell fontWeight="medium">{quote.client.name}</Table.Cell>
                 <Table.Cell>
-                  <Badge colorScheme={getStatusColor(quote.status)}>
+                  <Badge bg={getStatusColor(quote.status)}>
                     {quote.status_display}
                   </Badge>
                 </Table.Cell>

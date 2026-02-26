@@ -9,7 +9,7 @@ export interface Client{
     archived: boolean;
 }
 
-const useClients = (showArchived: boolean, clientSearch: string) => {
+const useClients = (showArchived: boolean, clientSearch?: string) => {
   return useData<Client>('clients/', {params: {archived: showArchived, name: clientSearch}}, [showArchived, clientSearch])
 }
 

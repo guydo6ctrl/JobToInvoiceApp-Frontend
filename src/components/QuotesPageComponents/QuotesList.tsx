@@ -26,14 +26,7 @@ const QuotesList = ({ limit }: Props) => {
   if (error) return <Text color="red.500">Error loading quotes</Text>;
   if (!data || data.length === 0) return <Text>No quotes found</Text>;
 
-  const sortedQuotes = [...data].sort((a, b) => {
-    const dateA = new Date(a.issue_date.split("-").reverse().join("-"));
-    const dateB = new Date(b.issue_date.split("-").reverse().join("-"));
-
-    return dateB.getTime() - dateA.getTime();
-  });
-
-  const displayedQuotes = limit ? sortedQuotes.slice(0, limit) : data;
+  const displayedQuotes = limit ? data.slice(0, limit) : data;
 
   const handleClick = (id: number) => {
     navigate(`/quotes/${id}`);
@@ -46,7 +39,6 @@ const QuotesList = ({ limit }: Props) => {
       setData((prev) => prev.filter((quote) => quote.id !== id));
     }
   };
-
 
   return (
     <Box>

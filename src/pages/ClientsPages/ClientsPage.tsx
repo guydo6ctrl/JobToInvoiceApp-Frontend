@@ -5,12 +5,12 @@ import TitleSeeAll from "../../components/General/TitleSeeAll";
 
 const ClientsPage = () => {
   return (
-    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
-      <GridItem colSpan={{ base: 1, lg: 1 }}>
+    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px" w="100%">
+      <GridItem colSpan={{ base: 1, lg: 1 }} w="100%">
         <TitleSeeAll children="Clients List" />
         <ClientsList />
       </GridItem>
-      <GridItem colSpan={{ base: 1, lg: 2 }} mt={-8}>
+      <GridItem colSpan={{ base: 1, lg: 2 }} mt={-8} w="100%">
         <AddClientForm endpoint="clients" />
       </GridItem>
     </SimpleGrid>

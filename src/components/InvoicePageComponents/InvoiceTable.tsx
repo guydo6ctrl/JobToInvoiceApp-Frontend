@@ -51,7 +51,7 @@ const InvoiceTable = () => {
         />
         <SearchInput
           onSearch={(searchText) => setClientSearch(searchText)}
-          placeholder="Search by client..."
+          placeholder="Search by client/ invoice number/ status..."
           maxW="500px"
         />
       </Box>

@@ -18,8 +18,8 @@ export interface Quote{
     archived: boolean
 }
 
-const useQuotes = (showArchived: boolean, clientSearch: string) => {
-  return (useData<Quote>('quotes/', {params: {archived: showArchived, client_name: clientSearch}}, [showArchived, clientSearch]))
+const useQuotes = (showArchived: boolean, searchText?: string) => {
+  return (useData<Quote>('quotes/', {params: {archived: showArchived, search: searchText}}, [showArchived, searchText]))
 }
 
 const useQuotesByClient = (clientId: string) => {

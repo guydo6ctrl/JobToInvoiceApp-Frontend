@@ -76,7 +76,7 @@ const ClientDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorScheme="blue" onClick={() => setIsEditing(true)}>
+            <Button colorScheme="brand" onClick={() => setIsEditing(true)}>
               Edit
             </Button>
           ) : (

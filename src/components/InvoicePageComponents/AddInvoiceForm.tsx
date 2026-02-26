@@ -23,6 +23,7 @@ import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { searchTemplates } from "../../services/templateService";
 import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
+import { Quote } from "../../hooks/useQuotes";
 
 interface InvoiceFormDataProps {
   client_id: string;
@@ -88,10 +89,19 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
     await submit(formData);
   };
 
+  const today = new Date().toISOString().slice(0, 10);
+
+  const due_date: string = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+
   const handleSelectQuote = (quote: any) => {
     setFormData({
       ...formData,
       source_quote: formData.source_quote.toString(),
+      description: quote.description,
+      issue_date: today,
+      due_date: due_date,
       line_items: quote.line_items.map((item: any) => ({
         name: item.name || item.description,
         description: item.description,
@@ -124,16 +134,16 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
           {/* Client / Job / Quote selectors */}
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
             <SelectClient formData={formData} handleChange={handleChange} />
-            <SelectJob
-              formData={formData}
-              handleChange={handleChange}
-              client={formData.client_id}
-            />
             <SelectQuote
               formData={formData}
               handleChange={handleChange}
               client={formData.client_id}
               onSelectQuote={handleSelectQuote}
+            />
+            <SelectJob
+              formData={formData}
+              handleChange={handleChange}
+              client={formData.client_id}
             />
           </SimpleGrid>
 

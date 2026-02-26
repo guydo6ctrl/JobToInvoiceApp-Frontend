@@ -53,7 +53,7 @@ const JobsTable = () => {
         />
         <SearchInput
           onSearch={(searchText) => setClientSearch(searchText)}
-          placeholder="Search by client..."
+          placeholder="Search by client/ job number/ status..."
           maxW="500px"
         />
       </Box>
