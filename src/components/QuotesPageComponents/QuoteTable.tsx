@@ -12,6 +12,7 @@ import useQuotes from "../../hooks/useQuotes";
 import { useState } from "react";
 import usePatchQuote from "../../hooks/usePatchQuote";
 import DataTableHeader from "../General/DataTableHeader";
+import ArchiveButton from "../General/ArchiveButton";
 
 const QuotesTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -81,7 +82,7 @@ const QuotesTable = () => {
                 <Table.Cell fontWeight="medium">{quote.client.name}</Table.Cell>
                 <Table.Cell>
                   <Badge colorScheme={getStatusColor(quote.status)}>
-                    {quote.status}
+                    {quote.status_display}
                   </Badge>
                 </Table.Cell>
                 <Table.Cell>{quote.issue_date}</Table.Cell>
@@ -98,16 +99,11 @@ const QuotesTable = () => {
                   >
                     View
                   </Button>
-                  <Button
-                    size="sm"
-                    colorScheme="gray"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleArchive(quote.id, quote.archived);
-                    }}
-                  >
-                    {quote.archived === false ? "Archive" : "Unarchive"}
-                  </Button>
+                  <ArchiveButton
+                    id={quote.id}
+                    isArchived={quote.archived}
+                    onToggle={() => handleArchive(quote.id, quote.archived)}
+                  />
                 </Table.Cell>
               </Table.Row>
             ))}

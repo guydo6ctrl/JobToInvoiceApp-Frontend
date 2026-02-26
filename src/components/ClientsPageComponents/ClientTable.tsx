@@ -4,6 +4,7 @@ import useClients from "../../hooks/useClients";
 import { useState } from "react";
 import DataTableHeader from "../General/DataTableHeader";
 import usePatchClient from "../../hooks/usePatchClient";
+import ArchiveButton from "../General/ArchiveButton";
 
 const ClientsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -30,7 +31,7 @@ const ClientsTable = () => {
   return (
     <Box>
       <DataTableHeader
-        children="Jobs"
+        children="Clients"
         showArchived={showArchived}
         onCheckedChange={(e) => setShowArchived(e.checked)}
       />
@@ -75,16 +76,11 @@ const ClientsTable = () => {
                   >
                     View
                   </Button>
-                  <Button
-                    size="sm"
-                    colorScheme="gray"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleArchive(client.id, client.archived);
-                    }}
-                  >
-                    {client.archived === false ? "Archive" : "Unarchive"}
-                  </Button>
+                  <ArchiveButton
+                    id={client.id}
+                    isArchived={client.archived}
+                    onToggle={() => handleArchive(client.id, client.archived)}
+                  />
                 </Table.Cell>
               </Table.Row>
             ))}

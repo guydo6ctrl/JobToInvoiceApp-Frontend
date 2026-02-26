@@ -4,6 +4,7 @@ import useJobs from "../../hooks/useJobs";
 import DataTableHeader from "../General/DataTableHeader";
 import { useState } from "react";
 import usePatchJob from "../../hooks/usePatchJob";
+import ArchiveButton from "../General/ArchiveButton";
 
 const JobsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -17,13 +18,13 @@ const JobsTable = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "green";
+        return "green.300";
       case "scheduled":
-        return "blue";
+        return "blue.300";
       case "cancelled":
-        return "red";
+        return "red.300";
       default:
-        return "yellow";
+        return "yellow.300";
     }
   };
 
@@ -72,8 +73,8 @@ const JobsTable = () => {
                   <Text>{job.title}</Text>
                 </Table.Cell>
                 <Table.Cell>
-                  <Badge colorScheme={getStatusColor(job.status)}>
-                    {job.status}
+                  <Badge bg={getStatusColor(job.status)}>
+                    {job.status_display}
                   </Badge>
                 </Table.Cell>
                 <Table.Cell fontSize="sm" color="gray.600">
@@ -91,16 +92,11 @@ const JobsTable = () => {
                   >
                     View
                   </Button>
-                  <Button
-                    size="sm"
-                    colorScheme="gray"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleArchive(job.id, job.archived);
-                    }}
-                  >
-                    {job.archived === false ? "Archive" : "Unarchive"}
-                  </Button>
+                  <ArchiveButton
+                    id={job.id}
+                    isArchived={job.archived}
+                    onToggle={() => handleArchive(job.id, job.archived)}
+                  />
                 </Table.Cell>
               </Table.Row>
             ))}

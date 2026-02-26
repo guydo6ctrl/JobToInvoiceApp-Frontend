@@ -5,7 +5,7 @@ import TitleSeeAll from "../../components/General/TitleSeeAll";
 
 const InvoicePage = () => {
   return (
-    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px">
+    <SimpleGrid columns={{ base: 1, lg: 3 }} gap="40px" >
       <GridItem colSpan={{ base: 1, lg: 1 }}>
         <TitleSeeAll children="Invoice List" />
         <InvoiceList limit={5} />

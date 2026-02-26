@@ -73,8 +73,8 @@ const InvoiceList = ({ limit }: Props) => {
                   : invoice.status === "draft"
                     ? "yellow.300"
                     : invoice.status === "sent"
-                      ? "blue"
-                      : "red"
+                      ? "blue.300"
+                      : "red.300"
               }
             >
               {invoice.status_display}
