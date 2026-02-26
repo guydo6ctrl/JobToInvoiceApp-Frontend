@@ -18,8 +18,8 @@ interface Job{
   archived: boolean;
 }
 
-const useJobs = (showArchived: boolean) => {
-  return (useData<Job>('jobs/', {params: {archived: showArchived}}, [showArchived]))
+const useJobs = (showArchived: boolean, clientSearch: string) => {
+  return (useData<Job>('jobs/', {params: {archived: showArchived, client_name: clientSearch}}, [showArchived, clientSearch]))
 }
 
 const useJobsByClient = (clientId: string) => {

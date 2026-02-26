@@ -5,15 +5,17 @@ import { useState } from "react";
 import DataTableHeader from "../General/DataTableHeader";
 import usePatchClient from "../../hooks/usePatchClient";
 import ArchiveButton from "../General/ArchiveButton";
+import SearchInput from "../General/SearchInput";
 
 const ClientsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
+  const [clientSearch, setClientSearch] = useState("");
   const {
     data: clients = [],
     isLoading,
     error,
     setData,
-  } = useClients(showArchived);
+  } = useClients(showArchived, clientSearch);
   const { update } = usePatchClient();
   const navigate = useNavigate();
 
@@ -30,11 +32,18 @@ const ClientsTable = () => {
 
   return (
     <Box>
-      <DataTableHeader
-        children="Clients"
-        showArchived={showArchived}
-        onCheckedChange={(e) => setShowArchived(e.checked)}
-      />
+      <Box mb={2}>
+        <DataTableHeader
+          children="Clients"
+          showArchived={showArchived}
+          onCheckedChange={(e) => setShowArchived(e.checked)}
+        />
+        <SearchInput
+          onSearch={(searchText) => setClientSearch(searchText)}
+          placeholder="Search by client..."
+          maxW="500px"
+        />
+      </Box>
       <Box width="100%" boxShadow="md" borderRadius="md" overflowX="auto">
         <Table.Root>
           <Table.Header bg="gray.100">

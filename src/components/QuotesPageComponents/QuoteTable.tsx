@@ -13,15 +13,17 @@ import { useState } from "react";
 import usePatchQuote from "../../hooks/usePatchQuote";
 import DataTableHeader from "../General/DataTableHeader";
 import ArchiveButton from "../General/ArchiveButton";
+import SearchInput from "../General/SearchInput";
 
 const QuotesTable = () => {
   const [showArchived, setShowArchived] = useState(false);
+  const [clientSearch, setClientSearch] = useState("");
   const {
     data: quotes = [],
     isLoading,
     error,
     setData,
-  } = useQuotes(showArchived);
+  } = useQuotes(showArchived, clientSearch);
   const { update } = usePatchQuote();
   const navigate = useNavigate();
 
@@ -53,11 +55,19 @@ const QuotesTable = () => {
 
   return (
     <Box width="100%">
-      <DataTableHeader
-        children="Quotes"
-        showArchived={showArchived}
-        onCheckedChange={(e) => setShowArchived(e.checked)}
-      />
+      <Box mb={2}>
+        <DataTableHeader
+          children="Quotes"
+          showArchived={showArchived}
+          onCheckedChange={(e) => setShowArchived(e.checked)}
+        />
+        <SearchInput
+          onSearch={(searchText) => setClientSearch(searchText)}
+          placeholder="Search by client..."
+          maxW="500px"
+        />
+      </Box>
+
       <Box width="100%" boxShadow="md" borderRadius="md" overflowX="auto">
         <Table.Root>
           <Table.Header bg="gray.100">

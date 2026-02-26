@@ -5,10 +5,15 @@ import { useState } from "react";
 import usePatchInvoice from "../../hooks/usePatchInvoice";
 import DataTableHeader from "../General/DataTableHeader";
 import ArchiveButton from "../General/ArchiveButton";
+import SearchInput from "../General/SearchInput";
 
 const InvoiceTable = () => {
   const [showArchived, setShowArchived] = useState(false);
-  const { data, isLoading, error, setData } = useInvoice(showArchived);
+  const [clientSearch, setClientSearch] = useState("");
+  const { data, isLoading, error, setData } = useInvoice(
+    showArchived,
+    clientSearch,
+  );
   const { update } = usePatchInvoice();
   const navigate = useNavigate();
 
@@ -38,11 +43,18 @@ const InvoiceTable = () => {
 
   return (
     <Box width="100%">
-      <DataTableHeader
-        children="Invoices"
-        showArchived={showArchived}
-        onCheckedChange={(e) => setShowArchived(e.checked)}
-      />
+      <Box mb={2}>
+        <DataTableHeader
+          children="Invoices"
+          showArchived={showArchived}
+          onCheckedChange={(e) => setShowArchived(e.checked)}
+        />
+        <SearchInput
+          onSearch={(searchText) => setClientSearch(searchText)}
+          placeholder="Search by client..."
+          maxW="500px"
+        />
+      </Box>
       <Box width="100%" boxShadow="md" borderRadius="md" overflowX="auto">
         <Table.Root>
           <Table.Header bg="gray.100">

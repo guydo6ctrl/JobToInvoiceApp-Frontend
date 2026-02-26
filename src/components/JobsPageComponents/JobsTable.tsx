@@ -5,10 +5,17 @@ import DataTableHeader from "../General/DataTableHeader";
 import { useState } from "react";
 import usePatchJob from "../../hooks/usePatchJob";
 import ArchiveButton from "../General/ArchiveButton";
+import SearchInput from "../General/SearchInput";
 
 const JobsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
-  const { data: jobs, isLoading, error, setData } = useJobs(showArchived);
+  const [clientSearch, setClientSearch] = useState("");
+  const {
+    data: jobs,
+    isLoading,
+    error,
+    setData,
+  } = useJobs(showArchived, clientSearch);
   const { update } = usePatchJob();
   const navigate = useNavigate();
 
@@ -38,11 +45,18 @@ const JobsTable = () => {
 
   return (
     <Box width="100%">
-      <DataTableHeader
-        children="Jobs"
-        showArchived={showArchived}
-        onCheckedChange={(e) => setShowArchived(e.checked)}
-      />
+      <Box mb={2}>
+        <DataTableHeader
+          children="Jobs"
+          showArchived={showArchived}
+          onCheckedChange={(e) => setShowArchived(e.checked)}
+        />
+        <SearchInput
+          onSearch={(searchText) => setClientSearch(searchText)}
+          placeholder="Search by client..."
+          maxW="500px"
+        />
+      </Box>
       <Box bg="white" borderRadius="lg" shadow="md" overflow="hidden">
         <Table.Root>
           <Table.Header bg="gray.50">
