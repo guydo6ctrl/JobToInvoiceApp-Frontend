@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import SelectLineItemType from "../General/SelectLineItemType";
 
 export interface LineItem {
   name: string;
@@ -41,6 +42,11 @@ const LineItemsInput = ({
   clientId,
   selectedTemplate,
 }: LineItemsInputProps) => {
+  const [showForm, setShowForm] = useState(false);
+  const [newItem, setNewItem] = useState(defaultNewItem);
+  const [editingIdx, setEditingIdx] = useState<number | null>(null);
+  const [editItem, setEditItem] = useState<LineItem | null>(null);
+
   useEffect(() => {
     if (selectedTemplate) {
       onChange([
@@ -56,19 +62,18 @@ const LineItemsInput = ({
       ]);
     }
   }, [selectedTemplate]);
-  const [showForm, setShowForm] = useState(false);
-  const [newItem, setNewItem] = useState(defaultNewItem);
 
   const handleNumberChange =
-    (field: "quantity" | "unit_price") =>
+    (field: "quantity" | "unit_price", isEditing: boolean = false) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setNewItem({
-        ...newItem,
-        [field]: e.target.value === "" ? null : Number(e.target.value),
-      });
+      const value = e.target.value === "" ? null : Number(e.target.value);
+      if (isEditing && editItem) {
+        setEditItem({ ...editItem, [field]: value });
+      } else {
+        setNewItem({ ...newItem, [field]: value });
+      }
     };
 
-  // Save template if checked.
   const addLineItem = async () => {
     if (newItem.description && newItem.unit_price !== null) {
       if (newItem.saveAsTemplate) {
@@ -87,26 +92,138 @@ const LineItemsInput = ({
     }
   };
 
+  const saveEdit = () => {
+    if (editingIdx !== null && editItem) {
+      const updated = [...lineItems];
+      updated[editingIdx] = editItem;
+      onChange(updated);
+      setEditingIdx(null);
+      setEditItem(null);
+    }
+  };
+
+  const startEdit = (idx: number) => {
+    setEditingIdx(idx);
+    setEditItem({ ...lineItems[idx]! });
+  };
+
   return (
     <Box>
       {/* Display existing items */}
       <VStack mb={4}>
         {lineItems.map((item, idx) => (
-          <HStack key={idx} bg="white" p={2} w="full" borderRadius="md">
-            <Text flex={1}>{item.name}</Text>
-            <Text flex={1}>{item.description}</Text>
-            <Text>Qty: {item.quantity}</Text>
-            <Text>Unit Price: £{item.unit_price}</Text>
-            <Text>Total: £{(item.unit_price ?? 0) * (item.quantity ?? 0)}</Text>
-            <Text>Type: {item.type}</Text>
-            <Button
-              size="sm"
-              colorScheme="red"
-              onClick={() => onChange(lineItems.filter((_, i) => i !== idx))}
-            >
-              Remove
-            </Button>
-          </HStack>
+          <Box key={idx} bg="white" p={3} w="full" borderRadius="md">
+            {editingIdx === idx && editItem ? (
+              // Edit mode
+              <VStack gap={2} align="stretch">
+                <Input
+                  placeholder="Name"
+                  value={editItem.name}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, name: e.target.value })
+                  }
+                  size="sm"
+                />
+                <Input
+                  placeholder="Description"
+                  value={editItem.description}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, description: e.target.value })
+                  }
+                  size="sm"
+                />
+                <HStack gap={2} align="center">
+                  <Input
+                    type="number"
+                    placeholder="Quantity"
+                    value={editItem.quantity ?? ""}
+                    onChange={handleNumberChange("quantity", true)}
+                    size="sm"
+                  />
+                  <Input
+                    type="number"
+                    placeholder="Unit Price"
+                    value={editItem.unit_price ?? ""}
+                    onChange={handleNumberChange("unit_price", true)}
+                    size="sm"
+                  />
+                  <SelectLineItemType
+                    value={editItem.type}
+                    setNewItem={(e) =>
+                      setEditItem({ ...editItem, type: e.target.value })
+                    }
+                  />
+                </HStack>
+                <HStack gap={2}>
+                  <Button size="sm" colorScheme="green" onClick={saveEdit}>
+                    Save
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => {
+                      setEditingIdx(null);
+                      setEditItem(null);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </HStack>
+              </VStack>
+            ) : (
+              // View mode
+              <HStack justify="space-between">
+                <HStack align="center" gap={7} flex={1}>
+                  <Text fontWeight="bold" minW="120px">
+                    {item.name}
+                  </Text>
+                  <Text fontSize="sm" color="gray.600">
+                    {item.description}
+                  </Text>
+                </HStack>
+                <HStack gap={7}>
+                  <Text fontSize="sm" color="gray.600">
+                    {item.type}
+                  </Text>
+                  <HStack align="end" gap={7} fontSize="sm">
+                    <Text>
+                      {item.quantity} × £{item.unit_price}
+                    </Text>
+                    <Text fontWeight="bold">
+                      Total: £
+                      {((item.unit_price ?? 0) * (item.quantity ?? 0)).toFixed(
+                        2,
+                      )}
+                    </Text>
+                  </HStack>
+                </HStack>
+                <HStack gap={1}>
+                  <Button
+                    size="sm"
+                    px={2}
+                    py={1}
+                    fontSize="xs"
+                    colorScheme="blue"
+                    onClick={() => startEdit(idx)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    px={2}
+                    py={1}
+                    fontSize="xs"
+                    colorScheme="red"
+                    onClick={() =>
+                      onChange(lineItems.filter((_, i) => i !== idx))
+                    }
+                  >
+                    Remove
+                  </Button>
+                </HStack>
+              </HStack>
+            )}
+          </Box>
         ))}
       </VStack>
 
@@ -136,26 +253,17 @@ const LineItemsInput = ({
           />
           <Input
             type="number"
-            placeholder="Price"
+            placeholder="Unit Price"
             value={newItem.unit_price ?? ""}
             onChange={handleNumberChange("unit_price")}
             mb={2}
           />
-          <NativeSelect.Root mb={2}>
-            <NativeSelect.Field
-              name="type"
-              value={newItem.type}
-              onChange={(e) => setNewItem({ ...newItem, type: e.target.value })}
-            >
-              <option value="">Select type</option>
-              <option value="Labour">Labour</option>
-              <option value="Materials">Materials</option>
-              <option value="Miscellaneous">Miscellaneous</option>
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
+          <SelectLineItemType
+            value={newItem.type}
+            setNewItem={(e) => setNewItem({ ...newItem, type: e.target.value })}
+          />
 
-          <HStack>
+          <HStack mt={2}>
             <input
               type="checkbox"
               checked={newItem.saveAsTemplate}
