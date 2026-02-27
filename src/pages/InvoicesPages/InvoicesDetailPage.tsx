@@ -19,10 +19,12 @@ import {
 import SearchTemplatesInput from "../../components/QuotesPageComponents/SearchTemplatesInput";
 import LineItemsInput from "../../components/QuotesPageComponents/LineItemsInput";
 import SelectInvoiceStatus from "../../components/InvoicePageComponents/SelectInvoiceStatus";
+import { useDownload } from "../../hooks/Generic/useDownload";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { downloadFile } = useDownload();
 
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
@@ -92,6 +94,17 @@ const InvoiceDetailPage = () => {
   if (loading) return <Spinner />;
   if (error) return <Text color="red.500">{error}</Text>;
 
+  const handleDownload = async () => {
+    try {
+      await downloadFile(
+        `/invoices/${invoice.id}/download/`,
+        `Invoice-${invoice.number}.pdf`,
+      );
+    } catch {
+      alert("Failed to download invoice");
+    }
+  };
+
   return (
     <Box maxW="800px" mx="auto" py={8}>
       {/* Header Section */}
@@ -105,9 +118,10 @@ const InvoiceDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorScheme="blue" onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
+            <HStack>
+              <Button onClick={handleDownload}>Download PDF</Button>
+              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+            </HStack>
           ) : (
             <HStack gap={2}>
               <Button colorScheme="green" onClick={handleSave} loading={saving}>

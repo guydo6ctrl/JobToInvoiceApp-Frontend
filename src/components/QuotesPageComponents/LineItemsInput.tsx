@@ -13,8 +13,8 @@ import api from "../../services/api";
 export interface LineItem {
   name: string;
   description: string;
-  quantity: number;
-  unit_price: number;
+  quantity: number | null;
+  unit_price: number | null;
   type: string;
   saveAsTemplate: boolean;
 }
@@ -29,8 +29,8 @@ interface LineItemsInputProps {
 const defaultNewItem = {
   name: "",
   description: "",
-  quantity: 1,
-  unit_price: 0,
+  quantity: null,
+  unit_price: null,
   type: "Type",
   saveAsTemplate: false,
 };
@@ -59,9 +59,18 @@ const LineItemsInput = ({
   const [showForm, setShowForm] = useState(false);
   const [newItem, setNewItem] = useState(defaultNewItem);
 
+  const handleNumberChange =
+    (field: "quantity" | "unit_price") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewItem({
+        ...newItem,
+        [field]: e.target.value === "" ? null : Number(e.target.value),
+      });
+    };
+
   // Save template if checked.
   const addLineItem = async () => {
-    if (newItem.description && newItem.unit_price > 0) {
+    if (newItem.description && newItem.unit_price !== null) {
       if (newItem.saveAsTemplate) {
         await api.post("/templates/", {
           name: newItem.name,
@@ -88,7 +97,7 @@ const LineItemsInput = ({
             <Text flex={1}>{item.description}</Text>
             <Text>Qty: {item.quantity}</Text>
             <Text>Unit Price: £{item.unit_price}</Text>
-            <Text>Total: £{item.unit_price * item.quantity}</Text>
+            <Text>Total: £{(item.unit_price ?? 0) * (item.quantity ?? 0)}</Text>
             <Text>Type: {item.type}</Text>
             <Button
               size="sm"
@@ -121,19 +130,15 @@ const LineItemsInput = ({
           <Input
             type="number"
             placeholder="Quantity"
-            value={newItem.quantity}
-            onChange={(e) =>
-              setNewItem({ ...newItem, quantity: parseInt(e.target.value) })
-            }
+            value={newItem.quantity ?? ""}
+            onChange={handleNumberChange("quantity")}
             mb={2}
           />
           <Input
             type="number"
             placeholder="Price"
-            value={newItem.unit_price}
-            onChange={(e) =>
-              setNewItem({ ...newItem, unit_price: parseFloat(e.target.value) })
-            }
+            value={newItem.unit_price ?? ""}
+            onChange={handleNumberChange("unit_price")}
             mb={2}
           />
           <NativeSelect.Root mb={2}>

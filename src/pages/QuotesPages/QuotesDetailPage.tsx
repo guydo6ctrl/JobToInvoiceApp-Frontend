@@ -19,10 +19,12 @@ import { searchTemplates } from "../../services/templateService";
 import { Template } from "../../components/QuotesPageComponents/AddQuoteForm";
 import { formatDateForAPI, formatDateForInput } from "../../utilities/date";
 import SelectQuoteStatus from "../../components/QuotesPageComponents/SelectQuoteStatus";
+import { useDownload } from "../../hooks/Generic/useDownload";
 
 const QuotesDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { downloadFile } = useDownload();
 
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
@@ -92,6 +94,17 @@ const QuotesDetailPage = () => {
   if (loading) return <Spinner />;
   if (error) return <Text color="red.500">{error}</Text>;
 
+  const handleDownload = async () => {
+    try {
+      await downloadFile(
+        `/quotes/${quote.id}/download/`,
+        `Quote-${quote.number}.pdf`,
+      );
+    } catch {
+      alert("Failed to download quote");
+    }
+  };
+
   return (
     <Box maxW="800px" mx="auto" py={8}>
       {/* Header Section */}
@@ -105,9 +118,10 @@ const QuotesDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorScheme="blue" onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
+            <HStack>
+              <Button onClick={handleDownload}>Download PDF</Button>
+              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+            </HStack>
           ) : (
             <HStack gap={2}>
               <Button colorScheme="green" onClick={handleSave} loading={saving}>
