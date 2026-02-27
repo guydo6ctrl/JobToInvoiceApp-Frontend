@@ -18,6 +18,7 @@ import LineItemsInput, { LineItem } from "./LineItemsInput";
 import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
+import { brand } from "../../constants";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -178,7 +179,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
             <Button
               type="submit"
-              colorScheme="blue"
+              colorPalette={brand}
               mt={6}
               loading={loading}
               size="md"

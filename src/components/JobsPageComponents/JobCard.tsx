@@ -1,4 +1,5 @@
 import { Badge, Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
+import { brand } from "../../constants";
 
 interface JobCardProps {
   job: any;
@@ -58,7 +59,7 @@ const JobCard = ({ job, onView, onArchive }: JobCardProps) => {
       <HStack mt={3} justifyContent="flex-end" gap={2}>
         <Button
           size="sm"
-          colorScheme="gray"
+          colorPalette="gray"
           onClick={(e) => {
             e.stopPropagation();
             onArchive(job.id);
@@ -68,7 +69,7 @@ const JobCard = ({ job, onView, onArchive }: JobCardProps) => {
         </Button>
         <Button
           size="sm"
-          colorScheme="blue"
+          colorPalette={brand}
           onClick={(e) => {
             e.stopPropagation();
             onView(job.id);

@@ -11,6 +11,7 @@ import useClients from "../../hooks/useClients";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import usePatchClient from "../../hooks/usePatchClient";
+import { brand } from "../../constants";
 
 interface Props {
   limit?: number;
@@ -61,7 +62,7 @@ const ClientsList = ({ limit }: Props) => {
               {client.name}
             </Text>
 
-            <Badge color="blue" variant="subtle">
+            <Badge color="black" variant="subtle">
               Client
             </Badge>
           </HStack>
@@ -87,7 +88,7 @@ const ClientsList = ({ limit }: Props) => {
           <HStack mt={3} justifyContent="flex-end" gap={2}>
             <Button
               size="sm"
-              colorScheme="gray"
+              colorPalette="gray"
               onClick={(e) => {
                 e.stopPropagation();
                 handleArchive(client.id);
@@ -97,7 +98,7 @@ const ClientsList = ({ limit }: Props) => {
             </Button>
             <Button
               size="sm"
-              colorScheme="blue"
+              colorPalette={brand}
               onClick={(e) => {
                 e.stopPropagation();
                 handleClick(client.id);

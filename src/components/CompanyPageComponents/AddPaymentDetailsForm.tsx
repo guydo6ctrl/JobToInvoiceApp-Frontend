@@ -13,6 +13,7 @@ import { useFormSubmit } from "../../hooks/useFormSubmit";
 import GenericTextInput from "../General/GenericTextInput";
 import GenericTextAreaInput from "../General/GenericTextAreaInput";
 import { useNavigate } from "react-router-dom";
+import { brand } from "../../constants";
 
 interface BankFormData {
   bank_name: string;
@@ -66,7 +67,7 @@ const AddPaymentDetailsForm = ({ endpoint }: { endpoint: string }) => {
                   <Heading size="lg">Bank Details</Heading>
                   <Button
                     size="sm"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate("bank/all");
@@ -149,7 +150,7 @@ const AddPaymentDetailsForm = ({ endpoint }: { endpoint: string }) => {
               <Button variant="ghost">Cancel</Button>
               <Button
                 type="submit"
-                colorScheme="blue"
+                colorPalette={brand}
                 loading={loading}
                 size="md"
               >

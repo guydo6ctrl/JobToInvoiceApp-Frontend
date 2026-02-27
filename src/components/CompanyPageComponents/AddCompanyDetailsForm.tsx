@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import GenericTextInput from "../General/GenericTextInput";
+import { brand } from "../../constants";
 
 interface CompanyFormData {
   name: string;
@@ -162,7 +163,7 @@ const AddCompanyDetailsForm = ({ endpoint }: { endpoint: string }) => {
                 <Button variant="ghost">Cancel</Button>
                 <Button
                   type="submit"
-                  colorScheme="blue"
+                  colorPalette={brand}
                   loading={loading}
                   size="md"
                 >

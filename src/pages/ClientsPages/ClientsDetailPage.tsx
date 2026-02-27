@@ -76,12 +76,12 @@ const ClientDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorScheme="brand" onClick={() => setIsEditing(true)}>
+            <Button colorPalette="brand" onClick={() => setIsEditing(true)}>
               Edit
             </Button>
           ) : (
             <HStack gap={2}>
-              <Button colorScheme="green" onClick={handleSave} loading={saving}>
+              <Button colorPalette="green" onClick={handleSave} loading={saving}>
                 Save
               </Button>
               <Button

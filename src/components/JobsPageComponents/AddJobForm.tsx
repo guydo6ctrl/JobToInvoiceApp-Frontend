@@ -13,6 +13,7 @@ import {
 import SelectClient from "../General/SelectClient";
 import SelectQuote from "../General/SelectQuote";
 import SelectJobStatus from "./SelectJobStatus";
+import { brand } from "../../constants";
 
 interface JobFormData {
   client_id: string;
@@ -118,7 +119,7 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
 
         <Button
           type="submit"
-          colorScheme="blue"
+          colorPalette={brand}
           mt={6}
           w="full"
           loading={loading}

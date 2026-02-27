@@ -31,7 +31,7 @@ const DeleteButton = ({
   };
 
   return (
-    <Button size="sm" colorScheme="red" onClick={handleDelete}>
+    <Button size="sm" colorPalette="red" onClick={handleDelete}>
       {buttonLabel}
     </Button>
   );

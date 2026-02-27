@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import SelectLineItemType from "../General/SelectLineItemType";
+import { brand } from "../../constants";
 
 export interface LineItem {
   name: string;
@@ -155,7 +156,7 @@ const LineItemsInput = ({
                   />
                 </HStack>
                 <HStack gap={2}>
-                  <Button size="sm" colorScheme="green" onClick={saveEdit}>
+                  <Button size="sm" colorPalette="green" onClick={saveEdit}>
                     Save
                   </Button>
                   <Button
@@ -203,7 +204,7 @@ const LineItemsInput = ({
                     px={2}
                     py={1}
                     fontSize="xs"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     onClick={() => startEdit(idx)}
                   >
                     Edit
@@ -213,7 +214,7 @@ const LineItemsInput = ({
                     px={2}
                     py={1}
                     fontSize="xs"
-                    colorScheme="red"
+                    colorPalette="red"
                     onClick={() =>
                       onChange(lineItems.filter((_, i) => i !== idx))
                     }
@@ -275,7 +276,7 @@ const LineItemsInput = ({
           </HStack>
 
           <HStack paddingY={3}>
-            <Button colorScheme="green" onClick={addLineItem}>
+            <Button colorPalette="green" onClick={addLineItem}>
               Add
             </Button>
             <Button variant="ghost" onClick={() => setShowForm(false)}>
@@ -286,7 +287,7 @@ const LineItemsInput = ({
       )}
 
       {!showForm && (
-        <Button colorScheme="blue" onClick={() => setShowForm(true)}>
+        <Button colorPalette={brand} onClick={() => setShowForm(true)}>
           Add New Line Item
         </Button>
       )}

@@ -14,6 +14,7 @@ import usePatchQuote from "../../hooks/usePatchQuote";
 import DataTableHeader from "../General/DataTableHeader";
 import ArchiveButton from "../General/ArchiveButton";
 import SearchInput from "../General/SearchInput";
+import { brand } from "../../constants";
 
 const QuotesTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -100,7 +101,7 @@ const QuotesTable = () => {
                 <Table.Cell textAlign="center">
                   <Button
                     size="sm"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     mr={2}
                     onClick={(e) => {
                       e.stopPropagation();

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
+import { brand } from "../../constants";
 
 interface ClientFormData {
   name: string;
@@ -132,7 +133,7 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
           {/* Submit button */}
           <Button
             type="submit"
-            colorPalette="blue"
+            colorPalette={brand}
             mt={2}
             loading={loading}
             size="md"

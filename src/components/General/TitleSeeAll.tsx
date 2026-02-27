@@ -25,7 +25,7 @@ const TitleSeeAll = ({ children }: Props) => {
         </Text>
         <Button
           size="sm"
-          colorScheme="gray"
+          colorPalette="gray"
           onClick={(e) => {
             e.stopPropagation();
             navigate("all");

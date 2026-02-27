@@ -6,6 +6,7 @@ import usePatchInvoice from "../../hooks/usePatchInvoice";
 import DataTableHeader from "../General/DataTableHeader";
 import ArchiveButton from "../General/ArchiveButton";
 import SearchInput from "../General/SearchInput";
+import { brand } from "../../constants";
 
 const InvoiceTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -91,7 +92,7 @@ const InvoiceTable = () => {
                 <Table.Cell textAlign="center">
                   <Button
                     size="sm"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     mr={2}
                     onClick={(e) => {
                       e.stopPropagation();

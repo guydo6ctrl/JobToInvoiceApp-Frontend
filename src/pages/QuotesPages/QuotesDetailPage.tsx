@@ -124,7 +124,11 @@ const QuotesDetailPage = () => {
             </HStack>
           ) : (
             <HStack gap={2}>
-              <Button colorScheme="green" onClick={handleSave} loading={saving}>
+              <Button
+                colorPalette="green"
+                onClick={handleSave}
+                loading={saving}
+              >
                 Save
               </Button>
               <Button

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import SelectJobStatus from "../../components/JobsPageComponents/SelectJobStatus";
 import SelectQuote from "../../components/General/SelectQuote";
+import { brand } from "../../constants";
 
 const JobsDetailPage = () => {
   const { id } = useParams();
@@ -84,12 +85,16 @@ const JobsDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorScheme="blue" onClick={() => setIsEditing(true)}>
+            <Button colorPalette={brand} onClick={() => setIsEditing(true)}>
               Edit
             </Button>
           ) : (
             <HStack gap={2}>
-              <Button colorScheme="green" onClick={handleSave} loading={saving}>
+              <Button
+                colorPalette="green"
+                onClick={handleSave}
+                loading={saving}
+              >
                 Save
               </Button>
               <Button

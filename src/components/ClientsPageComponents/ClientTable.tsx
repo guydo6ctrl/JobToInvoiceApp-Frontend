@@ -6,6 +6,7 @@ import DataTableHeader from "../General/DataTableHeader";
 import usePatchClient from "../../hooks/usePatchClient";
 import ArchiveButton from "../General/ArchiveButton";
 import SearchInput from "../General/SearchInput";
+import { brand } from "../../constants";
 
 const ClientsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -76,7 +77,7 @@ const ClientsTable = () => {
                 <Table.Cell textAlign="center">
                   <Button
                     size="sm"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     mr={2}
                     onClick={(e) => {
                       e.stopPropagation();

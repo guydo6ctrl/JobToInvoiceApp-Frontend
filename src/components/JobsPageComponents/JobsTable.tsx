@@ -6,6 +6,7 @@ import { useState } from "react";
 import usePatchJob from "../../hooks/usePatchJob";
 import ArchiveButton from "../General/ArchiveButton";
 import SearchInput from "../General/SearchInput";
+import { brand } from "../../constants";
 
 const JobsTable = () => {
   const [showArchived, setShowArchived] = useState(false);
@@ -97,7 +98,7 @@ const JobsTable = () => {
                 <Table.Cell textAlign="center">
                   <Button
                     size="sm"
-                    colorScheme="blue"
+                    colorPalette={brand}
                     mr={2}
                     onClick={(e) => {
                       e.stopPropagation();

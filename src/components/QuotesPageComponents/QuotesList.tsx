@@ -11,6 +11,7 @@ import useQuotes from "../../hooks/useQuotes";
 import { useNavigate } from "react-router-dom";
 import usePatchQuote from "../../hooks/usePatchQuote";
 import { useState } from "react";
+import { brand } from "../../constants";
 
 interface Props {
   limit?: number;
@@ -95,7 +96,7 @@ const QuotesList = ({ limit }: Props) => {
           <HStack mt={3} justifyContent="flex-end" gap={2}>
             <Button
               size="sm"
-              colorScheme="gray"
+              colorPalette="gray"
               onClick={(e) => {
                 e.stopPropagation();
                 handleArchive(quote.id);
@@ -106,7 +107,7 @@ const QuotesList = ({ limit }: Props) => {
 
             <Button
               size="sm"
-              colorScheme="blue"
+              colorPalette={brand}
               onClick={(e) => {
                 e.stopPropagation();
                 handleClick?.(quote.id);

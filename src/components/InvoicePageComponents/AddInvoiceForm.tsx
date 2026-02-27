@@ -24,6 +24,7 @@ import { searchTemplates } from "../../services/templateService";
 import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
 import { Quote } from "../../hooks/useQuotes";
+import { brand } from "../../constants";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -219,7 +220,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
           {/* Submit Button */}
           <Button
             type="submit"
-            colorScheme="blue"
+            colorPalette={brand}
             size="lg"
             w="full"
             loading={loading}

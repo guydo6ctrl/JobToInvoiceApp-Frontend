@@ -4,6 +4,7 @@ import DeleteButton from "../components/General/DeleteButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePatchBankDetail from "../hooks/usePatchBankDetail";
+import { brand } from "../constants";
 
 const BankPage = () => {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ const BankPage = () => {
                 <Table.Cell textAlign="center">
                   <Button
                     size="sm"
-                    colorPalette="blue" // Fix: colorScheme → colorPalette (Chakra v3)
+                    colorPalette={brand}
                     mr={2}
                     loading={loadingId === bank.id} // Fix: isLoading → loading (Chakra v3)
                     onClick={() => handleSetDefault(bank.id)}

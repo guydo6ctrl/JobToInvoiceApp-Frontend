@@ -3,6 +3,7 @@ import { Badge, Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import usePatchInvoice from "../../hooks/usePatchInvoice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { brand } from "../../constants";
 
 interface Props {
   limit?: number;
@@ -86,7 +87,7 @@ const InvoiceList = ({ limit }: Props) => {
           <HStack mt={3} justifyContent="flex-end" gap={2}>
             <Button
               size="sm"
-              colorScheme="gray"
+              colorPalette="gray"
               onClick={(e) => {
                 e.stopPropagation();
                 handleArchive(invoice.id);
@@ -96,7 +97,7 @@ const InvoiceList = ({ limit }: Props) => {
             </Button>
             <Button
               size="sm"
-              colorScheme="blue"
+              colorPalette={brand}
               onClick={(e) => {
                 e.stopPropagation();
                 handleClick(invoice.id);
