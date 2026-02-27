@@ -26,6 +26,7 @@ const NavBar = () => {
         <Spacer />
         {/* Right section */}
         <Flex align="center" gap={3}>
+          <NavButton route="company">Company Details</NavButton>
           <IconButton
             aria-label="Settings"
             variant="ghost"

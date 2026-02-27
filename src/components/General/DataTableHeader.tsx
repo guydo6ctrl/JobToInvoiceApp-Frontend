@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  showArchived: boolean;
-  onCheckedChange: (e: { checked: boolean }) => void;
+  showArchived?: boolean;
+  onCheckedChange?: (e: { checked: boolean }) => void;
 }
 
 const DataTableHeader = ({
