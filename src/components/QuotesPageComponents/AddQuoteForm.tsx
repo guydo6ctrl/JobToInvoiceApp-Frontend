@@ -19,6 +19,12 @@ import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
 
+const today = new Date().toISOString().slice(0, 10);
+
+const expiry_date: string = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .slice(0, 10);
+
 interface QuoteFormDataProps {
   client_id: string;
   description: string;
@@ -38,8 +44,8 @@ export interface Template {
 const defaultFormData = {
   client_id: "",
   description: "",
-  issue_date: "",
-  expiry_date: "",
+  issue_date: today,
+  expiry_date: expiry_date,
   line_items: [],
   status: "",
 };

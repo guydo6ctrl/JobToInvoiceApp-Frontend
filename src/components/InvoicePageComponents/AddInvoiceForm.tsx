@@ -25,6 +25,12 @@ import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
 import { Quote } from "../../hooks/useQuotes";
 
+const today = new Date().toISOString().slice(0, 10);
+
+const due_date: string = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .slice(0, 10);
+
 interface InvoiceFormDataProps {
   client_id: string;
   job: string;
@@ -41,8 +47,8 @@ const defaultFormData = {
   job: "",
   source_quote: "",
   description: "",
-  issue_date: "",
-  due_date: "",
+  issue_date: today,
+  due_date: due_date,
   line_items: [],
   status: "",
 };
@@ -88,12 +94,6 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
     e.preventDefault();
     await submit(formData);
   };
-
-  const today = new Date().toISOString().slice(0, 10);
-
-  const due_date: string = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
 
   const handleSelectQuote = (quote: any) => {
     setFormData({
