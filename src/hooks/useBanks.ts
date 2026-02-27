@@ -1,6 +1,6 @@
 import useData from "./Generic/useData";
 
-interface Bank {
+export interface BankDetail {
     id: number;
   bank_name: string;
   account_number: string;
@@ -10,7 +10,7 @@ interface Bank {
 }
 
 const useBanks = () => {
-  return useData<Bank>('company/bank', {}, [])
+  return useData<BankDetail>('company/bank', {}, [])
 }
 
 export default useBanks

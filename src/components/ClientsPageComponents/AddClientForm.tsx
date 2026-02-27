@@ -132,7 +132,7 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
           {/* Submit button */}
           <Button
             type="submit"
-            colorScheme="blue"
+            colorPalette="blue"
             mt={2}
             loading={loading}
             size="md"

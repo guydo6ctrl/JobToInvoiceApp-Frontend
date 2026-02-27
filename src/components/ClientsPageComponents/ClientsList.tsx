@@ -61,7 +61,7 @@ const ClientsList = ({ limit }: Props) => {
               {client.name}
             </Text>
 
-            <Badge colorScheme="blue" variant="subtle">
+            <Badge color="blue" variant="subtle">
               Client
             </Badge>
           </HStack>
