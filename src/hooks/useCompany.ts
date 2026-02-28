@@ -1,6 +1,7 @@
 import useData from "./Generic/useData";
 
 export interface Company {
+  id: number;
   name: string;
   email: string;
   phone: string;
@@ -11,7 +12,7 @@ export interface Company {
 }
 
 const useCompany = () => {
-  return useData<Company>('clients/', {}, [])
+  return useData<Company>('company/details', {}, [])
 }
 
 export default useCompany

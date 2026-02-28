@@ -10,6 +10,7 @@ import {
 import AddCompanyDetailsForm from "../components/CompanyPageComponents/AddCompanyDetailsForm";
 import useCompany from "../hooks/useCompany";
 import AddPaymentDetailsForm from "../components/CompanyPageComponents/AddPaymentDetailsForm";
+import EditCompanyDetailsForm from "../components/CompanyPageComponents/EditCompanyDetailsForm";
 
 const CompanyPage = () => {
   const { data, isLoading, error } = useCompany();
@@ -34,8 +35,12 @@ const CompanyPage = () => {
         w="100%"
         alignItems="start"
       >
-        <GridItem colSpan={{ base: 1, lg: 1 }} w="100%">
-          <AddCompanyDetailsForm endpoint="company/details" />
+        <GridItem w="100%">
+          {data.length > 0 ? (
+            <EditCompanyDetailsForm />
+          ) : (
+            <AddCompanyDetailsForm endpoint="company/details" />
+          )}
         </GridItem>
         <GridItem colSpan={{ base: 1, lg: 1 }} w="100%">
           <AddPaymentDetailsForm endpoint="company/bank" />
