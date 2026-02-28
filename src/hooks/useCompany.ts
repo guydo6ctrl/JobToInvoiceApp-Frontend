@@ -5,6 +5,7 @@ export interface Company {
   name: string;
   email: string;
   phone: string;
+  is_vat_registered: boolean;
   address_line: string;
   town_or_city: string;
   postcode: string;

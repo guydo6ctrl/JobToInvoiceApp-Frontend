@@ -242,7 +242,7 @@ const QuotesDetailPage = () => {
       </Card.Root>
 
       {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate("/quotes")} size="md">
+      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
         ← Back to Quotes
       </Button>
     </Box>

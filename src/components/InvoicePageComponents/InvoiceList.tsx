@@ -62,11 +62,11 @@ const InvoiceList = ({ limit }: Props) => {
             </VStack>
             <Badge
               bg={
-                invoice.status === "paid"
+                invoice.status_display === "Paid"
                   ? "green.300"
-                  : invoice.status === "draft"
+                  : invoice.status_display === "Draft"
                     ? "yellow.300"
-                    : invoice.status === "sent"
+                    : invoice.status_display === "Sent"
                       ? "blue.300"
                       : "red.300"
               }

@@ -81,7 +81,11 @@ const ClientDetailPage = () => {
             </Button>
           ) : (
             <HStack gap={2}>
-              <Button colorPalette="green" onClick={handleSave} loading={saving}>
+              <Button
+                colorPalette="green"
+                onClick={handleSave}
+                loading={saving}
+              >
                 Save
               </Button>
               <Button
@@ -162,7 +166,7 @@ const ClientDetailPage = () => {
       </Card.Root>
 
       {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate("/clients")} size="md">
+      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
         ← Back to Clients
       </Button>
     </Box>

@@ -17,7 +17,7 @@ import LineItemsInput, {
   LineItem,
 } from "../QuotesPageComponents/LineItemsInput";
 import SelectInvoiceStatus from "./SelectInvoiceStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Template } from "../QuotesPageComponents/AddQuoteForm";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { searchTemplates } from "../../services/templateService";
@@ -25,6 +25,8 @@ import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
 import { Quote } from "../../hooks/useQuotes";
 import { brand } from "../../constants";
+import SelectInvoiceVAT from "./SelectInvoiceVat";
+import useCompany from "../../hooks/useCompany";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -40,6 +42,7 @@ interface InvoiceFormDataProps {
   issue_date: string;
   due_date: string;
   line_items: LineItem[];
+  vat_rate: string;
   status: string;
 }
 
@@ -51,6 +54,7 @@ const defaultFormData = {
   issue_date: today,
   due_date: due_date,
   line_items: [],
+  vat_rate: "",
   status: "",
 };
 
@@ -69,6 +73,17 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
       alert("Invoice added successfully!");
     },
   });
+
+  const { data: companyData } = useCompany();
+
+  useEffect(() => {
+    if (companyData[0]) {
+      setFormData((prev) => ({
+        ...prev,
+        vat_rate: companyData[0]?.is_vat_registered ? "20.00" : "0.00",
+      }));
+    }
+  }, [companyData]);
 
   const handleSearch = async (searchTextOrResult: string | any) => {
     if (typeof searchTextOrResult === "object") {
@@ -204,10 +219,16 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
 
           {/* Status selector */}
           <Box>
-            <SelectInvoiceStatus
-              status={formData.status}
-              onChange={handleChange}
-            />
+            <HStack gap={3}>
+              <SelectInvoiceVAT
+                vat_rate={formData.vat_rate}
+                onChange={handleChange}
+              />
+              <SelectInvoiceStatus
+                status={formData.status}
+                onChange={handleChange}
+              />
+            </HStack>
           </Box>
 
           {/* Error message */}

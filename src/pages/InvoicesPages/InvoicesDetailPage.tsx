@@ -20,6 +20,7 @@ import SearchTemplatesInput from "../../components/QuotesPageComponents/SearchTe
 import LineItemsInput from "../../components/QuotesPageComponents/LineItemsInput";
 import SelectInvoiceStatus from "../../components/InvoicePageComponents/SelectInvoiceStatus";
 import { useDownload } from "../../hooks/Generic/useDownload";
+import SelectInvoiceVAT from "../../components/InvoicePageComponents/SelectInvoiceVat";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
@@ -62,6 +63,7 @@ const InvoiceDetailPage = () => {
         issue_date: formatDateForAPI(formData.issue_date),
         due_date: formatDateForAPI(formData.due_date),
         line_items: formData.line_items,
+        vat_rate: parseFloat(formData.vat_rate).toFixed(2),
         status: formData.status,
       };
       const res = await api.put(`/invoices/${id}/`, dataToSave);
@@ -124,7 +126,11 @@ const InvoiceDetailPage = () => {
             </HStack>
           ) : (
             <HStack gap={2}>
-              <Button colorPalette="green" onClick={handleSave} loading={saving}>
+              <Button
+                colorPalette="green"
+                onClick={handleSave}
+                loading={saving}
+              >
                 Save
               </Button>
               <Button
@@ -219,6 +225,21 @@ const InvoiceDetailPage = () => {
               )}
             </VStack>
 
+            {/* VAT rate */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                VAT Rate
+              </Text>
+              {isEditing ? (
+                <SelectInvoiceVAT
+                  vat_rate={formData.vat_rate}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Text fontSize="md">{invoice.vat_rate_display}</Text>
+              )}
+            </VStack>
+
             {/* Status */}
             <VStack gap={2} align="stretch">
               <Text fontSize="sm" fontWeight="600" color="gray.600">
@@ -238,7 +259,7 @@ const InvoiceDetailPage = () => {
       </Card.Root>
 
       {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate("/invoices")} size="md">
+      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
         ← Back to Invoices
       </Button>
     </Box>
@@ -246,3 +267,6 @@ const InvoiceDetailPage = () => {
 };
 
 export default InvoiceDetailPage;
+function Decimal(vat_rate: any): any {
+  throw new Error("Function not implemented.");
+}

@@ -186,7 +186,7 @@ const JobsDetailPage = () => {
       </Card.Root>
 
       {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate("/jobs")} size="md">
+      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
         ← Back to Jobs
       </Button>
     </Box>

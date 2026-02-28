@@ -12,19 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import useCompany from "../../hooks/useCompany";
+import useCompany, { Company } from "../../hooks/useCompany";
 import EditField from "../General/EditField";
-
-interface Company {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  address_line: string;
-  town_or_city: string;
-  postcode: string;
-  country: string;
-}
 
 const EditCompanyDetailsForm = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -54,7 +43,7 @@ const EditCompanyDetailsForm = () => {
       setCompany(res.data);
       setIsEditing(false);
     } catch {
-      setError("Failed to save changes");
+      setError("Failed to save changes, please ensure details are valid.");
     } finally {
       setSaving(false);
     }
@@ -141,6 +130,33 @@ const EditCompanyDetailsForm = () => {
               formData={formData}
               onChange={handleChange}
             />
+
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                {"VAT details"}
+              </Text>
+              {isEditing ? (
+                <HStack gap={3}>
+                  <input
+                    type="checkbox"
+                    checked={formData.is_vat_registered}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        is_vat_registered: e.target.checked,
+                      })
+                    }
+                  />
+                  <Text ml={2}>Is your business VAT Registered</Text>
+                </HStack>
+              ) : (
+                <Text fontSize="md">
+                  {company.is_vat_registered
+                    ? "VAT Registered"
+                    : "Not VAT Registered"}
+                </Text>
+              )}
+            </VStack>
 
             {/* Address */}
             <Text fontSize="sm" fontWeight="600" color="gray.700">

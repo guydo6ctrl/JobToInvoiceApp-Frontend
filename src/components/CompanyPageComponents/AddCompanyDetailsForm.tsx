@@ -17,6 +17,7 @@ interface CompanyFormData {
   name: string;
   email: string;
   phone: string;
+  is_vat_registered: boolean;
   address_line: string;
   town_or_city: string;
   postcode: string;
@@ -27,6 +28,7 @@ const defaultCompanyFormData = {
   name: "",
   email: "",
   phone: "",
+  is_vat_registered: true,
   address_line: "",
   town_or_city: "",
   postcode: "",
@@ -56,6 +58,7 @@ const AddCompanyDetailsForm = ({ endpoint }: { endpoint: string }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await submit(formData);
+    window.location.reload();
   };
 
   return (
@@ -102,6 +105,20 @@ const AddCompanyDetailsForm = ({ endpoint }: { endpoint: string }) => {
                   name="phone"
                 />
               </VStack>
+
+              <HStack gap={3}>
+                <input
+                  type="checkbox"
+                  checked={formData.is_vat_registered}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      is_vat_registered: e.target.checked,
+                    })
+                  }
+                />
+                <Text ml={2}>Is your business VAT registered?</Text>
+              </HStack>
 
               {/* Address Section */}
               <VStack gap={4} align="stretch">
