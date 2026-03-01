@@ -13,7 +13,8 @@ import {
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import useCompany, { Company } from "../../hooks/useCompany";
-import EditField from "../General/EditField";
+import EditCompanyField from "../General/EditCompanyField";
+import EditTextAreaCompany from "../General/EditTextAreaCompany";
 
 const EditCompanyDetailsForm = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -29,7 +30,9 @@ const EditCompanyDetailsForm = () => {
     }
   }, [data]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData((prev) =>
       prev ? { ...prev, [e.target.name]: e.target.value } : prev,
     );
@@ -106,7 +109,7 @@ const EditCompanyDetailsForm = () => {
 
             {/* Business Information */}
 
-            <EditField
+            <EditCompanyField
               label="Business Name"
               name="name"
               value={company.name}
@@ -114,7 +117,31 @@ const EditCompanyDetailsForm = () => {
               formData={formData}
               onChange={handleChange}
             />
-            <EditField
+            <EditTextAreaCompany
+              label="Payment Instructions"
+              name="payment_instructions"
+              value={company.payment_instructions}
+              isEditing={isEditing}
+              formData={formData}
+              onChange={handleChange}
+            />
+            <EditTextAreaCompany
+              label="Quote Terms"
+              name="quote_terms"
+              value={company.quote_terms}
+              isEditing={isEditing}
+              formData={formData}
+              onChange={handleChange}
+            />
+            <EditCompanyField
+              label="Business Name"
+              name="name"
+              value={company.name}
+              isEditing={isEditing}
+              formData={formData}
+              onChange={handleChange}
+            />
+            <EditCompanyField
               label="Email Address"
               name="email"
               value={company.email}
@@ -122,7 +149,7 @@ const EditCompanyDetailsForm = () => {
               formData={formData}
               onChange={handleChange}
             />
-            <EditField
+            <EditCompanyField
               label="Phone Number"
               name="phone"
               value={company.phone}
@@ -162,7 +189,7 @@ const EditCompanyDetailsForm = () => {
             <Text fontSize="sm" fontWeight="600" color="gray.700">
               Address
             </Text>
-            <EditField
+            <EditCompanyField
               label="Street Address"
               name="address_line"
               value={company.address_line}
@@ -172,7 +199,7 @@ const EditCompanyDetailsForm = () => {
             />
             <HStack gap={4} align="stretch">
               <Box flex={2}>
-                <EditField
+                <EditCompanyField
                   label="Town/City"
                   name="town_or_city"
                   value={company.town_or_city}
@@ -182,7 +209,7 @@ const EditCompanyDetailsForm = () => {
                 />
               </Box>
               <Box flex={1}>
-                <EditField
+                <EditCompanyField
                   label="Postcode"
                   name="postcode"
                   value={company.postcode}
@@ -192,7 +219,7 @@ const EditCompanyDetailsForm = () => {
                 />
               </Box>
             </HStack>
-            <EditField
+            <EditCompanyField
               label="Country"
               name="country"
               value={company.country}

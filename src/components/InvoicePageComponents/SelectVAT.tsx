@@ -6,7 +6,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectInvoiceVAT = ({ vat_rate, onChange }: Props) => {
+const SelectVAT = ({ vat_rate, onChange }: Props) => {
   const { data } = useCompany();
   return (
     <Field.Root>
@@ -38,4 +38,4 @@ const SelectInvoiceVAT = ({ vat_rate, onChange }: Props) => {
   );
 };
 
-export default SelectInvoiceVAT;
+export default SelectVAT;

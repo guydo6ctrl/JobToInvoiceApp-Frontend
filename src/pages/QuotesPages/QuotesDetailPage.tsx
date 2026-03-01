@@ -20,6 +20,8 @@ import { Template } from "../../components/QuotesPageComponents/AddQuoteForm";
 import { formatDateForAPI, formatDateForInput } from "../../utilities/date";
 import SelectQuoteStatus from "../../components/QuotesPageComponents/SelectQuoteStatus";
 import { useDownload } from "../../hooks/Generic/useDownload";
+import EditTextArea from "../../components/General/EditTextArea";
+import SelectVAT from "../../components/InvoicePageComponents/SelectVAT";
 
 const QuotesDetailPage = () => {
   const { id } = useParams();
@@ -59,9 +61,12 @@ const QuotesDetailPage = () => {
       const dataToSave = {
         client_id: formData.client.id,
         description: formData.description,
+        notes: formData.notes,
+        quote_terms: formData.quote_terms,
         issue_date: formatDateForAPI(formData.issue_date),
         expiry_date: formatDateForAPI(formData.expiry_date),
         line_items: formData.line_items,
+        vat_rate: parseFloat(formData.vat_rate).toFixed(2),
         status: formData.status,
       };
       const res = await api.put(`/quotes/${id}/`, dataToSave);
@@ -150,23 +155,15 @@ const QuotesDetailPage = () => {
         <Card.Body>
           <VStack gap={6} align="stretch">
             {/* Description */}
-            <VStack gap={2} align="stretch">
-              <Text fontSize="sm" fontWeight="600" color="gray.600">
-                Description
-              </Text>
-              {isEditing ? (
-                <Textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Enter description"
-                  size="md"
-                  minH="100px"
-                />
-              ) : (
-                <Text fontSize="md">{quote.description}</Text>
-              )}
-            </VStack>
+            <EditTextArea
+              nameProp="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter description"
+              isEditing={isEditing}
+              data={quote.description}
+              label="Description"
+            />
 
             {/* Expiry Date */}
             <VStack gap={2} align="stretch">
@@ -222,6 +219,41 @@ const QuotesDetailPage = () => {
                 </VStack>
               )}
             </VStack>
+
+            {/* VAT rate */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                VAT Rate
+              </Text>
+              {isEditing ? (
+                <SelectVAT
+                  vat_rate={formData.vat_rate}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Text fontSize="md">{quote.vat_rate_display}</Text>
+              )}
+            </VStack>
+
+            <EditTextArea
+              nameProp="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              placeholder="Enter notes"
+              isEditing={isEditing}
+              data={quote.notes}
+              label="Notes"
+            />
+
+            <EditTextArea
+              nameProp="quote_terms"
+              value={formData.quote_terms}
+              onChange={handleChange}
+              placeholder="Enter quote terms"
+              isEditing={isEditing}
+              data={quote.quote_terms}
+              label="Quote terms"
+            />
 
             {/* Status */}
             <VStack gap={2} align="stretch">

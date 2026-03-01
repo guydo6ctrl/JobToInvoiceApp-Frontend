@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectClient from "../General/SelectClient";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import SelectQuoteStatus from "./SelectQuoteStatus";
@@ -19,6 +19,9 @@ import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
 import { brand } from "../../constants";
+import TextAreaInput from "../General/TextAreaInput";
+import useCompany from "../../hooks/useCompany";
+import SelectVAT from "../InvoicePageComponents/SelectVAT";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -32,6 +35,9 @@ interface QuoteFormDataProps {
   issue_date: string;
   expiry_date: string;
   line_items: LineItem[];
+  notes: string;
+  quote_terms: string;
+  vat_rate: string;
   status: string;
 }
 
@@ -48,6 +54,9 @@ const defaultFormData = {
   issue_date: today,
   expiry_date: expiry_date,
   line_items: [],
+  notes: "",
+  quote_terms: "",
+  vat_rate: "",
   status: "",
 };
 
@@ -91,6 +100,18 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
     const data = await searchTemplates(searchTextOrResult);
     setSearchResults(data);
   };
+
+  const { data: companyData } = useCompany();
+
+  useEffect(() => {
+    if (companyData[0]) {
+      setFormData((prev) => ({
+        ...prev,
+        vat_rate: companyData[0]?.is_vat_registered ? "20.00" : "0.00",
+        quote_terms: companyData[0]?.quote_terms ?? "",
+      }));
+    }
+  }, [companyData]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -161,11 +182,33 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 />
               </Box>
 
-              {/* Status */}
-              <SelectQuoteStatus
-                status={formData.status}
+              <TextAreaInput
+                label="Notes"
+                nameProp="notes"
+                value={formData.notes}
                 onChange={handleChange}
+                placeholder="Enter optional notes"
               />
+
+              <TextAreaInput
+                label="Quoting terms"
+                nameProp="quote_terms"
+                value={formData.quote_terms}
+                onChange={handleChange}
+                placeholder="Enter optional quote terms"
+              />
+
+              {/* Status */}
+              <HStack gap={2}>
+                <SelectVAT
+                  vat_rate={formData.vat_rate}
+                  onChange={handleChange}
+                />
+                <SelectQuoteStatus
+                  status={formData.status}
+                  onChange={handleChange}
+                />
+              </HStack>
             </Fieldset.Content>
 
             {/* Error */}

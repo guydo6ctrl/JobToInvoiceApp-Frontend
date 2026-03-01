@@ -20,7 +20,9 @@ import SearchTemplatesInput from "../../components/QuotesPageComponents/SearchTe
 import LineItemsInput from "../../components/QuotesPageComponents/LineItemsInput";
 import SelectInvoiceStatus from "../../components/InvoicePageComponents/SelectInvoiceStatus";
 import { useDownload } from "../../hooks/Generic/useDownload";
-import SelectInvoiceVAT from "../../components/InvoicePageComponents/SelectInvoiceVat";
+import SelectInvoiceVAT from "../../components/InvoicePageComponents/SelectVAT";
+import EditField from "../../components/General/EditCompanyField";
+import EditTextArea from "../../components/General/EditTextArea";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
@@ -60,6 +62,8 @@ const InvoiceDetailPage = () => {
       const dataToSave = {
         client_id: formData.client.id,
         description: formData.description,
+        notes: formData.notes,
+        payment_instructions: formData.payment_instructions,
         issue_date: formatDateForAPI(formData.issue_date),
         due_date: formatDateForAPI(formData.due_date),
         line_items: formData.line_items,
@@ -152,23 +156,16 @@ const InvoiceDetailPage = () => {
         <Card.Body>
           <VStack gap={6} align="stretch">
             {/* Description */}
-            <VStack gap={2} align="stretch">
-              <Text fontSize="sm" fontWeight="600" color="gray.600">
-                Description
-              </Text>
-              {isEditing ? (
-                <Textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Enter description"
-                  size="md"
-                  minH="100px"
-                />
-              ) : (
-                <Text fontSize="md">{invoice.description}</Text>
-              )}
-            </VStack>
+
+            <EditTextArea
+              nameProp="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter description"
+              isEditing={isEditing}
+              data={invoice.description}
+              label="Description"
+            />
 
             {/* Expiry Date */}
             <VStack gap={2} align="stretch">
@@ -239,6 +236,26 @@ const InvoiceDetailPage = () => {
                 <Text fontSize="md">{invoice.vat_rate_display}</Text>
               )}
             </VStack>
+
+            <EditTextArea
+              nameProp="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              placeholder="Enter notes"
+              isEditing={isEditing}
+              data={invoice.notes}
+              label="Notes"
+            />
+
+            <EditTextArea
+              nameProp="payment_instructions"
+              value={formData.payment_instructions}
+              onChange={handleChange}
+              placeholder="Enter payment instructions"
+              isEditing={isEditing}
+              data={invoice.payment_instructions}
+              label="Payment Instructions"
+            />
 
             {/* Status */}
             <VStack gap={2} align="stretch">

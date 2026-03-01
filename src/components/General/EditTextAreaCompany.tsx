@@ -1,4 +1,4 @@
-import { VStack, Text, Input } from "@chakra-ui/react";
+import { VStack, Text, Input, Textarea } from "@chakra-ui/react";
 import { Company } from "../../hooks/useCompany";
 
 interface FieldProps {
@@ -7,10 +7,10 @@ interface FieldProps {
   value?: string;
   isEditing: boolean;
   formData: Company;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const EditField = ({
+const EditTextAreaCompany = ({
   label,
   name,
   value,
@@ -23,7 +23,7 @@ const EditField = ({
       {label}
     </Text>
     {isEditing ? (
-      <Input
+      <Textarea
         name={name}
         value={(formData[name] as string) || ""}
         onChange={onChange}
@@ -36,4 +36,4 @@ const EditField = ({
   </VStack>
 );
 
-export default EditField;
+export default EditTextAreaCompany;

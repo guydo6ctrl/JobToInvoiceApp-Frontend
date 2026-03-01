@@ -7,16 +7,20 @@ import {
   VStack,
   HStack,
   Card,
+  Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import GenericTextInput from "../General/GenericTextInput";
 import { brand } from "../../constants";
+import TextAreaInput from "../General/TextAreaInput";
 
 interface CompanyFormData {
   name: string;
   email: string;
   phone: string;
+  payment_instructions: string;
+  quote_terms: string;
   is_vat_registered: boolean;
   address_line: string;
   town_or_city: string;
@@ -28,6 +32,8 @@ const defaultCompanyFormData = {
   name: "",
   email: "",
   phone: "",
+  payment_instructions: "",
+  quote_terms: "",
   is_vat_registered: true,
   address_line: "",
   town_or_city: "",
@@ -49,7 +55,9 @@ const AddCompanyDetailsForm = ({ endpoint }: { endpoint: string }) => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -88,6 +96,22 @@ const AddCompanyDetailsForm = ({ endpoint }: { endpoint: string }) => {
                   value={formData.name}
                   handleChange={handleChange}
                   name="name"
+                />
+
+                <TextAreaInput
+                  label={"Payment Instructions"}
+                  nameProp="payment_instructions"
+                  value={formData.payment_instructions}
+                  onChange={handleChange}
+                  placeholder="Optional default payment instructions"
+                />
+
+                <TextAreaInput
+                  label={"Quote terms"}
+                  nameProp="quote_terms"
+                  value={formData.quote_terms}
+                  onChange={handleChange}
+                  placeholder="Optional default quoting terms"
                 />
 
                 <GenericTextInput
