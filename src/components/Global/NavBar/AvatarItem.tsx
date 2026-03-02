@@ -6,7 +6,7 @@ const AvatarItem = () => {
   return (
     <AvatarGroup>
       <Avatar.Root>
-        <Avatar.Fallback />
+        <Avatar.Fallback name="Guy Davies" />
         <Avatar.Image />
       </Avatar.Root>
     </AvatarGroup>

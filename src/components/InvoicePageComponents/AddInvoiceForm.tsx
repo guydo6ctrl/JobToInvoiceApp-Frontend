@@ -30,6 +30,7 @@ import SelectInvoiceVAT from "./SelectVAT";
 import useCompany from "../../hooks/useCompany";
 import TextAreaInput from "../General/TextAreaInput";
 import SelectVAT from "./SelectVAT";
+import AddNewDataButton from "../General/AddNewDataButton";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -239,10 +240,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
           {/* Status selector */}
           <Box>
             <HStack gap={3}>
-              <SelectVAT
-                vat_rate={formData.vat_rate}
-                onChange={handleChange}
-              />
+              <SelectVAT vat_rate={formData.vat_rate} onChange={handleChange} />
               <SelectInvoiceStatus
                 status={formData.status}
                 onChange={handleChange}
@@ -258,15 +256,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
           )}
 
           {/* Submit Button */}
-          <Button
-            type="submit"
-            colorPalette={brand}
-            size="lg"
-            w="full"
-            loading={loading}
-          >
-            Add Invoice
-          </Button>
+          <AddNewDataButton loading={loading} label="Invoice" />
         </VStack>
       </Box>
     </form>

@@ -53,6 +53,9 @@ const InvoiceList = ({ limit }: Props) => {
               <Text fontWeight="bold" fontSize="lg">
                 {invoice.client.name}
               </Text>
+              <Text fontWeight="bold" fontSize="lg">
+                £{invoice.total_due}
+              </Text>
               <Text fontSize="sm" color="gray.500">
                 {invoice.number ?? invoice.id}
               </Text>

@@ -8,15 +8,11 @@ import {
   Spinner,
   Text,
   VStack,
-  Badge,
-  Button,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { greeting } from "../utilities/greeting";
 import StatCard from "../components/HomePageComponents/StatCard";
-import RowItem from "../components/HomePageComponents/RowItem";
 import QuickAction from "../components/HomePageComponents/QuickAction";
 import {
   AlertInterface,
@@ -30,7 +26,6 @@ import RecentQuotes from "../components/HomePageComponents/RecentQuotes";
 import HomeAlerts from "../components/HomePageComponents/HomeAlerts";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [invoices, setInvoices] = useState<RecentInvoice[]>([]);
   const [quotes, setQuotes] = useState<RecentQuote[]>([]);
@@ -91,7 +86,7 @@ const HomePage = () => {
       </HStack>
 
       {/* ── Stat cards ── */}
-      <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} gap={3}>
+      <SimpleGrid columns={{ base: 2, md: 2, lg: 4 }} gap={3}>
         <StatCard
           label="Outstanding"
           value={fmt(stats?.outstanding_amount ?? 0)}
@@ -104,11 +99,7 @@ const HomePage = () => {
           sub={`${stats?.overdue_count ?? 0} invoice${(stats?.overdue_count ?? 0) !== 1 ? "s" : ""}`}
           alert={(stats?.overdue_count ?? 0) > 0}
         />
-        <StatCard
-          label="This Month"
-          value={fmt(stats?.total_invoiced_month ?? 0)}
-          sub="total invoiced"
-        />
+
         <StatCard
           label="Open Quotes"
           value={String(stats?.open_quotes ?? 0)}
@@ -119,7 +110,6 @@ const HomePage = () => {
           value={String(stats?.active_jobs ?? 0)}
           sub="in progress"
         />
-        <StatCard label="Paid" value={fmt(0)} sub="this month" />
       </SimpleGrid>
 
       <HomeAlerts alerts={alerts} />
@@ -137,10 +127,10 @@ const HomePage = () => {
           Quick Actions
         </Text>
         <HStack gap={3}>
-          <QuickAction label="New Invoice" icon="🧾" to="/invoices" />
+          <QuickAction label="New Client" icon="👤" to="/clients" />
           <QuickAction label="New Quote" icon="📋" to="/quotes" />
           <QuickAction label="New Job" icon="🔧" to="/jobs" />
-          <QuickAction label="New Client" icon="👤" to="/clients" />
+          <QuickAction label="New Invoice" icon="🧾" to="/invoices" />
         </HStack>
       </Box>
 

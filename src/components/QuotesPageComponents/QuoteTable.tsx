@@ -91,6 +91,9 @@ const QuotesTable = () => {
               >
                 <Table.Cell fontWeight="bold">{quote.number}</Table.Cell>
                 <Table.Cell fontWeight="medium">{quote.client.name}</Table.Cell>
+                <Table.Cell fontWeight="medium">
+                  £{quote.quote_total}
+                </Table.Cell>
                 <Table.Cell>
                   <Badge bg={getStatusColor(quote.status)}>
                     {quote.status_display}

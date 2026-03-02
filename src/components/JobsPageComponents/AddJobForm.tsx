@@ -14,6 +14,7 @@ import SelectClient from "../General/SelectClient";
 import SelectQuote from "../General/SelectQuote";
 import SelectJobStatus from "./SelectJobStatus";
 import { brand } from "../../constants";
+import AddNewDataButton from "../General/AddNewDataButton";
 
 interface JobFormData {
   client_id: string;
@@ -117,15 +118,7 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
           </Text>
         )}
 
-        <Button
-          type="submit"
-          colorPalette={brand}
-          mt={6}
-          w="full"
-          loading={loading}
-        >
-          Add Job
-        </Button>
+        <AddNewDataButton loading={loading} label="Job" />
       </form>
     </Box>
   );

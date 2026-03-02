@@ -62,6 +62,7 @@ const QuotesList = ({ limit }: Props) => {
               <Text fontWeight="bold" fontSize="lg">
                 {quote.client.name}
               </Text>
+              <Text fontWeight="bold">£{quote.quote_total}</Text>
               <Text fontSize="sm" color="gray.500">
                 {quote.number ?? quote.id}
               </Text>

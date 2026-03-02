@@ -50,7 +50,7 @@ const RecentQuotes = ({ data }: Props) => {
               key={q.id}
               number={q.number}
               client={q.client_name}
-              amount={q.total_due}
+              amount={q.quote_total}
               status={q.status}
               statusDisplay={q.status_display}
               date={q.expiry_date}

@@ -22,6 +22,7 @@ import { brand } from "../../constants";
 import TextAreaInput from "../General/TextAreaInput";
 import useCompany from "../../hooks/useCompany";
 import SelectVAT from "../InvoicePageComponents/SelectVAT";
+import AddNewDataButton from "../General/AddNewDataButton";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -220,15 +221,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
             {/* Actions */}
 
-            <Button
-              type="submit"
-              colorPalette={brand}
-              mt={6}
-              loading={loading}
-              size="md"
-            >
-              Add Quote
-            </Button>
+            <AddNewDataButton loading={loading} label="Quote" />
           </Fieldset.Root>
         </Box>
       </Box>

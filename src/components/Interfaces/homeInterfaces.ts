@@ -11,7 +11,7 @@ export interface RecentInvoice {
   id: number;
   number: string;
   client_name: string;
-  subtotal: number;
+  total_due: number;
   status: string;
   status_display: string;
   due_date: string;
@@ -21,7 +21,7 @@ export interface RecentQuote {
   id: number;
   number: string;
   client_name: string;
-  total_due: number;
+  quote_total: number;
   status: string;
   status_display: string;
   expiry_date: string;

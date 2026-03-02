@@ -14,6 +14,7 @@ interface Invoice{
     due_date: string;
     status: string;
     status_display: string;
+    total_due: number;
     job_id: number;
     job_number: string;
     archived: boolean;

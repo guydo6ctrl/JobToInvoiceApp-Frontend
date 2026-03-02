@@ -62,6 +62,7 @@ const InvoiceTable = () => {
             <Table.Row>
               <Table.ColumnHeader>Number</Table.ColumnHeader>
               <Table.ColumnHeader>Client</Table.ColumnHeader>
+              <Table.ColumnHeader>Total</Table.ColumnHeader>
               <Table.ColumnHeader>Job</Table.ColumnHeader>
               <Table.ColumnHeader>Status</Table.ColumnHeader>
               <Table.ColumnHeader>Issue Date</Table.ColumnHeader>
@@ -81,6 +82,7 @@ const InvoiceTable = () => {
                 <Table.Cell fontWeight="medium">
                   {invoice.client.name}
                 </Table.Cell>
+                <Table.Cell>£{invoice.total_due}</Table.Cell>
                 <Table.Cell>{invoice.job_number}</Table.Cell>
                 <Table.Cell>
                   <Badge bg={getStatusColor(invoice.status)}>

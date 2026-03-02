@@ -13,6 +13,7 @@ export interface Quote{
     issue_date: string;
     expiry_date: string;
     line_items: string;
+    quote_total: number;
     status: string;
     status_display: string;
     archived: boolean

@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { brand } from "../../constants";
+import AddNewDataButton from "../General/AddNewDataButton";
 
 interface ClientFormData {
   name: string;
@@ -131,15 +132,7 @@ const AddClientForm = ({ endpoint }: { endpoint: string }) => {
           )}
 
           {/* Submit button */}
-          <Button
-            type="submit"
-            colorPalette={brand}
-            mt={2}
-            loading={loading}
-            size="md"
-          >
-            Add Client
-          </Button>
+          <AddNewDataButton loading={loading} label="Client" />
         </VStack>
       </form>
     </Box>

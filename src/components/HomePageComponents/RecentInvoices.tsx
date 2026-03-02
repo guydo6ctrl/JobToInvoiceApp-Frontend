@@ -51,7 +51,7 @@ const RecentInvoices = ({ data }: Props) => {
               key={inv.id}
               number={inv.number}
               client={inv.client_name}
-              amount={inv.subtotal}
+              amount={inv.total_due}
               status={inv.status}
               statusDisplay={inv.status_display}
               date={inv.due_date}
