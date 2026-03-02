@@ -117,43 +117,58 @@ const LineItemsInput = ({
             {editingIdx === idx && editItem ? (
               // Edit mode
               <VStack gap={2} align="stretch">
-                <Input
-                  placeholder="Name"
-                  value={editItem.name}
-                  onChange={(e) =>
-                    setEditItem({ ...editItem, name: e.target.value })
-                  }
-                  size="sm"
-                />
-                <Input
-                  placeholder="Description"
-                  value={editItem.description}
-                  onChange={(e) =>
-                    setEditItem({ ...editItem, description: e.target.value })
-                  }
-                  size="sm"
-                />
-                <HStack gap={2} align="center">
+                <VStack align="start">
+                  <Text fontSize="sm">Name</Text>
                   <Input
-                    type="number"
-                    placeholder="Quantity"
-                    value={editItem.quantity ?? ""}
-                    onChange={handleNumberChange("quantity", true)}
-                    size="sm"
-                  />
-                  <Input
-                    type="number"
-                    placeholder="Unit Price"
-                    value={editItem.unit_price ?? ""}
-                    onChange={handleNumberChange("unit_price", true)}
-                    size="sm"
-                  />
-                  <SelectLineItemType
-                    value={editItem.type}
-                    setNewItem={(e) =>
-                      setEditItem({ ...editItem, type: e.target.value })
+                    placeholder="Name"
+                    value={editItem.name}
+                    onChange={(e) =>
+                      setEditItem({ ...editItem, name: e.target.value })
                     }
+                    size="sm"
                   />
+                </VStack>
+                <VStack align="start">
+                  <Text fontSize="sm">Description</Text>
+                  <Input
+                    placeholder="Description"
+                    value={editItem.description}
+                    onChange={(e) =>
+                      setEditItem({ ...editItem, description: e.target.value })
+                    }
+                    size="sm"
+                  />
+                </VStack>
+                <HStack gap={2} align="center">
+                  <VStack align="start">
+                    <Text fontSize="sm">Quantity</Text>
+                    <Input
+                      type="number"
+                      placeholder="Quantity"
+                      value={editItem.quantity ?? ""}
+                      onChange={handleNumberChange("quantity", true)}
+                      size="sm"
+                    />
+                  </VStack>
+                  <VStack align="start">
+                    <Text fontSize="sm">Unit Price</Text>
+                    <Input
+                      type="number"
+                      placeholder="Unit Price"
+                      value={editItem.unit_price ?? ""}
+                      onChange={handleNumberChange("unit_price", true)}
+                      size="sm"
+                    />
+                  </VStack>
+                  <VStack align="start">
+                    <Text fontSize="sm">Labour Type</Text>
+                    <SelectLineItemType
+                      value={editItem.type}
+                      setNewItem={(e) =>
+                        setEditItem({ ...editItem, type: e.target.value })
+                      }
+                    />
+                  </VStack>
                 </HStack>
                 <HStack gap={2}>
                   <Button size="sm" colorPalette="green" onClick={saveEdit}>

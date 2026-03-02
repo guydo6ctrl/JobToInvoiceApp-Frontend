@@ -3,7 +3,7 @@ import { brand } from "../../constants";
 
 interface Props {
   loading: boolean;
-  label: string
+  label: string;
 }
 const AddNewDataButton = ({ loading, label }: Props) => {
   return (

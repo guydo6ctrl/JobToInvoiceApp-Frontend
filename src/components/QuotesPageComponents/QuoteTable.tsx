@@ -75,6 +75,7 @@ const QuotesTable = () => {
             <Table.Row>
               <Table.ColumnHeader>Number</Table.ColumnHeader>
               <Table.ColumnHeader>Client</Table.ColumnHeader>
+              <Table.ColumnHeader>Amount</Table.ColumnHeader>
               <Table.ColumnHeader>Status</Table.ColumnHeader>
               <Table.ColumnHeader>Issue Date</Table.ColumnHeader>
               <Table.ColumnHeader>Expiry Date</Table.ColumnHeader>
