@@ -23,6 +23,7 @@ import { useDownload } from "../../hooks/Generic/useDownload";
 import SelectInvoiceVAT from "../../components/InvoicePageComponents/SelectVAT";
 import EditField from "../../components/General/EditCompanyField";
 import EditTextArea from "../../components/General/EditTextArea";
+import SelectQuote from "../../components/General/SelectQuote";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
@@ -166,6 +167,15 @@ const InvoiceDetailPage = () => {
               data={invoice.description}
               label="Description"
             />
+
+            {/* Source Quote */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                Source Quote
+              </Text>
+
+              <Text fontSize="md">{invoice.quote_number}</Text>
+            </VStack>
 
             {/* Expiry Date */}
             <VStack gap={2} align="stretch">

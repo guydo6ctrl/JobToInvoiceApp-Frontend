@@ -52,7 +52,7 @@ const SelectQuote = ({
       <NativeSelect.Root>
         <NativeSelect.Field
           name="source_quote"
-          value={formData.source_quote.toString()}
+          value={formData.source_quote}
           bg="gray.50"
           _hover={{ bg: "gray.100" }}
           onChange={handleSelectChange}
@@ -62,7 +62,7 @@ const SelectQuote = ({
           {isLoading && <option disabled>Loading quotes...</option>}
           {error && <option disabled>Error loading quotes</option>}
           {quotes.map((quote) => (
-            <option key={quote.id} value={quote.id.toString()}>
+            <option key={quote.id} value={quote.id}>
               {quote.number}
             </option>
           ))}

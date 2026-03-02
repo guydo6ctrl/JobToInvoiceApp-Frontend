@@ -163,7 +163,7 @@ const JobsDetailPage = () => {
                   client={formData.client.id}
                 />
               ) : (
-                <Text fontSize="md">{job.quote_number}</Text>
+                <Text fontSize="md">{job.quote_number ?? "Not provided"}</Text>
               )}
             </VStack>
 
