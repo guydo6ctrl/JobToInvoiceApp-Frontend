@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import GenericTextInput from "../General/GenericTextInput";
-import GenericTextAreaInput from "../General/GenericTextAreaInput";
 import { useNavigate } from "react-router-dom";
 import { brand } from "../../constants";
 
@@ -19,7 +18,6 @@ interface BankFormData {
   bank_name: string;
   account_number: string;
   sort_code: string;
-  payment_instructions: string;
   is_default: boolean;
 }
 
@@ -27,7 +25,6 @@ const defaultBankFormData = {
   bank_name: "",
   account_number: "",
   sort_code: "",
-  payment_instructions: "",
   is_default: false,
 };
 
@@ -108,13 +105,6 @@ const AddPaymentDetailsForm = ({ endpoint }: { endpoint: string }) => {
                   value={formData.sort_code}
                   handleChange={handleChange}
                   name="sort_code"
-                />
-
-                <GenericTextAreaInput
-                  children="Payment Instructions"
-                  value={formData.payment_instructions}
-                  handleChange={handleChange}
-                  name="payment_instructions"
                 />
 
                 <HStack gap={3}>

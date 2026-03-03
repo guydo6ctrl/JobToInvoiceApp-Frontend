@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/General/ProtectedRoute";
 import Layout from "./components/Global/Layout";
@@ -19,6 +18,7 @@ import ClientsListPage from "./pages/ClientsPages/ClientsListPage";
 import ClientsDetailPage from "./pages/ClientsPages/ClientsDetailPage";
 import CompanyPage from "./pages/CompanyPage";
 import BankPage from "./pages/BankPage";
+import HomePage from "./pages/HomePage";
 
 // Quote/Job/Invoice status workflow — Draft → Sent → Accepted → Complete
 // Basic reporting/dashboard — Show totals (revenue, pending invoices, etc.)
@@ -51,7 +51,8 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
+        
 
           <Route path="/company">
             <Route index element={<CompanyPage />} />

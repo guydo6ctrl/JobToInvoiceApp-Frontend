@@ -234,7 +234,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
             nameProp="payment_instructions"
             value={formData.payment_instructions}
             onChange={handleChange}
-            placeholder="Enter payment instructions"
+            placeholder="You can add default payment instructions in company details section in top right corner."
           />
 
           {/* Status selector */}

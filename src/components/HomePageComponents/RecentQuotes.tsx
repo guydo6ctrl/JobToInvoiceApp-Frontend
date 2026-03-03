@@ -1,7 +1,7 @@
 import { Box, HStack, VStack, Text } from "@chakra-ui/react";
 import RowItem from "./RowItem";
 import { useNavigate } from "react-router-dom";
-import { RecentQuote } from "../Interfaces/homeInterfaces";
+import { RecentQuote } from "../../Interfaces/homeInterfaces";
 
 interface Props {
   data: RecentQuote[];

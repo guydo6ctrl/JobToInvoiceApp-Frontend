@@ -1,5 +1,5 @@
 import { Box, HStack, VStack, Text } from "@chakra-ui/react";
-import { AlertInterface } from "../Interfaces/homeInterfaces";
+import { AlertInterface } from "../../Interfaces/homeInterfaces";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

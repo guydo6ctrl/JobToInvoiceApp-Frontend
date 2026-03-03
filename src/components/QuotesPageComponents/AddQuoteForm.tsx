@@ -196,7 +196,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 nameProp="quote_terms"
                 value={formData.quote_terms}
                 onChange={handleChange}
-                placeholder="Enter optional quote terms"
+                placeholder="You can add default quoting terms in company details section in top right corner."
               />
 
               {/* Status */}
