@@ -1,14 +1,9 @@
 import {
   Box,
-  Button,
-  Field,
-  Fieldset,
   Heading,
   HStack,
-  Input,
   SimpleGrid,
   Text,
-  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import SelectClient from "../General/SelectClient";
@@ -24,13 +19,12 @@ import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { searchTemplates } from "../../services/templateService";
 import SelectQuote from "../General/SelectQuote";
 import SelectJob from "../General/SelectJob";
-import { Quote } from "../../hooks/useQuotes";
-import { brand } from "../../constants";
-import SelectInvoiceVAT from "./SelectVAT";
 import useCompany from "../../hooks/useCompany";
 import TextAreaInput from "../General/TextAreaInput";
 import SelectVAT from "./SelectVAT";
 import AddNewDataButton from "../General/AddNewDataButton";
+import SelectPaymentOptions from "../General/SelectPaymentOption";
+import useBanks, { BankDetail } from "../../hooks/useBanks";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -48,6 +42,7 @@ interface InvoiceFormDataProps {
   issue_date: string;
   due_date: string;
   line_items: LineItem[];
+  payment_details: number | string;
   vat_rate: string;
   status: string;
 }
@@ -62,6 +57,7 @@ const defaultFormData = {
   issue_date: today,
   due_date: due_date,
   line_items: [],
+  payment_details: "",
   vat_rate: "",
   status: "",
 };
@@ -83,6 +79,7 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
   });
 
   const { data: companyData } = useCompany();
+  const { data: bankData } = useBanks();
 
   useEffect(() => {
     if (companyData[0]) {
@@ -90,6 +87,19 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
         ...prev,
         vat_rate: companyData[0]?.is_vat_registered ? "20.00" : "0.00",
         payment_instructions: companyData[0]?.payment_instructions ?? "",
+      }));
+    }
+  }, [companyData]);
+
+  useEffect(() => {
+    const defaultPaymentArray = bankData.filter(
+      (bank) => bank.is_default === true,
+    );
+    const defaultPayment = defaultPaymentArray[0];
+    if (defaultPayment) {
+      setFormData((prev) => ({
+        ...prev,
+        payment_details: defaultPayment.id,
       }));
     }
   }, [companyData]);
@@ -235,6 +245,12 @@ const AddInvoiceForm = ({ endpoint }: { endpoint: string }) => {
             value={formData.payment_instructions}
             onChange={handleChange}
             placeholder="You can add default payment instructions in company details section in top right corner."
+          />
+
+          <SelectPaymentOptions
+            label="Payment Details"
+            formData={formData}
+            onChange={handleChange}
           />
 
           {/* Status selector */}

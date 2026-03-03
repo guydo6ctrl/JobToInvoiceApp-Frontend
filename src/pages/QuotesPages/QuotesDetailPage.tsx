@@ -23,6 +23,7 @@ import { useDownload } from "../../hooks/Generic/useDownload";
 import EditTextArea from "../../components/General/EditTextArea";
 import SelectVAT from "../../components/InvoicePageComponents/SelectVAT";
 import { brand } from "../../constants";
+import SelectPaymentOptions from "../../components/General/SelectPaymentOption";
 
 const QuotesDetailPage = () => {
   const { id } = useParams();
@@ -68,6 +69,7 @@ const QuotesDetailPage = () => {
         expiry_date: formatDateForAPI(formData.expiry_date),
         line_items: formData.line_items,
         vat_rate: parseFloat(formData.vat_rate).toFixed(2),
+        payment_details: formData.payment_details,
         status: formData.status,
       };
       const res = await api.put(`/quotes/${id}/`, dataToSave);
@@ -112,11 +114,11 @@ const QuotesDetailPage = () => {
   };
 
   return (
-    <Box maxW="800px" mx="auto" py={8}>
+    <Box maxW="800px" mx="auto" py={4}>
       {/* Header Section */}
-      <VStack align="stretch" mb={8}>
+      <VStack align="stretch" mb={4}>
         <HStack justify="space-between" align="start">
-          <VStack align="start" gap={1}>
+          <VStack mt="auto" gap={1}>
             <Heading size="xl">{quote.client.name}</Heading>
             <Text color="gray.500" fontSize="sm">
               Quote Details
@@ -124,18 +126,23 @@ const QuotesDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <HStack>
-              <Button colorPalette={brand} onClick={handleDownload}>
-                Download PDF
+            <VStack>
+              <Button variant="ghost" onClick={() => navigate(-1)} size="md">
+                ← Back to Quotes
               </Button>
-              <Button
-                colorPalette={"red"}
-                bg={"red.500"}
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </Button>
-            </HStack>
+              <HStack>
+                <Button colorPalette={brand} onClick={handleDownload}>
+                  Download PDF
+                </Button>
+                <Button
+                  colorPalette={"red"}
+                  bg={"red.500"}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </Button>
+              </HStack>
+            </VStack>
           ) : (
             <HStack gap={2}>
               <Button
@@ -229,6 +236,24 @@ const QuotesDetailPage = () => {
               )}
             </VStack>
 
+            {/* Payment details */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                Payment Details
+              </Text>
+              {isEditing ? (
+                <SelectPaymentOptions
+                  formData={formData}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Box fontSize="md">
+                  <Text>Bank Name: {quote.bank_name}</Text>
+                  <Text>Account Number: {quote.account_number}</Text>
+                </Box>
+              )}
+            </VStack>
+
             {/* VAT rate */}
             <VStack gap={2} align="stretch">
               <Text fontSize="sm" fontWeight="600" color="gray.600">
@@ -281,11 +306,6 @@ const QuotesDetailPage = () => {
           </VStack>
         </Card.Body>
       </Card.Root>
-
-      {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
-        ← Back to Quotes
-      </Button>
     </Box>
   );
 };

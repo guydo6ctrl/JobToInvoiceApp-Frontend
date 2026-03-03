@@ -39,6 +39,8 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         {/* Public routes (no navbar) */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
@@ -51,8 +53,7 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<HomePage />} />
-        
+          <Route path="/home" element={<HomePage />} />
 
           <Route path="/company">
             <Route index element={<CompanyPage />} />

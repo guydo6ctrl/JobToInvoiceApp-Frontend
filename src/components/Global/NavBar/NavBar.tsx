@@ -15,7 +15,7 @@ const NavBar = () => {
         {/* Left section */}
         <Flex align="center" gap={6}>
           <AvatarItem />
-          <NavButton route="">
+          <NavButton route="home">
             <Icon as={BiSolidHome} boxSize={5} />
           </NavButton>
           <NavButton route="clients">Clients</NavButton>

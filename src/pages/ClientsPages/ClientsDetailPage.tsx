@@ -13,6 +13,7 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { brand } from "../../constants";
 
 const ClientDetailPage = () => {
   const { id } = useParams();
@@ -64,9 +65,9 @@ const ClientDetailPage = () => {
   if (error) return <Text color="red.500">{error}</Text>;
 
   return (
-    <Box maxW="800px" mx="auto" py={8}>
+    <Box maxW="800px" mx="auto" py={4}>
       {/* Header Section */}
-      <VStack align="stretch" mb={8}>
+      <VStack align="stretch" mb={4}>
         <HStack justify="space-between" align="start">
           <VStack align="start" gap={1}>
             <Heading size="xl">{client.name}</Heading>
@@ -76,9 +77,14 @@ const ClientDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorPalette="brand" onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
+            <HStack>
+              <Button variant="ghost" onClick={() => navigate(-1)} size="md">
+                ← Back to Clients
+              </Button>
+              <Button colorPalette={brand} onClick={() => setIsEditing(true)}>
+                Edit
+              </Button>
+            </HStack>
           ) : (
             <HStack gap={2}>
               <Button
@@ -164,11 +170,6 @@ const ClientDetailPage = () => {
           </VStack>
         </Card.Body>
       </Card.Root>
-
-      {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
-        ← Back to Clients
-      </Button>
     </Box>
   );
 };

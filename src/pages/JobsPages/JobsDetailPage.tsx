@@ -73,9 +73,9 @@ const JobsDetailPage = () => {
   if (error) return <Text color="red.500">{error}</Text>;
 
   return (
-    <Box maxW="800px" mx="auto" py={8}>
+    <Box maxW="800px" mx="auto" py={4}>
       {/* Header Section */}
-      <VStack align="stretch" mb={8}>
+      <VStack align="stretch" mb={4}>
         <HStack justify="space-between" align="start">
           <VStack align="start" gap={1}>
             <Heading size="xl">{job.client.name}</Heading>
@@ -85,9 +85,14 @@ const JobsDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <Button colorPalette={brand} onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
+            <HStack>
+              <Button variant="ghost" onClick={() => navigate(-1)} size="md">
+                ← Back to Jobs
+              </Button>
+              <Button colorPalette={brand} onClick={() => setIsEditing(true)}>
+                Edit
+              </Button>
+            </HStack>
           ) : (
             <HStack gap={2}>
               <Button
@@ -184,11 +189,6 @@ const JobsDetailPage = () => {
           </VStack>
         </Card.Body>
       </Card.Root>
-
-      {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
-        ← Back to Jobs
-      </Button>
     </Box>
   );
 };

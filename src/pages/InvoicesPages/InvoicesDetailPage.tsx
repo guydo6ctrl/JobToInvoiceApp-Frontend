@@ -21,9 +21,10 @@ import LineItemsInput from "../../components/QuotesPageComponents/LineItemsInput
 import SelectInvoiceStatus from "../../components/InvoicePageComponents/SelectInvoiceStatus";
 import { useDownload } from "../../hooks/Generic/useDownload";
 import SelectInvoiceVAT from "../../components/InvoicePageComponents/SelectVAT";
-import EditField from "../../components/General/EditCompanyField";
 import EditTextArea from "../../components/General/EditTextArea";
-import SelectQuote from "../../components/General/SelectQuote";
+import SelectPaymentOptions from "../../components/General/SelectPaymentOption";
+import { brand } from "../../constants";
+import InvoiceList from "../../components/InvoicePageComponents/InvoiceList";
 
 const InvoiceDetailPage = () => {
   const { id } = useParams();
@@ -65,6 +66,7 @@ const InvoiceDetailPage = () => {
         description: formData.description,
         notes: formData.notes,
         payment_instructions: formData.payment_instructions,
+        payment_details: formData.payment_details,
         issue_date: formatDateForAPI(formData.issue_date),
         due_date: formatDateForAPI(formData.due_date),
         line_items: formData.line_items,
@@ -113,11 +115,11 @@ const InvoiceDetailPage = () => {
   };
 
   return (
-    <Box maxW="800px" mx="auto" py={8}>
+    <Box maxW="800px" mx="auto" py={4}>
       {/* Header Section */}
-      <VStack align="stretch" mb={8}>
+      <VStack align="stretch" mb={4}>
         <HStack justify="space-between" align="start">
-          <VStack align="start" gap={1}>
+          <VStack mt="auto" gap={1}>
             <Heading size="xl">{invoice.client.name}</Heading>
             <Text color="gray.500" fontSize="sm">
               Invoice Details
@@ -125,10 +127,23 @@ const InvoiceDetailPage = () => {
           </VStack>
 
           {!isEditing ? (
-            <HStack>
-              <Button onClick={handleDownload}>Download PDF</Button>
-              <Button onClick={() => setIsEditing(true)}>Edit</Button>
-            </HStack>
+            <VStack>
+              <Button variant="ghost" onClick={() => navigate(-1)} size="md">
+                ← Back to Invoices
+              </Button>
+              <HStack>
+                <Button colorPalette={brand} onClick={handleDownload}>
+                  Download PDF
+                </Button>
+                <Button
+                  colorPalette={"red"}
+                  bg={"red.500"}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </Button>
+              </HStack>
+            </VStack>
           ) : (
             <HStack gap={2}>
               <Button
@@ -232,6 +247,24 @@ const InvoiceDetailPage = () => {
               )}
             </VStack>
 
+            {/* Payment details */}
+            <VStack gap={2} align="stretch">
+              <Text fontSize="sm" fontWeight="600" color="gray.600">
+                Payment Details
+              </Text>
+              {isEditing ? (
+                <SelectPaymentOptions
+                  formData={formData}
+                  onChange={handleChange}
+                />
+              ) : (
+                <Box fontSize="md">
+                  <Text>Bank Name: {invoice.bank_name}</Text>
+                  <Text>Account Number: {invoice.account_number}</Text>
+                </Box>
+              )}
+            </VStack>
+
             {/* VAT rate */}
             <VStack gap={2} align="stretch">
               <Text fontSize="sm" fontWeight="600" color="gray.600">
@@ -284,11 +317,6 @@ const InvoiceDetailPage = () => {
           </VStack>
         </Card.Body>
       </Card.Root>
-
-      {/* Footer */}
-      <Button variant="ghost" onClick={() => navigate(-1)} size="md">
-        ← Back to Invoices
-      </Button>
     </Box>
   );
 };

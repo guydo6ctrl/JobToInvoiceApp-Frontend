@@ -5,7 +5,6 @@ export interface BankDetail {
   bank_name: string;
   account_number: string;
   sort_code: string;
-  payment_instructions: string;
   is_default: boolean;
 }
 

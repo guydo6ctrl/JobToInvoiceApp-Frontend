@@ -13,7 +13,7 @@ const NavButton = ({ children, route }: Props) => {
       variant="ghost"
       bg="white"
       color="black"
-      onClick={() => navigate(`/${route}`)}
+      onClick={() => navigate(`${route}`)}
     >
       {children}
     </Button>

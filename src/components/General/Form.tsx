@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import LoadingIndicator from "./LoadingIndicator";
 import "../../styles/Form.css";
@@ -48,7 +48,7 @@ function Form({ route, method }: Props) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
 
-        navigate("/");
+        navigate("/home");
       }
     } catch (error: any) {
       alert(error.response?.data?.detail || "Something went wrong");
@@ -117,6 +117,15 @@ function Form({ route, method }: Props) {
       <button className="form-button" type="submit">
         {name}
       </button>
+
+      {method === "login" && (
+        <p style={{ marginTop: "1rem" }}>
+          Haven’t got an account?{" "}
+          <Link to="/register" style={{ color: "#3182ce" }}>
+            Register
+          </Link>
+        </p>
+      )}
     </form>
   );
 }

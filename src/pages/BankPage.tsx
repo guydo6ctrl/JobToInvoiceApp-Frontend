@@ -44,7 +44,6 @@ const BankPage = () => {
               </Table.ColumnHeader>
               <Table.ColumnHeader>Account Number</Table.ColumnHeader>
               <Table.ColumnHeader>Sort Code</Table.ColumnHeader>
-              <Table.ColumnHeader>Payment Instructions</Table.ColumnHeader>
               <Table.ColumnHeader>Default</Table.ColumnHeader>
               <Table.ColumnHeader textAlign="center">
                 Actions
@@ -58,13 +57,6 @@ const BankPage = () => {
                 <Table.Cell fontWeight="bold">{bank.bank_name}</Table.Cell>
                 <Table.Cell>{bank.account_number}</Table.Cell>
                 <Table.Cell>{bank.sort_code || "-"}</Table.Cell>
-
-                {/* Fix: truncation must be on an inner Text, not on Table.Cell */}
-                <Table.Cell>
-                  <Text truncate maxW="200px">
-                    {bank.payment_instructions || "-"}
-                  </Text>
-                </Table.Cell>
 
                 {/* Fix: Badge needs visible text content */}
                 <Table.Cell>

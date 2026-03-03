@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Field,
   Fieldset,
   Heading,
@@ -8,7 +7,6 @@ import {
   Input,
   SimpleGrid,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import SelectClient from "../General/SelectClient";
@@ -18,11 +16,12 @@ import LineItemsInput, { LineItem } from "./LineItemsInput";
 import SearchTemplatesInput from "./SearchTemplatesInput";
 import GenericDateInput from "./GenericDateInput";
 import { searchTemplates } from "../../services/templateService";
-import { brand } from "../../constants";
 import TextAreaInput from "../General/TextAreaInput";
 import useCompany from "../../hooks/useCompany";
 import SelectVAT from "../InvoicePageComponents/SelectVAT";
 import AddNewDataButton from "../General/AddNewDataButton";
+import SelectPaymentOptions from "../General/SelectPaymentOption";
+import useBanks from "../../hooks/useBanks";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -38,6 +37,7 @@ interface QuoteFormDataProps {
   line_items: LineItem[];
   notes: string;
   quote_terms: string;
+  payment_details: number | string;
   vat_rate: string;
   status: string;
 }
@@ -57,6 +57,7 @@ const defaultFormData = {
   line_items: [],
   notes: "",
   quote_terms: "",
+  payment_details: "",
   vat_rate: "",
   status: "",
 };
@@ -103,6 +104,7 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
   };
 
   const { data: companyData } = useCompany();
+  const { data: bankData } = useBanks();
 
   useEffect(() => {
     if (companyData[0]) {
@@ -110,6 +112,19 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
         ...prev,
         vat_rate: companyData[0]?.is_vat_registered ? "20.00" : "0.00",
         quote_terms: companyData[0]?.quote_terms ?? "",
+      }));
+    }
+  }, [companyData]);
+
+  useEffect(() => {
+    const defaultPaymentArray = bankData.filter(
+      (bank) => bank.is_default === true,
+    );
+    const defaultPayment = defaultPaymentArray[0];
+    if (defaultPayment) {
+      setFormData((prev) => ({
+        ...prev,
+        payment_details: defaultPayment.id,
       }));
     }
   }, [companyData]);
@@ -197,6 +212,11 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
                 value={formData.quote_terms}
                 onChange={handleChange}
                 placeholder="You can add default quoting terms in company details section in top right corner."
+              />
+              <SelectPaymentOptions
+                label="Payment Details"
+                formData={formData}
+                onChange={handleChange}
               />
 
               {/* Status */}
