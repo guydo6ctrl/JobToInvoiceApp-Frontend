@@ -88,16 +88,6 @@ const ClientsList = ({ limit }: Props) => {
           <HStack mt={3} justifyContent="flex-end" gap={2}>
             <Button
               size="sm"
-              colorPalette="gray"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleArchive(client.id);
-              }}
-            >
-              Archive
-            </Button>
-            <Button
-              size="sm"
               colorPalette={brand}
               onClick={(e) => {
                 e.stopPropagation();
@@ -105,6 +95,17 @@ const ClientsList = ({ limit }: Props) => {
               }}
             >
               View
+            </Button>
+            <Button
+              size="sm"
+              colorPalette="red"
+              bg="red.500"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleArchive(client.id);
+              }}
+            >
+              Archive
             </Button>
           </HStack>
         </Box>

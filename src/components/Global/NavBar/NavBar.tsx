@@ -27,14 +27,14 @@ const NavBar = () => {
         {/* Right section */}
         <Flex align="center" gap={3}>
           <NavButton route="company">Company Details</NavButton>
-          <IconButton
+          {/* <IconButton
             aria-label="Settings"
             variant="ghost"
             fontSize="20px"
             onClick={() => navigate("/settings")}
           >
             {<CiSettings />}
-          </IconButton>
+          </IconButton> */}
           <NavButton route="logout">Logout</NavButton>
         </Flex>
       </Flex>

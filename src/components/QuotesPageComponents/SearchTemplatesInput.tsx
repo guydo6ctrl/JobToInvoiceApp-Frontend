@@ -32,6 +32,11 @@ const SearchTemplatesInput = ({ onSearch, onSelect, results = [] }: Props) => {
               onSearch(e.target.value);
               setShowResults(true);
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
             onBlur={() => setTimeout(() => setShowResults(false), 200)}
           />
         </InputGroup>

@@ -1,6 +1,7 @@
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { brand } from "../../constants";
 
 interface Props {
   children: ReactNode;
@@ -25,7 +26,7 @@ const TitleSeeAll = ({ children }: Props) => {
         </Text>
         <Button
           size="sm"
-          colorPalette="gray"
+          colorPalette="blue"
           onClick={(e) => {
             e.stopPropagation();
             navigate("all");

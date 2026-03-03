@@ -18,7 +18,7 @@ const CompanyBanner = () => {
           Complete your company details to get started!
         </Text>
         <Button
-          colorScheme="yellow"
+          colorPalette="yellow"
           size="sm"
           onClick={() => navigate("/company/")}
         >

@@ -221,7 +221,9 @@ const AddQuoteForm = ({ endpoint }: { endpoint: string }): JSX.Element => {
 
             {/* Actions */}
 
-            <AddNewDataButton loading={loading} label="Quote" />
+            <Box mt={3}>
+              <AddNewDataButton loading={loading} label="Quote" />
+            </Box>
           </Fieldset.Root>
         </Box>
       </Box>

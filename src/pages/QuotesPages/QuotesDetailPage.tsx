@@ -22,6 +22,7 @@ import SelectQuoteStatus from "../../components/QuotesPageComponents/SelectQuote
 import { useDownload } from "../../hooks/Generic/useDownload";
 import EditTextArea from "../../components/General/EditTextArea";
 import SelectVAT from "../../components/InvoicePageComponents/SelectVAT";
+import { brand } from "../../constants";
 
 const QuotesDetailPage = () => {
   const { id } = useParams();
@@ -124,8 +125,16 @@ const QuotesDetailPage = () => {
 
           {!isEditing ? (
             <HStack>
-              <Button onClick={handleDownload}>Download PDF</Button>
-              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+              <Button colorPalette={brand} onClick={handleDownload}>
+                Download PDF
+              </Button>
+              <Button
+                colorPalette={"red"}
+                bg={"red.500"}
+                onClick={() => setIsEditing(true)}
+              >
+                Edit
+              </Button>
             </HStack>
           ) : (
             <HStack gap={2}>

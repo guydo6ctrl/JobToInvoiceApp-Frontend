@@ -15,7 +15,8 @@ const ArchiveButton = ({ id, isArchived, onToggle }: ArchiveButtonProps) => {
   return (
     <Button
       size="sm"
-      colorPalette={isArchived ? "green" : "gray"}
+      colorPalette={isArchived ? "green" : "red"}
+      bg={isArchived ? "green.500" : "red.500"}
       onClick={handleClick}
     >
       {isArchived ? "Unarchive" : "Archive"}

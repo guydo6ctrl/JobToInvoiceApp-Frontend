@@ -118,7 +118,9 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
           </Text>
         )}
 
-        <AddNewDataButton loading={loading} label="Job" />
+        <Box mt={3}>
+          <AddNewDataButton loading={loading} label="Job" />
+        </Box>
       </form>
     </Box>
   );

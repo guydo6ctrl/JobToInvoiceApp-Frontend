@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { brand } from "../../constants";
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
 const AddNewDataButton = ({ loading, label }: Props) => {
   return (
     <Button
+      w="100%"
       type="submit"
       colorPalette={brand}
       mt={2}
