@@ -14,7 +14,6 @@ const AddNewDataButton = ({ loading, label }: Props) => {
       mt={2}
       loading={loading}
       size="md"
-      onClick={() => setTimeout(() => window.location.reload(), 100)}
     >
       Add {label}
     </Button>
