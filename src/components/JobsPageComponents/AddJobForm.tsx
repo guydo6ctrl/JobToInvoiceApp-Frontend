@@ -54,7 +54,12 @@ const AddJobForm = ({ endpoint }: { endpoint: string }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submit(formData);
+    try {
+      await submit(formData);
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
